@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // 
-string connectionString = builder.Configuration.GetConnectionString("SqliteConnection");  
+string connectionString = builder.Configuration.GetConnectionString("SqliteConnection");
 
 //wire up or define dependency that belongs to infrastructure
 //DI database
@@ -23,7 +23,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+  app.UseExceptionHandler("/Home/Error");
 }
 app.UseStaticFiles();
 

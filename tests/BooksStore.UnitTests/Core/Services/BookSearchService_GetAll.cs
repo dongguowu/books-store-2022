@@ -25,13 +25,14 @@ public class BookSearchService_GetAll
   {
     var title = "a test book";
     _mockRepo.Setup(r => r.ListAsync(It.IsAny<System.Threading.CancellationToken>())).ReturnsAsync(
-      new List<Book>() { new Book(title, 23.31m) });
+      new List<Book>() { new Book(title, 23.31m), new Book(title, 23.31m) });
 
     var result = await _searchService!.GetAllBooks();
 
     Assert.That(result.Status, Is.EqualTo(Ardalis.Result.ResultStatus.Ok));
-    Assert.That(result.Value.Count, Is.EqualTo(1));
+    Assert.That(result.Value.Count, Is.EqualTo(2));
     Assert.That(result.Value[0].Title, Is.EqualTo(title));
+    Assert.That(result.Value[1].Title, Is.EqualTo(title));
   }
 
   [TestCase()]
