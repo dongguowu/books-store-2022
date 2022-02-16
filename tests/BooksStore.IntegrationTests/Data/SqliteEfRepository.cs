@@ -2,20 +2,36 @@
 using System.Linq;
 using System.Threading.Tasks;
 using BooksStore.Core.BookAggregate;
+using BooksStore.Infra.Data.Context;
+using BooksStore.Infra.Data.Repository;
 using BooksStore.SharedKernel.Interfaces;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Moq;
 using NUnit.Framework;
 
 namespace BooksStore.IntegrationTests.Data;
 
 [TestFixture]
-public class EfRepository : BaseEfRepTestFixture
+public class SqliteEfRepository
 {
   private IRepository<Book>? _rep;
+  private AppDbContext? _dbContext;
+
   [SetUp]
   public void Init()
   {
-    RefreshDatabase();
-    _rep = GetRepository();
+    var folder = Environment.SpecialFolder.LocalApplicationData;
+    var path = Environment.GetFolderPath(folder);
+    var DbPath = System.IO.Path.Join(path, "booksStore.db");
+
+
+    var builder = new DbContextOptionsBuilder();
+    builder.UseSqlite(DbPath);
+    DbContextOptions options = builder.Options;
+    _dbContext = new AppDbContext(options, (new Mock<IMediator>()).Object);
+    //_dbContext.Database.EnsureDeleted();
+    _rep = new EfRepository<Book>(_dbContext);
   }
 
   [TestCase()]
@@ -68,7 +84,7 @@ public class EfRepository : BaseEfRepTestFixture
     await _rep!.AddAsync(book);
 
     // Detach the book so we get a different instance
-    _dbContext.Entry(book).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+    _dbContext!.Entry(book).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
 
     // Fetch the book and update its category
     var dbBook = (await _rep.ListAsync()).FirstOrDefault(b => b.Title == title);

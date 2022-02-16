@@ -14,10 +14,7 @@ public abstract class BaseEfRepTestFixture
 
   protected void RefreshDatabase()
   {
-    var options = CreateNewContextOptions();
-    var mockMediator = new Mock<IMediator>();
-
-    _dbContext = new AppDbContext(options, mockMediator.Object);
+    _dbContext = new AppDbContext(CreateNewContextOptions(), (new Mock<IMediator>()).Object);
   }
 
   protected EfRepository<Book> GetRepository()
