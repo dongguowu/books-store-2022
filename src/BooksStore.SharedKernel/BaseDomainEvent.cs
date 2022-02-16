@@ -4,5 +4,5 @@ namespace BooksStore.SharedKernel;
 
 public abstract class BaseDomainEvent : INotification
 {
-  public DateTime dateOccurred { get; set; }  = DateTime.UtcNow;
+  public DateTime dateOccurred { get; set; } = DateTime.UtcNow;
 }
