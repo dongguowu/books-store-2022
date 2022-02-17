@@ -21,11 +21,11 @@ public class SqliteEfRepository
   [SetUp]
   public void Init()
   {
-    var folder = Environment.SpecialFolder.LocalApplicationData;
-    var path = Environment.GetFolderPath(folder);
-    var dbPath = System.IO.Path.Join(path, "booksStore.db");
+    //var folder = Environment.SpecialFolder.LocalApplicationData;
+    //var path = Environment.GetFolderPath(folder);
+    //var dbPath = System.IO.Path.Join(path, "booksStore.db");
     var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-    optionsBuilder.UseSqlite($"Data Source={dbPath}");
+    optionsBuilder.UseSqlite($"Data Source=books_test.db");
     _dbContext = new AppDbContext(optionsBuilder.Options, (new Mock<IMediator>()).Object); 
     _dbContext.Database.EnsureDeleted();  
     _dbContext.Database.EnsureCreated();  

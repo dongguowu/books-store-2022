@@ -1,27 +1,36 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BooksStore.Core.BookAggregate;
+using BooksStore.SharedKernel.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
-namespace BooksStore.Web;
-public class HomeController : Controller
+namespace BooksStore.Web.Controllers;
+public class BooksController : Controller
 {
-  // GET: HomeController
-  public ActionResult Index()
+  private readonly SharedKernel.Interfaces.IReadRepository<Book> _rep;
+
+  public BooksController(IReadRepository<Book> rep)
   {
-    return View();
+    _rep = rep;  }
+  // GET: BooksController
+  public async Task<ActionResult > Index()
+  {
+    var books = await _rep.ListAsync();
+    return View(books);
   }
 
-  // GET: HomeController/Details/5
+  // GET: BooksController/Details/5
   public ActionResult Details(int id)
   {
     return View();
   }
 
-  // GET: HomeController/Create
+  // GET: BooksController/Create
   public ActionResult Create()
   {
     return View();
   }
 
-  // POST: HomeController/Create
+  // POST: BooksController/Create
   [HttpPost]
   [ValidateAntiForgeryToken]
   public ActionResult Create(IFormCollection collection)
@@ -36,13 +45,13 @@ public class HomeController : Controller
     }
   }
 
-  // GET: HomeController/Edit/5
+  // GET: BooksController/Edit/5
   public ActionResult Edit(int id)
   {
     return View();
   }
 
-  // POST: HomeController/Edit/5
+  // POST: BooksController/Edit/5
   [HttpPost]
   [ValidateAntiForgeryToken]
   public ActionResult Edit(int id, IFormCollection collection)
@@ -57,13 +66,13 @@ public class HomeController : Controller
     }
   }
 
-  // GET: HomeController/Delete/5
+  // GET: BooksController/Delete/5
   public ActionResult Delete(int id)
   {
     return View();
   }
 
-  // POST: HomeController/Delete/5
+  // POST: BooksController/Delete/5
   [HttpPost]
   [ValidateAntiForgeryToken]
   public ActionResult Delete(int id, IFormCollection collection)

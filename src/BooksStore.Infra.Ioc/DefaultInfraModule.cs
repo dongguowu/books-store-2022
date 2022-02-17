@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using BooksStore.Infra.Data.Repository;
 using BooksStore.SharedKernel.Interfaces;
+using MediatR;
 using Module = Autofac.Module;
 
 namespace BooksStore.Infra.Ioc;
@@ -13,5 +14,17 @@ public class DefaultInfraModule : Module
     .As(typeof(IRepository<>))
     .As(typeof(IReadRepository<>))
     .InstancePerLifetimeScope();
+
+    builder
+        .RegisterType<Mediator>()
+        .As<IMediator>()
+        .InstancePerLifetimeScope();
+
+    builder.Register<ServiceFactory>(context =>
+    {
+      var c = context.Resolve<IComponentContext>();
+      return t => c.Resolve(t);
+    });
+
   }
 }
