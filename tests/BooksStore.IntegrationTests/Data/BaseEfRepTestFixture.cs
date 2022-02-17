@@ -31,11 +31,11 @@ public abstract class BaseEfRepTestFixture
 
     // Create a new options instance telling the context to use an
     // InMemory database and the new service provider.
-    var builder = new DbContextOptionsBuilder<AppDbContext>();
-    builder.UseInMemoryDatabase("booksStore")
+    var optionBuilder = new DbContextOptionsBuilder<AppDbContext>();
+    optionBuilder.UseInMemoryDatabase("booksStore")
            .UseInternalServiceProvider(serviceProvider);
 
-    return builder.Options;
+    return optionBuilder.Options;
   }
 
 }

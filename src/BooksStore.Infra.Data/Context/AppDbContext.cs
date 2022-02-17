@@ -15,6 +15,10 @@ public class AppDbContext : DbContext
     _mediator = mediator;
   }
 
+  //public AppDbContext(DbContextOptions options) : base(options)
+  //{
+  //}
+
   public DbSet<Book> Books => Set<Book>();
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)

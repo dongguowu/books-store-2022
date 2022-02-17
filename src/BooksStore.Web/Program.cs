@@ -1,21 +1,35 @@
-﻿using BooksStore.Infra.Data.Context;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using BooksStore.Infra.Data.Context;
 using BooksStore.Infra.Ioc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// 
+
+
+//
 string connectionString = builder.Configuration.GetConnectionString("SqliteConnection");
 
 //wire up or define dependency that belongs to infrastructure
 //DI database
 builder.Services
   .AddDbContext<AppDbContext>(options =>
-          options.UseSqlite(connectionString));
-DependencyContainer.RegisterServices(builder.Services);
+          options.UseSqlite(connectionString, b => b.MigrationsAssembly("BooksStore.Web")));
+//DependencyContainer.RegisterServices(builder.Services);
+
+
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
+{
+  containerBuilder.RegisterModule(new DefaultCoreModule());
+  containerBuilder.RegisterModule(new DefaultInfraModule());
+});
+
 
 var app = builder.Build();
 
