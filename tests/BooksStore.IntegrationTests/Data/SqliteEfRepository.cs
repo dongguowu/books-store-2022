@@ -26,9 +26,9 @@ public class SqliteEfRepository
     //var dbPath = System.IO.Path.Join(path, "booksStore.db");
     var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
     optionsBuilder.UseSqlite($"Data Source=books_test.db");
-    _dbContext = new AppDbContext(optionsBuilder.Options, (new Mock<IMediator>()).Object); 
-    _dbContext.Database.EnsureDeleted();  
-    _dbContext.Database.EnsureCreated();  
+    _dbContext = new AppDbContext(optionsBuilder.Options, (new Mock<IMediator>()).Object);
+    _dbContext.Database.EnsureDeleted();
+    _dbContext.Database.EnsureCreated();
     _rep = new EfRepository<Book>(_dbContext);
   }
 

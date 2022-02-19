@@ -1,6 +1,5 @@
 ﻿using BooksStore.Core.BookAggregate;
 using BooksStore.SharedKernel.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BooksStore.Web.Controllers;
@@ -10,9 +9,10 @@ public class BooksController : Controller
 
   public BooksController(IReadRepository<Book> rep)
   {
-    _rep = rep;  }
+    _rep = rep;
+  }
   // GET: BooksController
-  public async Task<ActionResult > Index()
+  public async Task<ActionResult> Index()
   {
     var books = await _rep.ListAsync();
     return View(books);

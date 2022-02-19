@@ -1,6 +1,5 @@
 ﻿using System;
 using BooksStore.Core.BookAggregate;
-using BooksStore.SharedKernel;
 using NUnit.Framework;
 
 namespace BooksStore.UnitTests.Core.BookAggregate;
