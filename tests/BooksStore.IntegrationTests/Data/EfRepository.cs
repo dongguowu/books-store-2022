@@ -35,7 +35,6 @@ public class EfRepository : BaseEfRepTestFixture
     }
     Assert.That(result.Title, Is.EqualTo(title));
     Assert.That(result.Price, Is.EqualTo(price));
-    Assert.That(result.Id.Trim().Length, Is.GreaterThan(20));
   }
 
   [TestCase()]
