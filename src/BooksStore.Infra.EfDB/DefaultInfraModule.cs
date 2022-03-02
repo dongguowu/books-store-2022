@@ -4,7 +4,7 @@ using BooksStore.SharedKernel.Interfaces;
 using MediatR;
 using Module = Autofac.Module;
 
-namespace BooksStore.Infra.Ioc;
+namespace BooksStore.Infra.EfDB;
 
 public class DefaultInfraModule : Module
 {

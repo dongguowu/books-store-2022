@@ -2,7 +2,7 @@
 using BooksStore.Core.Interfaces;
 using BooksStore.Core.Services;
 
-namespace BooksStore.Infra.Ioc;
+namespace BooksStore.Core.IoC;
 
 public class DefaultCoreModule : Module
 {
