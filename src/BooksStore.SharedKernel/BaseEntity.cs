@@ -3,5 +3,5 @@
 public abstract class BaseEntity
 {
   public Guid Id { get; set; }
-  public List<BaseDomainEvent> Events = new List<BaseDomainEvent>();
+  public List<BaseDomainEvent> Events = new();
 }

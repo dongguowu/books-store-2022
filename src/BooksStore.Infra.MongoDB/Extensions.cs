@@ -1,6 +1,5 @@
 ﻿using BooksStore.SharedKernel;
 using BooksStore.SharedKernel.Interfaces;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;

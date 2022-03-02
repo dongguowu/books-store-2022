@@ -28,9 +28,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.Web", "src\Books
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.IntegrationTests", "tests\BooksStore.IntegrationTests\BooksStore.IntegrationTests.csproj", "{68ED0FA3-5AD7-430F-95FB-4F7C2F5DE46D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksStore.WebApi", "src\BooksStore.WebApi\BooksStore.WebApi.csproj", "{A5EC1D34-3B3A-4DC0-B892-E0AE5240DB7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.WebApi", "src\BooksStore.WebApi\BooksStore.WebApi.csproj", "{A5EC1D34-3B3A-4DC0-B892-E0AE5240DB7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksStore.Infra.MongoDB", "src\BooksStore.Infra.MongoDB\BooksStore.Infra.MongoDB.csproj", "{0F117244-39D3-42FF-9781-C9DA82B1AC0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.Infra.MongoDB", "src\BooksStore.Infra.MongoDB\BooksStore.Infra.MongoDB.csproj", "{0F117244-39D3-42FF-9781-C9DA82B1AC0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
