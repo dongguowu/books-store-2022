@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using BooksStore.Core.IoC;
 using BooksStore.Infra.Data.Context;
+using BooksStore.Infra.EfDB;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

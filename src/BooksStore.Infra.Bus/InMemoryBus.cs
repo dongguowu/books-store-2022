@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using BooksStore.Domain.Core.Bus;
+using MediatR;
 
 namespace BooksStore.Infra.Bus
 {
