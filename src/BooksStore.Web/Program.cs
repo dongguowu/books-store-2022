@@ -1,9 +1,11 @@
 ﻿using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using BooksStore.Core.BookAggregate.AutoMapper;
 using BooksStore.Core.IoC;
 using BooksStore.Infra.Data.Context;
 using BooksStore.Infra.EfDB;
+using BooksStore.Web.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.RegisterAutoMapper();
 
 
 
@@ -36,6 +40,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     containerBuilder.RegisterModule(new DefaultCoreModule());
     containerBuilder.RegisterModule(new DefaultInfraModule());
 });
+
 
 
 var app = builder.Build();
