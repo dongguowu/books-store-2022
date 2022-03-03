@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="6.3.0" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BooksStore.Infra.Data\BooksStore.Infra.Data.csproj" />
+    <ProjectReference Include="..\BooksStore.Domain.Core\BooksStore.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>

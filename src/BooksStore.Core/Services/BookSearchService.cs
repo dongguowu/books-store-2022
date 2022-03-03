@@ -7,16 +7,16 @@ namespace BooksStore.Core.Services;
 
 public class BookSearchService : IBookSearchService
 {
-  private IReadRepository<Book> _rep;
+    private IReadRepository<Book> _rep;
 
-  public BookSearchService(IReadRepository<Book> rep)
-  {
-    _rep = rep;
-  }
+    public BookSearchService(IReadRepository<Book> rep)
+    {
+        _rep = rep;
+    }
 
-  public async Task<Result<List<Book>>> GetAllBooks()
-  {
-    return (await _rep.ListAsync()).ToList();
-  }
+    public async Task<Result<List<Book>>> GetAllBooks()
+    {
+        return (await _rep.ListAsync()).ToList();
+    }
 
 }

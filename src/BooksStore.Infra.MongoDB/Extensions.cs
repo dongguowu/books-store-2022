@@ -11,28 +11,28 @@ namespace BooksStore.Infra.MongoDB;
 
 public static class Extensions
 {
-  public static IServiceCollection AddMongo(this IServiceCollection services, string mongoConnectionString, string serviceName)
-  {
-    BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
-    BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));
-
-    services.AddSingleton(serviceProvider =>
+    public static IServiceCollection AddMongo(this IServiceCollection services, string mongoConnectionString, string serviceName)
     {
-      var mongoClient = new MongoClient(mongoConnectionString);
-      return mongoClient.GetDatabase(serviceName);
-    });
+        BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
+        BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));
 
-    return services;
-  }
+        services.AddSingleton(serviceProvider =>
+        {
+            var mongoClient = new MongoClient(mongoConnectionString);
+            return mongoClient.GetDatabase(serviceName);
+        });
 
-  public static IServiceCollection AddMongoRepository<T>(this IServiceCollection services, string collectionName) where T : BaseEntity, IAggregateRoot
-  {
-    services.AddSingleton<IRepository<T>>(serviceProvider =>
+        return services;
+    }
+
+    public static IServiceCollection AddMongoRepository<T>(this IServiceCollection services, string collectionName) where T : BaseEntity, IAggregateRoot
     {
-      var database = serviceProvider.GetService<IMongoDatabase>();
-      return new MongoRepository<T>(database, collectionName);
-    });
+        services.AddSingleton<IRepository<T>>(serviceProvider =>
+        {
+            var database = serviceProvider.GetService<IMongoDatabase>();
+            return new MongoRepository<T>(database, collectionName);
+        });
 
-    return services;
-  }
+        return services;
+    }
 }
