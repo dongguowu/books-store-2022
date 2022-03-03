@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.Reflection;
+using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using BooksStore.Core.IoC;
 using BooksStore.Infra.Data.Context;
@@ -9,8 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
+Assembly.GetExecutingAssembly();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 
 
@@ -27,8 +33,8 @@ builder.Services
 
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
-  containerBuilder.RegisterModule(new DefaultCoreModule());
-  containerBuilder.RegisterModule(new DefaultInfraModule());
+    containerBuilder.RegisterModule(new DefaultCoreModule());
+    containerBuilder.RegisterModule(new DefaultInfraModule());
 });
 
 
@@ -38,8 +44,20 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-  app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Home/Error");
 }
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    //app.UseSwaggerUI(options =>
+    //{
+    //    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    //    options.RoutePrefix = string.Empty;
+    //});
+};
+
 app.UseStaticFiles();
 
 app.UseRouting();

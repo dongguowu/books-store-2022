@@ -6,8 +6,8 @@ namespace BooksStore.Core.IoC;
 
 public class DefaultCoreModule : Module
 {
-  protected override void Load(ContainerBuilder builder)
-  {
-    builder.RegisterType<BookSearchService>().As<IBookSearchService>().InstancePerLifetimeScope();
-  }
+    protected override void Load(ContainerBuilder builder)
+    {
+        builder.RegisterType<BookSearchService>().As<IBookSearchService>().InstancePerLifetimeScope();
+    }
 }

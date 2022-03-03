@@ -7,7 +7,7 @@ namespace BooksStore.Infra.Data.Repository;
 
 public class EfRepository<T> : RepositoryBase<T>, IReadRepository<T>, IRepository<T> where T : BaseEntity, IAggregateRoot
 {
-  public EfRepository(AppDbContext dbContext) : base(dbContext)
-  {
-  }
+    public EfRepository(AppDbContext dbContext) : base(dbContext)
+    {
+    }
 }
