@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B5085B83-CFE3-4BBA-A92C-CDCAA9B86BC5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E1BD19D9-F466-4D5D-8949-6DCE67342A6C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E1BD19D9-F466-4D5D-8949-6DCE67342A6C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B943B795-FCA8-4A16-BC99-93EDA9E90E91}"
 	ProjectSection(SolutionItems) = preProject
@@ -44,7 +44,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.Infra.EfDB", "src\BooksStore.Infra.EfDB\BooksStore.Infra.EfDB.csproj", "{DDA4988C-B760-408D-8365-C76398F84CD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksStore.Core.IoC", "src\BooksStore.Core.Ioc\BooksStore.Core.IoC.csproj", "{8AB3A1AF-2E8F-43A9-A339-101EAD4687B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.Core.IoC", "src\BooksStore.Core.Ioc\BooksStore.Core.IoC.csproj", "{8AB3A1AF-2E8F-43A9-A339-101EAD4687B9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.Domain.Core", "src\BooksStore.Domain.Core\BooksStore.Domain.Core.csproj", "{6BD39F05-2000-41A1-BBB9-023C58A16CB5}"
 EndProject
