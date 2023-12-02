@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BooksStore.Domain.Core\BooksStore.Domain.Core.csproj" />
-    <ProjectReference Include="..\BooksStore.SharedKernel\SharedKernel.csproj" />
+    <ProjectReference Include="..\Core\SharedKernel\SharedKernel.csproj" />
   </ItemGroup>
 
 </Project>

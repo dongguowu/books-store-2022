@@ -8,6 +8,11 @@ public sealed class Book : BaseEntity
 
     public Book() { }
 
+    public Book( string title) 
+    {
+        Title = title;
+    }
+
     public Book(Guid id, string title, DateTime created) : base(id)
     {
         Title = title;

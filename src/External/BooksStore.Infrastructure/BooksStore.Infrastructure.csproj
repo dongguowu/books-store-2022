@@ -7,13 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.1.24" />
-    <PackageReference Include="FluentValidation" Version="11.8.1" />
-    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain\BooksStore.Domain.csproj" />
+    <ProjectReference Include="..\..\Core\BooksStore.Application\BooksStore.Application.csproj" />
   </ItemGroup>
 
 </Project>
