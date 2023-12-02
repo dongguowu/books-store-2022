@@ -1,9 +1,9 @@
-﻿using Ardalis.Specification;
-using BooksStore.Application.Abstractions.Messaging;
+﻿using BooksStore.Application.Abstractions.Messaging;
 using FluentValidation;
 using MediatR;
 
 namespace BooksStore.Application.Behaviors;
+
 public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : class, ICommand<TRequest>
 {

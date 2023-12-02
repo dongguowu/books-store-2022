@@ -1,4 +1,4 @@
-﻿namespace Domain;
+﻿namespace BooksStore.Domain;
 public class Class1
 {
 

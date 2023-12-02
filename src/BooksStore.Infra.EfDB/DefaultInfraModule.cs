@@ -5,7 +5,6 @@ using BooksStore.Domain.Core.Bus;
 using BooksStore.Infra.Bus;
 using BooksStore.Infra.Data.Repository;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection;
 using SharedKernel.Interfaces;
 using Module = Autofac.Module;
 

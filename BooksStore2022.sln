@@ -56,7 +56,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksStore.Domain", "Domain
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksStore.Application", "BooksStore.Application\BooksStore.Application.csproj", "{B05BDDCA-76D3-4D45-AEA2-C5EBC9471C10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{BB1B8397-47F1-4EF2-A7B8-E9780B80EA2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksStore.Infrastructure", "Infrastructure\BooksStore.Infrastructure.csproj", "{BB1B8397-47F1-4EF2-A7B8-E9780B80EA2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksStore.Architecture.Tests", "Architecture.Tests\BooksStore.Architecture.Tests.csproj", "{A3CA3583-B57B-45CA-B104-287C8F46D947}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -128,6 +130,10 @@ Global
 		{BB1B8397-47F1-4EF2-A7B8-E9780B80EA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB1B8397-47F1-4EF2-A7B8-E9780B80EA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB1B8397-47F1-4EF2-A7B8-E9780B80EA2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3CA3583-B57B-45CA-B104-287C8F46D947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3CA3583-B57B-45CA-B104-287C8F46D947}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3CA3583-B57B-45CA-B104-287C8F46D947}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3CA3583-B57B-45CA-B104-287C8F46D947}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -156,6 +162,7 @@ Global
 		{355D2AD2-5A32-4E1C-A9E7-9856633E2091} = {BB01674C-1CDF-457E-9639-87F1B36F8DCA}
 		{B05BDDCA-76D3-4D45-AEA2-C5EBC9471C10} = {BB01674C-1CDF-457E-9639-87F1B36F8DCA}
 		{BB1B8397-47F1-4EF2-A7B8-E9780B80EA2F} = {86473F17-C524-4211-9897-1CC532801551}
+		{A3CA3583-B57B-45CA-B104-287C8F46D947} = {E1BD19D9-F466-4D5D-8949-6DCE67342A6C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72C03CDF-61CA-477A-A985-004FE6CBFD3F}

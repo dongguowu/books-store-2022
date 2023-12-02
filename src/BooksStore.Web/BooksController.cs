@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using BooksStore.Core.BookAggregate;
-using BooksStore.Core.BookAggregate.AutoMapper;
 using BooksStore.Core.BookAggregate.Commands;
 using BooksStore.Core.BookAggregate.ViewModel;
 using BooksStore.Domain.Core.Bus;

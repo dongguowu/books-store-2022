@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using BooksStore.Core.BookAggregate.AutoMapper;
 using BooksStore.Core.IoC;
 using BooksStore.Infra.Data.Context;
 using BooksStore.Infra.EfDB;
