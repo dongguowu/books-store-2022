@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using BooksStore.Core.BookAggregate;
 using BooksStore.Core.Services;
-using BooksStore.SharedKernel.Interfaces;
 using Moq;
 using NUnit.Framework;
+using SharedKernel.Interfaces;
 
 namespace BooksStore.UnitTests.Core.Services;
 

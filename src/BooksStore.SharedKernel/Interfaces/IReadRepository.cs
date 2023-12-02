@@ -1,6 +1,6 @@
 ﻿using Ardalis.Specification;
 
-namespace BooksStore.SharedKernel.Interfaces;
+namespace SharedKernel.Interfaces;
 
 public interface IReadRepository<T> : IReadRepositoryBase<T> where T : BaseEntity, IAggregateRoot
 {

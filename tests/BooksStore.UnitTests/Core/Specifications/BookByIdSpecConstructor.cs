@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BooksStore.Core.BookAggregate;
 using BooksStore.Core.BookAggregate.Specifications;
 using NUnit.Framework;
@@ -19,24 +20,17 @@ internal class BookByIdSpecConstructor
     public void ReturnBook()
     {
         var book1 = new Book("the first book", 1.11m);
-        book1.Id = Guid.NewGuid();
         var id = book1.Id;
         var book2 = new Book("the second book", 2.11m);
         var book3 = new Book("the third book", 3.11m);
         var books = new List<Book>() { book1, book2, book3 };
-        book2.Id = Guid.NewGuid();
-        book3.Id = Guid.NewGuid();
 
         var spec = new BookByIdSpec(id);
 
         var result = spec.Evaluate(books);
-        if (result == null)
-        {
-            Assert.That(result, Is.Not.Null);
-            return;
-        }
-        Assert.That(result, Does.Contain(book1));
-        Assert.That(result, Does.Not.Contain(book2));
-        Assert.That(result, Does.Not.Contain(book3));
+        var enumerable = result as Book[] ?? result.ToArray();
+        Assert.That(enumerable, Does.Contain(book1));
+        Assert.That(enumerable, Does.Not.Contain(book2));
+        Assert.That(enumerable, Does.Not.Contain(book3));
     }
 }

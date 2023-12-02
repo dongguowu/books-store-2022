@@ -1,6 +1,6 @@
 ﻿using BooksStore.Core.BookAggregate;
-using BooksStore.SharedKernel.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using SharedKernel.Interfaces;
 
 namespace BooksStore.Web.Controllers;
 public class BooksController : Controller

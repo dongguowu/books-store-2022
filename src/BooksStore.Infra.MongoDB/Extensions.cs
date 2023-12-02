@@ -1,11 +1,10 @@
-﻿using BooksStore.SharedKernel;
-using BooksStore.SharedKernel.Interfaces;
+﻿using SharedKernel;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
-
+using SharedKernel.Interfaces;
 
 namespace BooksStore.Infra.MongoDB;
 

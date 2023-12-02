@@ -1,6 +1,6 @@
 ﻿using BooksStore.Core.BookAggregate.Commands;
-using BooksStore.SharedKernel.Interfaces;
 using MediatR;
+using SharedKernel.Interfaces;
 
 namespace BooksStore.Core.BookAggregate.CommandHandlers;
 public class BookCommandHandler : IRequestHandler<CreateBookCommand, bool>

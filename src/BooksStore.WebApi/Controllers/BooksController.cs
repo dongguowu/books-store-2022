@@ -1,6 +1,6 @@
 ﻿using BooksStore.Core.BookAggregate;
-using BooksStore.SharedKernel.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using SharedKernel.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

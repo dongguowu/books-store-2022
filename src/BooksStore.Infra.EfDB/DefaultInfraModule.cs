@@ -4,9 +4,9 @@ using BooksStore.Core.BookAggregate.Commands;
 using BooksStore.Domain.Core.Bus;
 using BooksStore.Infra.Bus;
 using BooksStore.Infra.Data.Repository;
-using BooksStore.SharedKernel.Interfaces;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using SharedKernel.Interfaces;
 using Module = Autofac.Module;
 
 namespace BooksStore.Infra.EfDB;

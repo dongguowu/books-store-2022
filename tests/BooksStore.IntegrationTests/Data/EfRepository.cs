@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using BooksStore.Core.BookAggregate;
-using BooksStore.SharedKernel.Interfaces;
 using NUnit.Framework;
+using SharedKernel.Interfaces;
 
 namespace BooksStore.IntegrationTests.Data;
 

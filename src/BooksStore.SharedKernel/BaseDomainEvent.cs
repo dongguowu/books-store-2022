@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace BooksStore.SharedKernel;
+namespace SharedKernel;
 
 public abstract class BaseDomainEvent : INotification
 {

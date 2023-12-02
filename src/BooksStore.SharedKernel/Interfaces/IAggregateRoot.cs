@@ -1,4 +1,4 @@
-﻿namespace BooksStore.SharedKernel.Interfaces;
+﻿namespace SharedKernel.Interfaces;
 
 public interface IAggregateRoot
 {

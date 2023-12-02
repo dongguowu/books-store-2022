@@ -1,6 +1,6 @@
 ﻿using Ardalis.EFCore.Extensions;
 using BooksStore.Core.BookAggregate;
-using BooksStore.SharedKernel;
+using SharedKernel;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using BooksStore.Core.BookAggregate;
 using BooksStore.Infra.Data.Context;
 using BooksStore.Infra.Data.Repository;
-using BooksStore.SharedKernel.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using NUnit.Framework;
+using SharedKernel.Interfaces;
 
 namespace BooksStore.IntegrationTests.Data;
 

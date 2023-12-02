@@ -1,13 +1,12 @@
 ﻿using MediatR;
 
-namespace BooksStore.Domain.Core.Events
+namespace BooksStore.Domain.Core.Events;
+
+public class Message : IRequest<bool>
 {
-    public class Message : IRequest<bool>
+    public string MessageType { get; protected set; }
+    public Message()
     {
-        public string MessageType { get; protected set; }
-        public Message()
-        {
-            MessageType = GetType().Name;
-        }
+        MessageType = GetType().Name;
     }
 }

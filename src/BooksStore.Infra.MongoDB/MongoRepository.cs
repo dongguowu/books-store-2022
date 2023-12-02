@@ -1,7 +1,7 @@
 ﻿using Ardalis.Specification;
-using BooksStore.SharedKernel;
-using BooksStore.SharedKernel.Interfaces;
+using SharedKernel;
 using MongoDB.Driver;
+using SharedKernel.Interfaces;
 
 namespace BooksStore.Infra.MongoDB;
 

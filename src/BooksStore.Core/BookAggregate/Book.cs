@@ -1,7 +1,7 @@
 ﻿using Ardalis.GuardClauses;
-using BooksStore.SharedKernel;
-using BooksStore.SharedKernel.Interfaces;
 using Newtonsoft.Json;
+using SharedKernel;
+using SharedKernel.Interfaces;
 
 namespace BooksStore.Core.BookAggregate;
 
