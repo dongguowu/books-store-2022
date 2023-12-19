@@ -38,14 +38,13 @@ public class AppDbContext : DbContext
         // dispatch events only if save was successful
         var entitiesWithEvents = ChangeTracker.Entries<BaseEntity>()
             .Select(e => e.Entity)
-            .Where(e => e.Events.Any())
+            .Where(e => e.DomainEvents.Any())
             .ToArray();
 
         foreach (var entity in entitiesWithEvents)
         {
-            var events = entity.Events.ToArray();
-            entity.Events.Clear();
-            foreach (var domainEvent in events)
+            entity.DomainEventClear();
+            foreach (var domainEvent in entity.DomainEvents)
             {
                 await _mediator.Publish(domainEvent).ConfigureAwait(false);
             }

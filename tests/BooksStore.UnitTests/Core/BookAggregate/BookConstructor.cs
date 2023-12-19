@@ -36,7 +36,7 @@ public class BookConstructor
     [TestCase()]
     public void InitializesCategoryToEmptyString()
     {
-        Assert.That(_testBook?.Events, Is.Not.Null);
+        Assert.That(_testBook?.DomainEvents, Is.Not.Null);
         Assert.That(_testBook?.Category, Is.EqualTo(string.Empty));
     }
     [TestCase()]
@@ -47,7 +47,7 @@ public class BookConstructor
     [TestCase()]
     public void InitializesEventsToEmptyList()
     {
-        Assert.That(_testBook?.Events, Is.Empty);
+        Assert.That(_testBook?.DomainEvents, Is.Empty);
     }
     [TestCase()]
     public void InitializesToJSON()
