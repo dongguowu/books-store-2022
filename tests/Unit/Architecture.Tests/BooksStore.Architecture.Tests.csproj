@@ -25,10 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\BooksStore.Web\BooksStore.Web.csproj" />
-    <ProjectReference Include="..\..\src\Core\BooksStore.Application\BooksStore.Application.csproj" />
-    <ProjectReference Include="..\..\src\Core\BooksStore.Domain\BooksStore.Domain.csproj" />
-    <ProjectReference Include="..\..\src\External\Infrastructure\BooksStore.Infrastructure\BooksStore.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\src\Core\BooksStore.Application\BooksStore.Application.csproj" />
+    <ProjectReference Include="..\..\..\src\Core\BooksStore.Domain\BooksStore.Domain.csproj" />
+    <ProjectReference Include="..\..\..\src\External\Infrastructure\BooksStore.Infrastructure\BooksStore.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\src\External\Presentation\BooksStore.Debug.Console\BooksStore.Debug.Console.csproj" />
   </ItemGroup>
 
 </Project>
