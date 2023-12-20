@@ -8,21 +8,17 @@ using SharedKernel;
 namespace BooksStore.Domain.Entities;
 public class BookCategory: BaseEntity
 {
-    public string Name { get; set; }
+    public string Name { get; private set; }
 
-    public BookCategory()
+    public BookCategory(Guid id, string name)
     {
-        Id = Guid.Empty;
-        Name = "No Category";
+        Id = id;
+        Name = name;
     }
+    
+    public BookCategory(string name) : this(Guid.NewGuid(), name) { }
 
+    private BookCategory() : this(Guid.Empty, "No Category") { }
 
-    private static BookCategory? _defaultCategory;
-
-    public static BookCategory DefaultBookCategory()
-    {
-        _defaultCategory ??= new BookCategory();
-        return _defaultCategory;
-    }
-
+    public static BookCategory DefaultBookCategory { get; } = new BookCategory();
 }

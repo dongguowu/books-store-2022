@@ -13,3 +13,8 @@ Console.WriteLine(book.Category.GetHashCode());
 Console.WriteLine(str);
 Console.WriteLine(book);
 Console.WriteLine(book.Category.GetHashCode());
+
+var category = new BookCategory("type one");
+book = new Book(str, category);
+Console.WriteLine(book);
+Console.WriteLine(book.Category.GetHashCode());

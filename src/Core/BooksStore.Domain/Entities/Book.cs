@@ -8,13 +8,18 @@ public sealed class Book : BaseEntity
     public string Title { get; private set; } = string.Empty;
     public DateTime Created { get; private set; } = DateTime.Now;
     public decimal Price { get; private set; } = decimal.Zero;
-    public BookCategory Category { get; set; } = BookCategory.DefaultBookCategory();
+    public BookCategory Category { get; set; } = BookCategory.DefaultBookCategory;
     public string ImageUrl { get; set; } = string.Empty;
-    public Book() { }
 
     public Book(string title)
     {
         Title = title;
+    }
+
+    public Book(string title, BookCategory category)
+    {
+        Title = title;
+        Category = category;
     }
 
     public Book(Guid id, string title, DateTime created) : base(id)
