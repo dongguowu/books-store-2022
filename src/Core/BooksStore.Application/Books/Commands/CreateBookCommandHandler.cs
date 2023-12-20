@@ -6,11 +6,11 @@ using Microsoft.Extensions.Logging;
 namespace BooksStore.Application.Books.Commands;
 public sealed class CreateBookCommandHandler : ICommandHandler<CreateBookCommand, Guid>
 {
-    private readonly IbookRepository _bookRepository;
+    private readonly IBookRepository _bookRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<CreateBookCommandHandler> _logger;
 
-    public CreateBookCommandHandler(IbookRepository bookRepository, IUnitOfWork unitOfWork, ILogger<CreateBookCommandHandler> logger)
+    public CreateBookCommandHandler(IBookRepository bookRepository, IUnitOfWork unitOfWork, ILogger<CreateBookCommandHandler> logger)
     {
         _bookRepository = bookRepository;
         _unitOfWork = unitOfWork;

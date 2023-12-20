@@ -2,7 +2,7 @@
 using BooksStore.Domain.Entities;
 
 namespace BooksStore.Infrastructure.Repositories;
-public sealed class BookRepository : IbookRepository
+public sealed class BookRepository : IBookRepository
 {
     private readonly ApplicationDbContext _dbContext;
 
