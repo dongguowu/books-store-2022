@@ -1,19 +1,19 @@
-﻿using MediatR;
-
-namespace SharedKernel;
+﻿namespace SharedKernel;
 
 public abstract class BaseEntity
 {
-    public Guid Id { get; protected set; } = Guid.NewGuid();
-
     private readonly List<BaseDomainEvent> _domainEvents = new();
+
+    protected BaseEntity(Guid id)
+    {
+        Id = id;
+    }
+
+    protected BaseEntity() { }
+    public Guid Id { get; protected set; } = Guid.NewGuid();
 
     //public List<BaseDomainEvent> DomainEvents = new();
     public IReadOnlyCollection<BaseDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
-
-    protected BaseEntity(Guid id) => Id = id;
-
-    protected BaseEntity() { }
 
     public void AddDomainEvent(BaseDomainEvent domainEvent)
     {
@@ -29,7 +29,4 @@ public abstract class BaseEntity
     {
         _domainEvents.Clear();
     }
-
-
-
 }

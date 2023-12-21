@@ -8,16 +8,17 @@ using Microsoft.Extensions.Options;
 using MimeKit;
 
 namespace BooksStore.Infrastructure.Shared.Services;
+
 public class SMTPMailService : IMailService
 {
-    public MailSettings _mailSettings { get; }
-    public ILogger<SMTPMailService> _logger { get; }
-
     public SMTPMailService(IOptions<MailSettings> mailSettings, ILogger<SMTPMailService> logger)
     {
         _mailSettings = mailSettings.Value;
         _logger = logger;
     }
+
+    public MailSettings _mailSettings { get; }
+    public ILogger<SMTPMailService> _logger { get; }
 
     public async Task SendAsync(MailRequest request)
     {
@@ -36,7 +37,7 @@ public class SMTPMailService : IMailService
             await smtp.SendAsync(email);
             smtp.Disconnect(true);
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             _logger.LogError(ex.Message, ex);
         }
