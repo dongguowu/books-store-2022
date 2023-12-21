@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
 
-namespace BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
 public class BookCategoryDto
 {
+    public Guid Id { get; set; }
     public string Name { get; set; } = string.Empty;
 }

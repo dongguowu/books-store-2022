@@ -3,14 +3,16 @@ using BooksStore.Domain.Abstractions;
 using BooksStore.Domain.Entities;
 using Microsoft.Extensions.Logging;
 
-namespace BooksStore.Application.Books.Commands;
+namespace BooksStore.Application.Features.Books.Commands.CreateBook;
+
 public sealed class CreateBookCommandHandler : ICommandHandler<CreateBookCommand, Guid>
 {
     private readonly IBookRepository _bookRepository;
-    private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<CreateBookCommandHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CreateBookCommandHandler(IBookRepository bookRepository, IUnitOfWork unitOfWork, ILogger<CreateBookCommandHandler> logger)
+    public CreateBookCommandHandler(IBookRepository bookRepository, IUnitOfWork unitOfWork,
+        ILogger<CreateBookCommandHandler> logger)
     {
         _bookRepository = bookRepository;
         _unitOfWork = unitOfWork;
@@ -19,7 +21,6 @@ public sealed class CreateBookCommandHandler : ICommandHandler<CreateBookCommand
 
     public async Task<Guid> Handle(CreateBookCommand request, CancellationToken cancellationToken)
     {
-
         _logger.LogInformation($"Creating a new Book(title:{request.Title})");
 
         var book = new Book(Guid.NewGuid(), request.Title, request.Created);

@@ -4,18 +4,19 @@ using SharedKernel.Interfaces;
 
 namespace BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
 
-public class GetBookCategoryQueryHandler : IRequestHandler<GetBookCategoryQuery, List<BookCategoryDto>>
+public class GetAllBookCategoryQueryHandler : IRequestHandler<GetAllBookCategoryQuery, List<BookCategoryDto>>
 {
     private readonly IMapper _mapper;
     private readonly IReadRepository<Domain.Entities.BookCategory> _rep;
 
-    public GetBookCategoryQueryHandler(IMapper mapper, IReadRepository<Domain.Entities.BookCategory> rep)
+    public GetAllBookCategoryQueryHandler(IMapper mapper, IReadRepository<Domain.Entities.BookCategory> rep)
     {
-        this._mapper = mapper;
-        this._rep = rep;
-        
+        _mapper = mapper;
+        _rep = rep;
     }
-    public async Task<List<BookCategoryDto>> Handle(GetBookCategoryQuery request, CancellationToken cancellationToken)
+
+    public async Task<List<BookCategoryDto>> Handle(GetAllBookCategoryQuery request,
+        CancellationToken cancellationToken)
     {
         // Query the database
         var bookCategories = await _rep.ListAsync(cancellationToken);

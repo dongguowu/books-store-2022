@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace BooksStore.Application.DTOs.Mail;
 
-namespace BooksStore.Application.DTOs.Mail;
 public record class MailRequest
 {
     public string To { get; set; } = string.Empty;

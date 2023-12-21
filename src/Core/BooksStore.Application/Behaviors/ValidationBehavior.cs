@@ -1,5 +1,6 @@
 ﻿using BooksStore.Application.Abstractions.Messaging;
 using FluentValidation;
+using FluentValidation.Results;
 using MediatR;
 
 namespace BooksStore.Application.Behaviors;
@@ -14,7 +15,8 @@ public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
         _validators = validators;
     }
 
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken)
     {
         if (!_validators.Any())
         {
@@ -28,17 +30,16 @@ public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
             .SelectMany(x => x.Errors)
             .Where(x => x != null)
             .GroupBy(
-            x => x.PropertyName,
-            x => x.ErrorMessage,
-            (propertyName, errorMessages) => new
-            {
-                Key = propertyName,
-                Values = errorMessages.Distinct().ToArray()
-            }).ToDictionary(x => x.Key, x => x.Values);
+                x => x.PropertyName,
+                x => x.ErrorMessage,
+                (propertyName, errorMessages) => new
+                {
+                    Key = propertyName, Values = errorMessages.Distinct().ToArray()
+                }).ToDictionary(x => x.Key, x => x.Values);
 
         if (errorsDictionary.Any())
         {
-            throw new ValidationException((IEnumerable<FluentValidation.Results.ValidationFailure>)errorsDictionary);
+            throw new ValidationException((IEnumerable<ValidationFailure>)errorsDictionary);
         }
 
         return await next();
