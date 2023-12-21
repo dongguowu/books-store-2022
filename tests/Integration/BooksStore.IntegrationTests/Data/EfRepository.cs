@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using BooksStore.Core.BookAggregate;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using SharedKernel.Interfaces;
 
@@ -10,7 +11,6 @@ namespace BooksStore.IntegrationTests.Data;
 [TestFixture]
 public class EfRepository : BaseEfRepTestFixture
 {
-    private IRepository<Book>? _rep;
     [SetUp]
     public void Init()
     {
@@ -18,7 +18,9 @@ public class EfRepository : BaseEfRepTestFixture
         _rep = GetRepository();
     }
 
-    [TestCase()]
+    private IRepository<Book>? _rep;
+
+    [TestCase]
     public async Task AddsBookAndSetsId()
     {
         var title = Guid.NewGuid().ToString();
@@ -33,11 +35,12 @@ public class EfRepository : BaseEfRepTestFixture
             Assert.IsNotNull(result);
             return;
         }
+
         Assert.That(result.Title, Is.EqualTo(title));
         Assert.That(result.Price, Is.EqualTo(price));
     }
 
-    [TestCase()]
+    [TestCase]
     public async Task DeletesBookAfterAddingIt()
     {
         // Add
@@ -50,12 +53,12 @@ public class EfRepository : BaseEfRepTestFixture
         await _rep.DeleteAsync(book);
 
         // Verify it's no longer there
-        var result = (await _rep.ListAsync());
+        var result = await _rep.ListAsync();
 
         Assert.That(result, Is.Empty);
     }
 
-    [TestCase()]
+    [TestCase]
     public async Task UpdatesBookAfterAddingIt()
     {
         // Add
@@ -67,7 +70,7 @@ public class EfRepository : BaseEfRepTestFixture
         await _rep!.AddAsync(book);
 
         // Detach the book so we get a different instance
-        _dbContext.Entry(book).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+        _dbContext.Entry(book).State = EntityState.Detached;
 
         // Fetch the book and update its category
         var dbBook = (await _rep.ListAsync()).FirstOrDefault(b => b.Title == title);
@@ -76,6 +79,7 @@ public class EfRepository : BaseEfRepTestFixture
             Assert.That(dbBook, Is.Not.Null);
             return;
         }
+
         Assert.AreNotSame(book, dbBook);
         var toUpdateCategory = Guid.NewGuid().ToString();
         dbBook.Category = toUpdateCategory;
@@ -91,6 +95,7 @@ public class EfRepository : BaseEfRepTestFixture
             Assert.That(updatedBook, Is.Not.Null);
             return;
         }
+
         Assert.That(updatedBook.Id, Is.EqualTo(dbBook.Id));
         Assert.That(updatedBook.Title, Is.EqualTo(dbBook.Title));
         Assert.That(updatedBook.Price, Is.EqualTo(dbBook.Price));

@@ -28,12 +28,15 @@ public class AppDbContext : DbContext
         modelBuilder.ApplyAllConfigurationsFromCurrentAssembly();
     }
 
-    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
-        int result = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+        var result = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
         // ignore events if no dispatcher provided
-        if (_mediator == null) return result;
+        if (_mediator == null)
+        {
+            return result;
+        }
 
         // dispatch events only if save was successful
         var entitiesWithEvents = ChangeTracker.Entries<BaseEntity>()

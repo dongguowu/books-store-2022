@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
-using BooksStore.Application.Books.Commands;
+using BooksStore.Application.Features.Books.Commands.CreateBook;
+using BooksStore.Debug.Console;
 using BooksStore.Domain.Entities;
 using BooksStore.Infrastructure;
 using NetArchTest.Rules;
@@ -13,15 +14,20 @@ public class ArchitectureTests
     private const string DomainNamespace = "BooksStore.Domain";
     private const string ApplicationNamespace = "BooksStore.Application";
 
-    private readonly string[] InfrastructureNamespaces = new[] { "BooksStore.Infrastructure", "BooksStore.Infrastructure.Shared" };
-    private readonly string[] PresentationNamespaces = new[] { "BooksStore.Presentation" };
+    private readonly string[] InfrastructureNamespaces =
+    {
+        "BooksStore.Infrastructure", "BooksStore.Infrastructure.Shared"
+    };
+
+    private readonly string[] PresentationNamespaces = { "BooksStore.Presentation" };
 
     [TestCase]
     public void Domain_Should_Not_HaveDependencyOnOtherProjects()
     {
         // Arrange
         var assembly = typeof(Book).Assembly;
-        var otherProjects = new[] { ApplicationNamespace }.Concat(InfrastructureNamespaces).Concat(PresentationNamespaces).ToArray() as string[];
+        var otherProjects = new[] { ApplicationNamespace }.Concat(InfrastructureNamespaces)
+            .Concat(PresentationNamespaces).ToArray();
 
         // Act
         var testResult = Types.InAssembly(assembly).ShouldNot().HaveDependencyOnAll(otherProjects).GetResult();
@@ -39,6 +45,7 @@ public class ArchitectureTests
         {
             Assert.Fail($"Assembly for namespace '{DomainNamespace}' not found.");
         }
+
         var dependency = SharedKernelNamespace;
 
         // Act
@@ -57,7 +64,7 @@ public class ArchitectureTests
         var assembly = typeof(CreateBookCommand).Assembly;
 
         //var otherProjects = new[] { InfrastructureNamespaces, PresentationNamespaces, WebNamespace };
-        var otherProjects = InfrastructureNamespaces.Concat(PresentationNamespaces).ToArray() as string[];
+        var otherProjects = InfrastructureNamespaces.Concat(PresentationNamespaces).ToArray();
         // Act
         var testResult = Types.InAssembly(assembly).ShouldNot().HaveDependencyOnAll(otherProjects).GetResult();
 
@@ -69,7 +76,7 @@ public class ArchitectureTests
     public void Application_Should_Have_DependencyOnDomain()
     {
         // Arrange
-        var assembly = typeof(BooksStore.Application.Books.Commands.CreateBookCommandHandler).Assembly;
+        var assembly = typeof(CreateBookCommandHandler).Assembly;
         var otherProject = DomainNamespace;
 
         // Act
@@ -101,7 +108,7 @@ public class ArchitectureTests
     {
         // Arrange
         // var assembly = typeof(BooksStore.Application.AssemblyReference).Assembly;
-        var assembly = typeof(BooksStore.Debug.Console.Class1).Assembly;
+        var assembly = typeof(Class1).Assembly;
 
         //var otherProjects = new[] { InfrastructureNamespaces, WebNamespace };
         var otherProjects = InfrastructureNamespaces;

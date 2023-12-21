@@ -10,6 +10,5 @@ public static class AutoMapperConfig
 
         services.AddAutoMapper(typeof(AutoMapperConfiguration));
         AutoMapperConfiguration.RegisterMappings();
-
     }
 }

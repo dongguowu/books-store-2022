@@ -5,6 +5,7 @@ using SharedKernel.Interfaces;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BooksStore.WebApi.Controllers;
+
 [Route("api/[controller]")]
 [ApiController]
 public class BooksController : ControllerBase
@@ -13,7 +14,7 @@ public class BooksController : ControllerBase
 
     public BooksController(IRepository<Book> rep)
     {
-        this._rep = rep;
+        _rep = rep;
     }
 
     // GET: api/<BooksController>
@@ -27,7 +28,7 @@ public class BooksController : ControllerBase
     [HttpGet("{id}")]
     public async Task<Book?> Get(Guid id)
     {
-        return await _rep.GetByIdAsync<Guid>(id);
+        return await _rep.GetByIdAsync(id);
     }
 
     // POST api/<BooksController>

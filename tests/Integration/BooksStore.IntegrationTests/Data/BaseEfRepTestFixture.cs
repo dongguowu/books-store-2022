@@ -14,13 +14,14 @@ public abstract class BaseEfRepTestFixture
 
     protected void RefreshDatabase()
     {
-        _dbContext = new AppDbContext(CreateNewContextOptions(), (new Mock<IMediator>()).Object);
+        _dbContext = new AppDbContext(CreateNewContextOptions(), new Mock<IMediator>().Object);
     }
 
     protected EfRepository<Book> GetRepository()
     {
         return new EfRepository<Book>(_dbContext);
     }
+
     private static DbContextOptions<AppDbContext> CreateNewContextOptions()
     {
         // Create a fresh service provider, and therefore a fresh
@@ -33,9 +34,8 @@ public abstract class BaseEfRepTestFixture
         // InMemory database and the new service provider.
         var optionBuilder = new DbContextOptionsBuilder<AppDbContext>();
         optionBuilder.UseInMemoryDatabase("booksStore")
-               .UseInternalServiceProvider(serviceProvider);
+            .UseInternalServiceProvider(serviceProvider);
 
         return optionBuilder.Options;
     }
-
 }

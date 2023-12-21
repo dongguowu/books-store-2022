@@ -1,6 +1,7 @@
 ﻿using BooksStore.Domain.Core.Commands;
 
 namespace BooksStore.Core.BookAggregate.Commands;
+
 public abstract class BookCommand : Command
 {
     public string Title { get; set; }

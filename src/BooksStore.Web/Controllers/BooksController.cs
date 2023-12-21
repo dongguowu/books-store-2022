@@ -3,14 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 using SharedKernel.Interfaces;
 
 namespace BooksStore.Web.Controllers;
+
 public class BooksController : Controller
 {
-    private readonly SharedKernel.Interfaces.IReadRepository<Book> _rep;
+    private readonly IReadRepository<Book> _rep;
 
     public BooksController(IReadRepository<Book> rep)
     {
         _rep = rep;
     }
+
     // GET: BooksController
     public async Task<ActionResult> Index()
     {

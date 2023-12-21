@@ -10,7 +10,8 @@ namespace BooksStore.Infra.MongoDB;
 
 public static class Extensions
 {
-    public static IServiceCollection AddMongo(this IServiceCollection services, string mongoConnectionString, string serviceName)
+    public static IServiceCollection AddMongo(this IServiceCollection services, string mongoConnectionString,
+        string serviceName)
     {
         BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
         BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));
@@ -24,7 +25,8 @@ public static class Extensions
         return services;
     }
 
-    public static IServiceCollection AddMongoRepository<T>(this IServiceCollection services, string collectionName) where T : BaseEntity, IAggregateRoot
+    public static IServiceCollection AddMongoRepository<T>(this IServiceCollection services, string collectionName)
+        where T : BaseEntity, IAggregateRoot
     {
         services.AddSingleton<IRepository<T>>(serviceProvider =>
         {

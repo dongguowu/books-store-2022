@@ -18,5 +18,4 @@ public class BookSearchService : IBookSearchService
     {
         return (await _rep.ListAsync()).ToList();
     }
-
 }

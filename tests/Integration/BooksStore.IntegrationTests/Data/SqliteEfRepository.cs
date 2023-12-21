@@ -15,9 +15,6 @@ namespace BooksStore.IntegrationTests.Data;
 [TestFixture]
 public class SqliteEfRepository
 {
-    private IRepository<Book>? _rep;
-    private AppDbContext? _dbContext;
-
     [SetUp]
     public void Init()
     {
@@ -25,14 +22,17 @@ public class SqliteEfRepository
         //var path = Environment.GetFolderPath(folder);
         //var dbPath = System.IO.Path.Join(path, "booksStore.db");
         var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-        optionsBuilder.UseSqlite($"Data Source=books_test.db");
-        _dbContext = new AppDbContext(optionsBuilder.Options, (new Mock<IMediator>()).Object);
+        optionsBuilder.UseSqlite("Data Source=books_test.db");
+        _dbContext = new AppDbContext(optionsBuilder.Options, new Mock<IMediator>().Object);
         _dbContext.Database.EnsureDeleted();
         _dbContext.Database.EnsureCreated();
         _rep = new EfRepository<Book>(_dbContext);
     }
 
-    [TestCase()]
+    private IRepository<Book>? _rep;
+    private AppDbContext? _dbContext;
+
+    [TestCase]
     public async Task AddsBookAndSetsId()
     {
         var title = Guid.NewGuid().ToString();
@@ -47,12 +47,13 @@ public class SqliteEfRepository
             Assert.IsNotNull(result);
             return;
         }
+
         Assert.That(result.Title, Is.EqualTo(title));
         Assert.That(result.Price, Is.EqualTo(price));
         //Assert.That(result.Id.Trim().Length, Is.GreaterThan(20));
     }
 
-    [TestCase()]
+    [TestCase]
     public async Task DeletesBookAfterAddingIt()
     {
         // Add
@@ -65,12 +66,12 @@ public class SqliteEfRepository
         await _rep.DeleteAsync(book);
 
         // Verify it's no longer there
-        var result = (await _rep.ListAsync());
+        var result = await _rep.ListAsync();
 
         Assert.That(result, Is.Empty);
     }
 
-    [TestCase()]
+    [TestCase]
     public async Task UpdatesBookAfterAddingIt()
     {
         // Add
@@ -82,7 +83,7 @@ public class SqliteEfRepository
         await _rep!.AddAsync(book);
 
         // Detach the book so we get a different instance
-        _dbContext!.Entry(book).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+        _dbContext!.Entry(book).State = EntityState.Detached;
 
         // Fetch the book and update its category
         var dbBook = (await _rep.ListAsync()).FirstOrDefault(b => b.Title == title);
@@ -91,6 +92,7 @@ public class SqliteEfRepository
             Assert.That(dbBook, Is.Not.Null);
             return;
         }
+
         Assert.AreNotSame(book, dbBook);
         var toUpdateCategory = Guid.NewGuid().ToString();
         dbBook.Category = toUpdateCategory;
@@ -106,6 +108,7 @@ public class SqliteEfRepository
             Assert.That(updatedBook, Is.Not.Null);
             return;
         }
+
         Assert.That(updatedBook.Id, Is.EqualTo(dbBook.Id));
         Assert.That(updatedBook.Title, Is.EqualTo(dbBook.Title));
         Assert.That(updatedBook.Price, Is.EqualTo(dbBook.Price));

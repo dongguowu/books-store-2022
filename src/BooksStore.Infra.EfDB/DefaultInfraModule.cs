@@ -6,7 +6,6 @@ using BooksStore.Infra.Bus;
 using BooksStore.Infra.Data.Repository;
 using MediatR;
 using SharedKernel.Interfaces;
-using Module = Autofac.Module;
 
 namespace BooksStore.Infra.EfDB;
 
@@ -14,11 +13,10 @@ public class DefaultInfraModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-
         builder.RegisterGeneric(typeof(EfRepository<>))
-        .As(typeof(IRepository<>))
-        .As(typeof(IReadRepository<>))
-        .InstancePerLifetimeScope();
+            .As(typeof(IRepository<>))
+            .As(typeof(IReadRepository<>))
+            .InstancePerLifetimeScope();
 
         builder
             .RegisterType<Mediator>()
@@ -41,6 +39,5 @@ public class DefaultInfraModule : Module
             var c = context.Resolve<IComponentContext>();
             return t => c.Resolve(t);
         });
-
     }
 }

@@ -22,15 +22,14 @@ builder.Services.AddSwaggerGen();
 builder.Services.RegisterAutoMapper();
 
 
-
 //
-string connectionString = builder.Configuration.GetConnectionString("SqliteConnection");
+var connectionString = builder.Configuration.GetConnectionString("SqliteConnection");
 
 //wire up or define dependency that belongs to infrastructure
 //DI database
 builder.Services
-  .AddDbContext<AppDbContext>(options =>
-          options.UseSqlite(connectionString, b => b.MigrationsAssembly("BooksStore.Web")));
+    .AddDbContext<AppDbContext>(options =>
+        options.UseSqlite(connectionString, b => b.MigrationsAssembly("BooksStore.Web")));
 //DependencyContainer.RegisterServices(builder.Services);
 
 
@@ -39,7 +38,6 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     containerBuilder.RegisterModule(new DefaultCoreModule());
     containerBuilder.RegisterModule(new DefaultInfraModule());
 });
-
 
 
 var app = builder.Build();
@@ -60,7 +58,9 @@ if (app.Environment.IsDevelopment())
     //    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
     //    options.RoutePrefix = string.Empty;
     //});
-};
+}
+
+;
 
 app.UseStaticFiles();
 
@@ -69,7 +69,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    "default",
+    "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

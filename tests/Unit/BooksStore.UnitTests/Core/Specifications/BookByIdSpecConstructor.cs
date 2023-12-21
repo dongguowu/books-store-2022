@@ -12,17 +12,16 @@ internal class BookByIdSpecConstructor
     [SetUp]
     public void Init()
     {
-
     }
 
-    [TestCase()]
+    [TestCase]
     public void ReturnBook()
     {
         var book1 = new Book("the first book", 1.11m);
         var id = book1.Id;
         var book2 = new Book("the second book", 2.11m);
         var book3 = new Book("the third book", 3.11m);
-        var books = new List<Book>() { book1, book2, book3 };
+        var books = new List<Book> { book1, book2, book3 };
 
         var spec = new BookByIdSpec(id);
 

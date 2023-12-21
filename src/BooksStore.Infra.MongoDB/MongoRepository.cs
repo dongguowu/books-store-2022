@@ -16,17 +16,6 @@ public class MongoRepository<T> : IReadRepository<T>, IRepository<T> where T : B
         _dbCollection = database.GetCollection<T>(collectionName);
     }
 
-    public async Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
-    {
-        if (entity == null)
-        {
-            throw new ArgumentNullException(nameof(entity));
-        }
-
-        await _dbCollection.InsertOneAsync(entity);
-        return entity;
-    }
-
     public Task<bool> AnyAsync(ISpecification<T> specification, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
@@ -47,39 +36,24 @@ public class MongoRepository<T> : IReadRepository<T>, IRepository<T> where T : B
         throw new NotImplementedException();
     }
 
-    public async Task DeleteAsync(T entity, CancellationToken cancellationToken = default)
-    {
-        var id = entity.Id;
-        FilterDefinition<T> filter = filterBuilder.Eq(entity => entity.Id, id);
-        await _dbCollection.DeleteOneAsync(filter);
-    }
-
-    public Task DeleteRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<T?> GetByIdAsync<TId>(TId id, CancellationToken cancellationToken = default) where TId : notnull
     {
         if (Guid.TryParse(id.ToString(), out var guid))
         {
-            return await this.GetByGuidAsync(guid);
+            return await GetByGuidAsync(guid);
         }
+
         return null;
     }
 
-    public async Task<T?> GetByGuidAsync(Guid id)
-    {
-        FilterDefinition<T> filter = filterBuilder.Eq(entity => entity.Id, id);
-        return await _dbCollection.Find(filter).FirstOrDefaultAsync();
-    }
-
-    public Task<T?> GetBySpecAsync<Spec>(Spec specification, CancellationToken cancellationToken = default) where Spec : ISingleResultSpecification, ISpecification<T>
+    public Task<T?> GetBySpecAsync<Spec>(Spec specification, CancellationToken cancellationToken = default)
+        where Spec : ISingleResultSpecification, ISpecification<T>
     {
         throw new NotImplementedException();
     }
 
-    public Task<TResult?> GetBySpecAsync<TResult>(ISpecification<T, TResult> specification, CancellationToken cancellationToken = default)
+    public Task<TResult?> GetBySpecAsync<TResult>(ISpecification<T, TResult> specification,
+        CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
@@ -94,7 +68,31 @@ public class MongoRepository<T> : IReadRepository<T>, IRepository<T> where T : B
         throw new NotImplementedException();
     }
 
-    public Task<List<TResult>> ListAsync<TResult>(ISpecification<T, TResult> specification, CancellationToken cancellationToken = default)
+    public Task<List<TResult>> ListAsync<TResult>(ISpecification<T, TResult> specification,
+        CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
+    {
+        if (entity == null)
+        {
+            throw new ArgumentNullException(nameof(entity));
+        }
+
+        await _dbCollection.InsertOneAsync(entity);
+        return entity;
+    }
+
+    public async Task DeleteAsync(T entity, CancellationToken cancellationToken = default)
+    {
+        var id = entity.Id;
+        var filter = filterBuilder.Eq(entity => entity.Id, id);
+        await _dbCollection.DeleteOneAsync(filter);
+    }
+
+    public Task DeleteRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
@@ -107,5 +105,11 @@ public class MongoRepository<T> : IReadRepository<T>, IRepository<T> where T : B
     public Task UpdateAsync(T entity, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<T?> GetByGuidAsync(Guid id)
+    {
+        var filter = filterBuilder.Eq(entity => entity.Id, id);
+        return await _dbCollection.Find(filter).FirstOrDefaultAsync();
     }
 }

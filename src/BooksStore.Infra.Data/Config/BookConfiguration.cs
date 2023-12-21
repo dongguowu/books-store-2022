@@ -11,5 +11,4 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
         builder.Property(t => t.Title)
             .IsRequired();
     }
-
 }
