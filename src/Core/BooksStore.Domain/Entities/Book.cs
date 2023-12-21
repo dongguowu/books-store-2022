@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
 using SharedKernel;
+using SharedKernel.Interfaces;
 using Formatting = System.Xml.Formatting;
 
 namespace BooksStore.Domain.Entities;
-public sealed class Book : BaseEntity
+public sealed class Book : BaseEntity, IAggregateRoot
 {
-    public string Title { get; private set; } = string.Empty;
+    public string Title { get; private set; }
     public DateTime Created { get; private set; } = DateTime.Now;
     public decimal Price { get; private set; } = decimal.Zero;
     public BookCategory Category { get; set; } = BookCategory.DefaultBookCategory;

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SharedKernel;
+﻿using SharedKernel;
+using SharedKernel.Interfaces;
 
 namespace BooksStore.Domain.Entities;
-public class BookCategory: BaseEntity
+public class BookCategory: BaseEntity, IAggregateRoot
 {
     public string Name { get; private set; }
 
