@@ -1,4 +1,4 @@
-﻿using BooksStore.Core.BookAggregate;
+﻿using BooksStore.Domain.Entities;
 using BooksStore.Infra.Data.Context;
 using BooksStore.Infra.Data.Repository;
 using MediatR;

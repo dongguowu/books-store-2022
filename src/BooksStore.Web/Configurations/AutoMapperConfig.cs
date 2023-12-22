@@ -1,6 +1,4 @@
-﻿using BooksStore.Core.BookAggregate.AutoMapper;
-
-namespace BooksStore.Web.Configurations;
+﻿namespace BooksStore.Web.Configurations;
 
 public static class AutoMapperConfig
 {
@@ -8,7 +6,7 @@ public static class AutoMapperConfig
     {
         //AutoMapperConfiguration.RegisterMappings().AssertConfigurationIsValid();
 
-        services.AddAutoMapper(typeof(AutoMapperConfiguration));
-        AutoMapperConfiguration.RegisterMappings();
+        //services.AddAutoMapper(typeof(AutoMapperConfiguration));
+        //AutoMapperConfiguration.RegisterMappings();
     }
 }

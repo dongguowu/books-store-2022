@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using BooksStore.Core.BookAggregate;
+using BooksStore.Domain.Entities;
 using BooksStore.Infra.Data.Context;
 using BooksStore.Infra.Data.Repository;
 using MediatR;
@@ -39,6 +39,7 @@ public class SqliteEfRepository
         var price = 100.00m;
         var book = new Book(title, price);
         await _rep!.AddAsync(book);
+        await _rep!.SaveChangesAsync();
 
         var result = (await _rep.ListAsync()).FirstOrDefault();
 
@@ -76,7 +77,7 @@ public class SqliteEfRepository
     {
         // Add
         var title = Guid.NewGuid().ToString();
-        var category = Guid.NewGuid().ToString();
+        var category = new BookCategory(Guid.NewGuid().ToString());
         var price = 100.00m;
         var book = new Book(title, price);
         book.Category = category;
@@ -94,7 +95,7 @@ public class SqliteEfRepository
         }
 
         Assert.AreNotSame(book, dbBook);
-        var toUpdateCategory = Guid.NewGuid().ToString();
+        var toUpdateCategory = new BookCategory(Guid.NewGuid().ToString());
         dbBook.Category = toUpdateCategory;
 
         // Update the book

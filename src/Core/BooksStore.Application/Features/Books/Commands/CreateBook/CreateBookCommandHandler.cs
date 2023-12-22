@@ -23,7 +23,7 @@ public sealed class CreateBookCommandHandler : ICommandHandler<CreateBookCommand
     {
         _logger.LogInformation($"Creating a new Book(title:{request.Title})");
 
-        var book = new Book(Guid.NewGuid(), request.Title, request.Created);
+        var book = new Book(request.Title);
 
         _bookRepository.Insert(book);
 

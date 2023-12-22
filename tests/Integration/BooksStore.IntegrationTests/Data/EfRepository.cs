@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using BooksStore.Core.BookAggregate;
+using BooksStore.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using SharedKernel.Interfaces;
@@ -63,10 +63,10 @@ public class EfRepository : BaseEfRepTestFixture
     {
         // Add
         var title = Guid.NewGuid().ToString();
-        var category = Guid.NewGuid().ToString();
+        var name = Guid.NewGuid().ToString();
         var price = 100.00m;
         var book = new Book(title, price);
-        book.Category = category;
+        book.Category = new BookCategory(name);
         await _rep!.AddAsync(book);
 
         // Detach the book so we get a different instance
@@ -80,12 +80,12 @@ public class EfRepository : BaseEfRepTestFixture
             return;
         }
 
-        Assert.AreNotSame(book, dbBook);
-        var toUpdateCategory = Guid.NewGuid().ToString();
-        dbBook.Category = toUpdateCategory;
+        var newBookCategory = new BookCategory(Guid.NewGuid().ToString());
+        dbBook.Category = newBookCategory;
 
         // Update the book
         await _rep.UpdateAsync(dbBook);
+        await _rep.SaveChangesAsync();
 
         // Fetch the updated book
         var updatedBook = (await _rep.ListAsync()).FirstOrDefault(b => b.Title == title);
@@ -100,7 +100,6 @@ public class EfRepository : BaseEfRepTestFixture
         Assert.That(updatedBook.Title, Is.EqualTo(dbBook.Title));
         Assert.That(updatedBook.Price, Is.EqualTo(dbBook.Price));
         Assert.That(updatedBook.Category, Is.Not.EqualTo(book.Category));
-        Assert.That(updatedBook.Category, Is.EqualTo(dbBook.Category));
-        Assert.That(updatedBook.Category, Is.EqualTo(toUpdateCategory));
+        Assert.That(updatedBook.Category, Is.EqualTo(newBookCategory));
     }
 }

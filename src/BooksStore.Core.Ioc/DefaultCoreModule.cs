@@ -1,6 +1,5 @@
 ﻿using Autofac;
-using BooksStore.Core.Interfaces;
-using BooksStore.Core.Services;
+using BooksStore.Application.Services;
 
 namespace BooksStore.Core.IoC;
 

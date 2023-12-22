@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BooksStore.Domain.Core\BooksStore.Domain.Core.csproj" />
+    <ProjectReference Include="..\Core\BooksStore.Domain\BooksStore.Domain.csproj" />
   </ItemGroup>
 
 </Project>

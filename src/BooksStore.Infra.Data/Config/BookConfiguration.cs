@@ -1,4 +1,4 @@
-﻿using BooksStore.Core.BookAggregate;
+﻿using BooksStore.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

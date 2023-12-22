@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using BooksStore.Core.BookAggregate;
-using BooksStore.Core.BookAggregate.Commands;
-using BooksStore.Core.BookAggregate.ViewModel;
-using BooksStore.Domain.Core.Bus;
+using BooksStore.Application.Features.Books.Commands.CreateBook;
+using BooksStore.Domain.Bus;
+using BooksStore.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using SharedKernel.Interfaces;
 
@@ -27,9 +26,9 @@ public class BooksController : ControllerBase
 
     // GET: api/<ValuesController>
     [HttpGet]
-    public async Task<IEnumerable<BookViewModel>> Get()
+    public async Task<IEnumerable<Book>> Get()
     {
-        var books = (await _rep.ListAsync()).Select(b => _mapper.Map<BookViewModel>(b));
+        var books = (await _rep.ListAsync()).Select(b => _mapper.Map<Book>(b));
         return books;
         //return (IEnumerable<Book>)((IQueryable)(await _rep.ListAsync())).ProjectTo<BookViewModel>(_mapper.ConfigurationProvider);
     }
@@ -56,11 +55,11 @@ public class BooksController : ControllerBase
 
     // POST api/<ValuesController>
     [HttpPost]
-    public void Post([FromBody] BookViewModel book)
+    public void Post([FromBody] Book book)
     {
         //var createBookCommand = new CreateBookCommand( book.Title, book.ImageUrl, book.Price);
 
-        _bus.SendCommand(_mapper.Map<CreateBookCommand>(book));
+        //_bus.SendCommand(new CreateBookCommand(book.Title));
     }
 
     // PUT api/<ValuesController>/5

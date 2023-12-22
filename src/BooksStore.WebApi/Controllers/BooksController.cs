@@ -1,4 +1,4 @@
-﻿using BooksStore.Core.BookAggregate;
+﻿using BooksStore.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using SharedKernel.Interfaces;
 

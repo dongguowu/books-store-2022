@@ -12,7 +12,7 @@ public class BookCategory : BaseEntity, IAggregateRoot
     }
 
     public BookCategory(string name) : this(Guid.NewGuid(), name) { }
-    private BookCategory() : this(Guid.Empty, "No Category") { }
+    private BookCategory() : this(Guid.Empty,string.Empty) { }
     public string Name { get; set; }
 
     public static BookCategory DefaultBookCategory { get; } = new();

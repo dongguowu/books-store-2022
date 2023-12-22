@@ -1,7 +1,7 @@
 ﻿using Autofac;
-using BooksStore.Core.BookAggregate.CommandHandlers;
-using BooksStore.Core.BookAggregate.Commands;
-using BooksStore.Domain.Core.Bus;
+using BooksStore.Application.Features.Books.Commands.CreateBook;
+using BooksStore.Domain.Bus;
+using BooksStore.Domain.Entities;
 using BooksStore.Infra.Bus;
 using BooksStore.Infra.Data.Repository;
 using MediatR;
@@ -29,15 +29,15 @@ public class DefaultInfraModule : Module
             .InstancePerLifetimeScope();
 
         builder
-            .RegisterType<BookCommandHandler>()
-            .As<IRequestHandler<CreateBookCommand, bool>>()
+            .RegisterType<CreateBookCommandHandler>()
+            .As<IRequestHandler<CreateBookCommand, Book>>()
             .InstancePerLifetimeScope();
 
 
-        builder.Register<ServiceFactory>(context =>
-        {
-            var c = context.Resolve<IComponentContext>();
-            return t => c.Resolve(t);
-        });
+        //builder.Register<ServiceFactory>(context =>
+        //{
+        //    var c = context.Resolve<IComponentContext>();
+        //    return t => c.Resolve(t);
+        //});
     }
 }

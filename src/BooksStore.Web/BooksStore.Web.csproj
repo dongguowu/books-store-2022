@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BooksStore.Core.Ioc\BooksStore.Core.IoC.csproj" />
-    <ProjectReference Include="..\BooksStore.Core\BooksStore.Core.csproj" />
     <ProjectReference Include="..\BooksStore.Infra.EfDB\BooksStore.Infra.EfDB.csproj" />
   </ItemGroup>
 

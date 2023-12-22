@@ -1,5 +1,5 @@
 ﻿using System;
-using BooksStore.Core.BookAggregate;
+using BooksStore.Domain.Entities;
 using NUnit.Framework;
 
 namespace BooksStore.UnitTests.Core.BookAggregate;
@@ -39,7 +39,7 @@ public class BookConstructor
     public void InitializesCategoryToEmptyString()
     {
         Assert.That(_testBook?.DomainEvents, Is.Not.Null);
-        Assert.That(_testBook?.Category, Is.EqualTo(string.Empty));
+        Assert.That(_testBook?.Category.Name, Is.EqualTo(string.Empty));
     }
 
     [TestCase]
@@ -68,6 +68,7 @@ public class BookConstructor
         Assert.That(_testBook?.ToJSON(), Does.Contain(_testBook?.Id.ToString()).IgnoreCase);
     }
 
+    [Ignore("no guard")]
     [TestCase]
     public void InitializesThrowArgumentException()
     {

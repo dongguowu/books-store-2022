@@ -1,5 +1,5 @@
 ﻿using Ardalis.EFCore.Extensions;
-using BooksStore.Core.BookAggregate;
+using BooksStore.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SharedKernel;
@@ -24,6 +24,7 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
 
         modelBuilder.ApplyAllConfigurationsFromCurrentAssembly();
     }

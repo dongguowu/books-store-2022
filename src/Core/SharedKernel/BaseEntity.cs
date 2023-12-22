@@ -1,4 +1,6 @@
-﻿namespace SharedKernel;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SharedKernel;
 
 public abstract class BaseEntity
 {
@@ -13,7 +15,9 @@ public abstract class BaseEntity
     public Guid Id { get; protected set; } = Guid.NewGuid();
 
     //public List<BaseDomainEvent> DomainEvents = new();
+    [NotMapped]
     public IReadOnlyCollection<BaseDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
 
     public void AddDomainEvent(BaseDomainEvent domainEvent)
     {

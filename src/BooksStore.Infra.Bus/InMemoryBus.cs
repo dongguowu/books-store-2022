@@ -1,5 +1,5 @@
-﻿using BooksStore.Domain.Core.Bus;
-using BooksStore.Domain.Core.Commands;
+﻿using BooksStore.Domain.Bus;
+using BooksStore.Domain.Commands;
 using MediatR;
 
 namespace BooksStore.Infra.Bus;

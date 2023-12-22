@@ -1,4 +1,4 @@
-﻿using BooksStore.Core.BookAggregate;
+﻿using BooksStore.Domain.Entities;
 using BooksStore.Infra.MongoDB;
 
 var builder = WebApplication.CreateBuilder(args);
