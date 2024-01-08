@@ -12,11 +12,13 @@ public abstract class BaseEntity
     }
 
     protected BaseEntity() { }
+
     public Guid Id { get; protected set; } = Guid.NewGuid();
 
-    //public List<BaseDomainEvent> DomainEvents = new();
-    [NotMapped]
-    public IReadOnlyCollection<BaseDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+    public DateTime? DateCreated { get; set; }
+    public DateTime? DateModified { get; set; }
+
+    [NotMapped] public IReadOnlyCollection<BaseDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
 
     public void AddDomainEvent(BaseDomainEvent domainEvent)

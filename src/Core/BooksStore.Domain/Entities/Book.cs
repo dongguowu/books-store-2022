@@ -11,9 +11,18 @@ public sealed class Book : BaseEntity, IAggregateRoot
         Title = title;
     }
 
-    public Book(string title, BookCategory category)
+    public Book(string title, BookCategory category) : this(title)
     {
-        Title = title;
+        Category = category;
+    }
+
+    public Book(string title, decimal price) : this(title)
+    {
+        Price = price;
+    }
+
+    public Book(string title, decimal price, BookCategory category) : this(title, price)
+    {
         Category = category;
     }
 
@@ -23,15 +32,9 @@ public sealed class Book : BaseEntity, IAggregateRoot
         Created = created;
     }
 
-    public Book(string title, decimal price)
-    {
-        Title = title;
-        Price = price;
-    }
-
-    public string Title { get; private set; }
+    public string Title { get; set; } = string.Empty;
     public DateTime Created { get; private set; } = DateTime.Now;
-    public decimal Price { get; private set; } = decimal.Zero;
+    public decimal Price { get; set; } = decimal.Zero;
     public BookCategory Category { get; set; } = BookCategory.DefaultBookCategory;
     public string ImageUrl { get; set; } = string.Empty;
 

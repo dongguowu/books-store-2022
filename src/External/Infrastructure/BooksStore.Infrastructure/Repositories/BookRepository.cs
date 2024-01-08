@@ -1,19 +1,13 @@
-﻿using BooksStore.Domain.Abstractions;
+﻿using Ardalis.Specification;
+using BooksStore.Domain.Abstractions;
 using BooksStore.Domain.Entities;
+using SharedKernel.Interfaces;
 
 namespace BooksStore.Infrastructure.Repositories;
 
-public sealed class BookRepository : IBookRepository
+public sealed class BookRepository : EfRepository<Book>
 {
-    private readonly ApplicationDbContext _dbContext;
-
-    public BookRepository(ApplicationDbContext dbContext)
+    public BookRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
-        _dbContext = dbContext;
-    }
-
-    public void Insert(Book book)
-    {
-        _dbContext.Set<Book>().Add(book);
     }
 }
