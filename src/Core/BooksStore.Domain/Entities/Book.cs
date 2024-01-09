@@ -35,7 +35,7 @@ public sealed class Book : BaseEntity, IAggregateRoot
     public string Title { get; set; } = string.Empty;
     public DateTime Created { get; private set; } = DateTime.Now;
     public decimal Price { get; set; } = decimal.Zero;
-    public BookCategory Category { get; set; } = BookCategory.DefaultBookCategory;
+    public BookCategory Category { get; set; } = BookCategory.Default;
     public string ImageUrl { get; set; } = string.Empty;
 
     public string ToJSON()

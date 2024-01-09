@@ -1,13 +1,11 @@
-﻿using Ardalis.Specification;
-using BooksStore.Domain.Abstractions;
-using BooksStore.Domain.Entities;
-using SharedKernel.Interfaces;
+﻿using BooksStore.Domain.Entities;
+using BooksStore.Persistence.DatabaseContext;
 
-namespace BooksStore.Infrastructure.Repositories;
+namespace BooksStore.Persistence.Repositories;
 
 public sealed class BookRepository : EfRepository<Book>
 {
-    public BookRepository(ApplicationDbContext dbContext) : base(dbContext)
+    public BookRepository(BookDatabaseContext dbContext) : base(dbContext)
     {
     }
 }

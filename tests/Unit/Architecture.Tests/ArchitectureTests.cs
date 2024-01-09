@@ -3,6 +3,7 @@ using BooksStore.Application.Features.Books.Commands.CreateBook;
 using BooksStore.Debug.Console;
 using BooksStore.Domain.Entities;
 using BooksStore.Infrastructure;
+using BooksStore.Persistence.DatabaseContext;
 using NetArchTest.Rules;
 
 namespace BooksStore.Architecture.Tests;
@@ -92,7 +93,7 @@ public class ArchitectureTests
     {
         // Arrange
         // var assembly = typeof(BooksStore.Application.AssemblyReference).Assembly;
-        var assembly = typeof(ApplicationDbContext).Assembly;
+        var assembly = typeof(BookDatabaseContext).Assembly;
 
         //var otherProjects = new[] { PresentationNamespaces, WebNamespace };
         var otherProjects = PresentationNamespaces;

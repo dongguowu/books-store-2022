@@ -3,18 +3,18 @@ using BooksStore.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using SharedKernel;
 
-namespace BooksStore.Infrastructure;
+namespace BooksStore.Persistence.DatabaseContext;
 
-public sealed class ApplicationDbContext : DbContext, IUnitOfWork
+public sealed class BookDatabaseContext : DbContext, IUnitOfWork
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+    public BookDatabaseContext(DbContextOptions<BookDatabaseContext> options) : base(options) { }
 
     public DbSet<Book> Books { get; set; }
     public DbSet<BookCategory> BookCategories { get; set; }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
-        var modifiedOrAddedEntities = base.ChangeTracker.Entries<BaseEntity>()
+        var modifiedOrAddedEntities = ChangeTracker.Entries<BaseEntity>()
             .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified);
 
         foreach (var entityEntry in modifiedOrAddedEntities)
@@ -32,7 +32,8 @@ public sealed class ApplicationDbContext : DbContext, IUnitOfWork
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(BookDatabaseContext).Assembly);
+
 
         base.OnModelCreating(modelBuilder);
     }

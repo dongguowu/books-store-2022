@@ -1,4 +1,4 @@
-﻿namespace BooksStore.Infrastructure.Configurations;
+﻿namespace BooksStore.Persistence.Configurations;
 
 public class BookConfiguration
 {
