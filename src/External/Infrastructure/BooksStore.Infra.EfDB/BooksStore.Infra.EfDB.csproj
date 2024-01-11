@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.3.0" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BooksStore.Infra.Bus\BooksStore.Infra.Bus.csproj" />
+    <ProjectReference Include="..\BooksStore.Infra.Data\BooksStore.Infra.Data.csproj" />
+    <ProjectReference Include="..\Core\BooksStore.Application\BooksStore.Application.csproj" />
+  </ItemGroup>
+
+</Project>
