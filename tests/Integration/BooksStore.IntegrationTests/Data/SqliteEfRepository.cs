@@ -10,7 +10,7 @@ using Moq;
 using NUnit.Framework;
 using SharedKernel.Interfaces;
 
-namespace BooksStore.IntegrationTests.Data;
+namespace BooksStore.EfRepository.Tests.Data;
 
 [TestFixture]
 public class SqliteEfRepository
