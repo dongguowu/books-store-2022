@@ -9,15 +9,11 @@ namespace BooksStore.Persistence.Tests;
 [TestFixture]
 public class Tests
 {
-    private IRepository<Book>? _rep;
-    private BookDatabaseContext? _context;
-
-
     [SetUp]
     public void Setup()
     {
         var options = new DbContextOptionsBuilder<BookDatabaseContext>()
-            .UseInMemoryDatabase("TestDatabase-" + Guid.NewGuid().ToString()) // Unique database name for each test
+            .UseInMemoryDatabase("TestDatabase-" + Guid.NewGuid()) // Unique database name for each test
             .Options;
 
         _context = new BookDatabaseContext(options);
@@ -31,6 +27,9 @@ public class Tests
         _rep = null;
         _context = null;
     }
+
+    private IRepository<Book>? _rep;
+    private BookDatabaseContext? _context;
 
     [TestCase]
     public async Task AddsBookAndSetsId()
@@ -50,7 +49,6 @@ public class Tests
 
         Assert.That(result.Title, Is.EqualTo(title));
         Assert.That(result.Price, Is.EqualTo(price));
-
     }
 
     [TestCase]
@@ -74,7 +72,6 @@ public class Tests
     [TestCase]
     public async Task UpdatesBookAfterAddingIt()
     {
-
         // Setup
         var title = Guid.NewGuid().ToString();
         const decimal price = 100.00m;

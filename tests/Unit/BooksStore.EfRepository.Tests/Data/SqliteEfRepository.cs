@@ -75,7 +75,6 @@ public class SqliteEfRepository
     [TestCase]
     public async Task UpdatesBookAfterAddingIt()
     {
-
         // Setup
         var title = Guid.NewGuid().ToString();
         const decimal price = 100.00m;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using BooksStore.Application.Features.Books.Queries.SearchBooks;
 using BooksStore.Domain.Entities;

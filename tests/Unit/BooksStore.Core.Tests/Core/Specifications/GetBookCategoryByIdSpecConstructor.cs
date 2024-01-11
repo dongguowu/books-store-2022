@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryByName;
-using BooksStore.Application.Features.Books.Queries.SearchBooks;
 using BooksStore.Domain.Entities;
 using NUnit.Framework;
 
@@ -22,7 +21,7 @@ internal class GetBookCategoryByIdSpecConstructor
         var category01 = new BookCategory(name);
         var category02 = new BookCategory("2");
         var category03 = new BookCategory("3");
-        var list = new List<BookCategory>() {category01, category02, category03};
+        var list = new List<BookCategory> { category01, category02, category03 };
 
         var spec = new BookCategoryByNameSpec(name);
 

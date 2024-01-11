@@ -19,7 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\External\Infrastructure\BooksStore.Infrastructure\BooksStore.Persistence.csproj" />
+    <ProjectReference
+      Include="..\..\..\src\External\Infrastructure\BooksStore.Infrastructure\BooksStore.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

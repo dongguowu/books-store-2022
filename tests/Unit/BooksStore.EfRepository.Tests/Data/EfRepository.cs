@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using BooksStore.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using SharedKernel.Interfaces;
 

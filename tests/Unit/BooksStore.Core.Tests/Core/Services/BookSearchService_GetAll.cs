@@ -15,22 +15,23 @@ namespace BooksStore.UnitTests.Core.Services;
 [TestFixture]
 public class BookSearchServiceGetAll
 {
-    private readonly Mock<IReadRepository<Book>> _mockRepo = new();
-    private BookSearchService? _searchService;
-
     [SetUp]
     public void Init()
     {
         _searchService = new BookSearchService(_mockRepo.Object);
     }
 
+    private readonly Mock<IReadRepository<Book>> _mockRepo = new();
+    private BookSearchService? _searchService;
+
 
     [TestCase]
     public async Task ReturnsList()
     {
         const string title = "a test book";
-        var list = new List<Book>(){new(title), new(title + "02")};
-        _mockRepo.Setup(r => r.ListAsync(It.IsAny<BooksSearchSpec>(), It.IsAny<CancellationToken>())).ReturnsAsync(list);
+        var list = new List<Book> { new(title), new(title + "02") };
+        _mockRepo.Setup(r => r.ListAsync(It.IsAny<BooksSearchSpec>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(list);
 
         var result = await _searchService!.GetAllBooks();
 
@@ -45,7 +46,8 @@ public class BookSearchServiceGetAll
     {
         var expectedErrorMessage = "Database not there.";
         var exception = new Exception(expectedErrorMessage);
-        _mockRepo.Setup(r => r.ListAsync(It.IsAny<BooksSearchSpec>(), It.IsAny<CancellationToken>())).ThrowsAsync(exception);
+        _mockRepo.Setup(r => r.ListAsync(It.IsAny<BooksSearchSpec>(), It.IsAny<CancellationToken>()))
+            .ThrowsAsync(exception);
 
         Assert.ThrowsAsync(Is.TypeOf<Exception>()
                 .And.Message.Contains(expectedErrorMessage),

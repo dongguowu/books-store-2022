@@ -2,7 +2,6 @@
 using BooksStore.Application.Features.Books.Commands.CreateBook;
 using BooksStore.Debug.Console;
 using BooksStore.Domain.Entities;
-using BooksStore.Infrastructure;
 using BooksStore.Persistence.DatabaseContext;
 using NetArchTest.Rules;
 
