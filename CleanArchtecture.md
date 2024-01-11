@@ -39,4 +39,3 @@ Injecting the application db context in the webinars controller breaks the CQRS 
 Moving controllers into the presentation class library allows control over referencing other projects.
 One piece of configuration is needed for controllers to function outside of the web application.
 
-mongodb://root:rrrr@localhost:27017
