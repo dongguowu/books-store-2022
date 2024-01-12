@@ -11,29 +11,29 @@ namespace BooksStore.Infrastructure.Shared.Services;
 
 public class SMTPMailService : IMailService
 {
-    public SMTPMailService(IOptions<MailSettings> mailSettings, ILogger<SMTPMailService> logger)
+    public SMTPMailService(IOptions<EmailSettings> mailSettings, ILogger<SMTPMailService> logger)
     {
-        _mailSettings = mailSettings.Value;
+        EmailSettings = mailSettings.Value;
         _logger = logger;
     }
 
-    public MailSettings _mailSettings { get; }
+    public EmailSettings EmailSettings { get; }
     public ILogger<SMTPMailService> _logger { get; }
 
-    public async Task SendAsync(MailRequest request)
+    public async Task SendAsync(EmailMessage request)
     {
         try
         {
             var email = new MimeMessage();
-            email.Sender = MailboxAddress.Parse(request.From ?? _mailSettings.From);
+            email.Sender = MailboxAddress.Parse(request.From ?? EmailSettings.FromAddress);
             email.To.Add(MailboxAddress.Parse(request.To));
             email.Subject = request.Subject;
             var builder = new BodyBuilder();
             builder.HtmlBody = request.Body;
             email.Body = builder.ToMessageBody();
             using var smtp = new SmtpClient();
-            smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
-            smtp.Authenticate(_mailSettings.UserName, _mailSettings.Password);
+            smtp.Connect(EmailSettings.Host, EmailSettings.Port, SecureSocketOptions.StartTls);
+            smtp.Authenticate(EmailSettings.UserName, EmailSettings.Password);
             await smtp.SendAsync(email);
             smtp.Disconnect(true);
         }

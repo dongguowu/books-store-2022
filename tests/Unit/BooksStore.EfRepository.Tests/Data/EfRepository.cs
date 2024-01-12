@@ -10,14 +10,14 @@ namespace BooksStore.EfRepository.Tests.Data;
 [TestFixture]
 public class EfRepository : BaseEfRepTestFixture
 {
-    private IRepository<Book>? _rep;
-
     [SetUp]
     public void Init()
     {
         RefreshDatabase();
         _rep = GetRepository();
     }
+
+    private IRepository<Book>? _rep;
 
     [TestCase]
     public async Task AddsBookAndSetsId()
