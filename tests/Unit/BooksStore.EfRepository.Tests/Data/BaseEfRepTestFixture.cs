@@ -6,20 +6,25 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
-namespace BooksStore.IntegrationTests.Data;
+namespace BooksStore.EfRepository.Tests.Data;
 
 public abstract class BaseEfRepTestFixture
 {
-    protected AppDbContext _dbContext;
+    protected AppDbContext? DbContext;
+
+    protected BaseEfRepTestFixture()
+    {
+        DbContext = null;
+    }
 
     protected void RefreshDatabase()
     {
-        _dbContext = new AppDbContext(CreateNewContextOptions(), new Mock<IMediator>().Object);
+        DbContext = new AppDbContext(CreateNewContextOptions(), new Mock<IMediator>().Object);
     }
 
     protected EfRepository<Book> GetRepository()
     {
-        return new EfRepository<Book>(_dbContext);
+        return new EfRepository<Book>(DbContext);
     }
 
     private static DbContextOptions<AppDbContext> CreateNewContextOptions()

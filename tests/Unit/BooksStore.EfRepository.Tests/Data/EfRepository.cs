@@ -5,19 +5,19 @@ using BooksStore.Domain.Entities;
 using NUnit.Framework;
 using SharedKernel.Interfaces;
 
-namespace BooksStore.IntegrationTests.Data;
+namespace BooksStore.EfRepository.Tests.Data;
 
 [TestFixture]
 public class EfRepository : BaseEfRepTestFixture
 {
+    private IRepository<Book>? _rep;
+
     [SetUp]
     public void Init()
     {
         RefreshDatabase();
         _rep = GetRepository();
     }
-
-    private IRepository<Book>? _rep;
 
     [TestCase]
     public async Task AddsBookAndSetsId()
