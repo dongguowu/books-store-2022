@@ -1,11 +1,27 @@
-﻿using BooksStore.Domain.Entities;
-using BooksStore.Infra.MongoDB;
+﻿using BooksStore.Application;
+using BooksStore.Domain.Entities;
+using BooksStore.Infrastructure.Shared;
+using BooksStore.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services.AddMongo("mongodb://root:rrrr@localhost:27017", "BooksStore").AddMongoRepository<Book>("books");
+    //builder.Services.AddMongo("mongodb://root:rrrr@localhost:27017", "BooksStore").AddMongoRepository<Book>("books");
+
+    // Add services to the container.
+    builder.Services.AddApplicationServices();
+    builder.Services.AddInfrastructureServices(builder.Configuration);
+    builder.Services.AddPersistenceServices(builder.Configuration);
+
 
     builder.Services.AddControllers();
+
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("all", builder =>
+            builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
+    });
 
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -7,12 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\BooksStore.Application\BooksStore.Application.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\BooksStore.Infra.MongoDB\BooksStore.Infra.MongoDB.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\BooksStore.Infrastructure.Shared\BooksStore.Infrastructure.Shared.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\BooksStore.Persistence\BooksStore.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

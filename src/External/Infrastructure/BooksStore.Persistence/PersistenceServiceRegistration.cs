@@ -10,7 +10,7 @@ public static class PersistenceServiceRegistration
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services,
         IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("DatabaseConnectionString");
+        var connectionString = configuration.GetConnectionString("EfDatabaseConnectionString");
 
         if (!string.IsNullOrWhiteSpace(connectionString))
         {
