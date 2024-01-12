@@ -27,12 +27,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\Core\BooksStore.Application\BooksStore.Application.csproj" />
     <ProjectReference Include="..\..\..\src\Core\BooksStore.Domain\BooksStore.Domain.csproj" />
-    <ProjectReference
-      Include="..\..\..\src\External\Infrastructure\BooksStore.Infrastructure.Shared\BooksStore.Infrastructure.Shared.csproj" />
-    <ProjectReference
-      Include="..\..\..\src\External\Infrastructure\BooksStore.Infrastructure\BooksStore.Persistence.csproj" />
-    <ProjectReference
-      Include="..\..\..\src\External\Presentation\BooksStore.Debug.Console\BooksStore.Debug.Console.csproj" />
+    <ProjectReference Include="..\..\..\src\External\Infrastructure\BooksStore.Infrastructure.Shared\BooksStore.Infrastructure.Shared.csproj" />
+    <ProjectReference Include="..\..\..\src\External\Infrastructure\BooksStore.Persistence\BooksStore.Persistence.csproj" />
+    <ProjectReference Include="..\..\..\src\External\Presentation\BooksStore.Debug.Console\BooksStore.Debug.Console.csproj" />
   </ItemGroup>
 
 </Project>
