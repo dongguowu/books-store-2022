@@ -1,5 +1,4 @@
 ﻿using BooksStore.Application;
-using BooksStore.Domain.Entities;
 using BooksStore.Infrastructure.Shared;
 using BooksStore.Persistence;
 
@@ -17,8 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddCors(options =>
     {
-        options.AddPolicy("all", builder =>
-            builder.AllowAnyOrigin()
+        options.AddPolicy("all", corsPolicyBuilder =>
+            corsPolicyBuilder
+                .AllowAnyOrigin()
                 .AllowAnyHeader()
                 .AllowAnyMethod());
     });
