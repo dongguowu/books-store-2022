@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Features\Books\Commands\UpdateBook\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

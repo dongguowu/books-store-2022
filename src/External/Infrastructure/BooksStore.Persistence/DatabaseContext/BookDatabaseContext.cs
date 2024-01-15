@@ -9,8 +9,8 @@ public sealed class BookDatabaseContext : DbContext, IUnitOfWork
 {
     public BookDatabaseContext(DbContextOptions<BookDatabaseContext> options) : base(options) { }
 
-    public DbSet<Book> Books { get; set; }
-    public DbSet<BookCategory> BookCategories { get; set; }
+    public DbSet<Book>? Books { get; set; }
+    public DbSet<BookCategory>? BookCategories { get; set; }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
@@ -33,8 +33,6 @@ public sealed class BookDatabaseContext : DbContext, IUnitOfWork
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(BookDatabaseContext).Assembly);
-
-
         base.OnModelCreating(modelBuilder);
     }
 }

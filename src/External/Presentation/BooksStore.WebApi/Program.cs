@@ -1,6 +1,9 @@
 ﻿using BooksStore.Application;
+using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
+using BooksStore.Infra.Data.Context;
 using BooksStore.Infrastructure.Shared;
 using BooksStore.Persistence;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -9,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
     // Add services to the container.
     builder.Services.AddApplicationServices();
     builder.Services.AddInfrastructureServices(builder.Configuration);
-    builder.Services.AddPersistenceServices(builder.Configuration);
+    builder.Services.AddEfPersistenceServices(builder.Configuration);
 
 
     builder.Services.AddControllers();

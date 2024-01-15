@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\BooksStore.Application\BooksStore.Application.csproj" />
+    <ProjectReference Include="..\BooksStore.Infra.Data\BooksStore.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>
