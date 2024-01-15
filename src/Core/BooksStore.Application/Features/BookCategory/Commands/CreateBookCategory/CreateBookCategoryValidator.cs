@@ -24,11 +24,15 @@ public class CreateBookCategoryValidator : AbstractValidator<CreateBookCategoryC
 
     private async Task<bool> BookCategoryNameUnique(CreateBookCategoryCommand command, CancellationToken token)
     {
-        var query = new GetBookCategoryByNameQuery(command.Name);
-        var handler = new GetBookCategoryByNameQueryHandler(_rep);
+        return !(await BookCategoryNameMustExist(command.Name, token));
+    }
 
+    private async Task<bool> BookCategoryNameMustExist(string name, CancellationToken token)
+    {
+        var query = new GetBookCategoryByNameQuery(name);
+        var handler = new GetBookCategoryByNameQueryHandler(_rep);
         var bookCategory = await handler.Handle(query, token);
 
-        return bookCategory == null;
+        return bookCategory != null;
     }
 }

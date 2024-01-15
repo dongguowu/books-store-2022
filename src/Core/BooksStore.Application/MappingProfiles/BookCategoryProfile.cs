@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BooksStore.Application.Features.BookCategory.Commands.CreateBookCategory;
+using BooksStore.Application.Features.BookCategory.Commands.UpdateBookCategory;
 using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
 using BooksStore.Domain.Entities;
 
@@ -10,6 +11,8 @@ public class BookCategoryProfile : Profile
     public BookCategoryProfile()
     {
         CreateMap<BookCategoryDto, BookCategory>().ReverseMap();
-        CreateMap<CreateBookCategoryCommand, BookCategory>().ReverseMap();
+        //CreateMap<BookCategory, BookCategoryDetailDto>();
+        CreateMap<CreateBookCategoryCommand, BookCategory>();
+        CreateMap<UpdateBookCategoryCommand, BookCategory>();
     }
 }

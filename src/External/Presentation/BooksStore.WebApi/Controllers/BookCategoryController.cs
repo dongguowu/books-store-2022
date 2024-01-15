@@ -1,14 +1,14 @@
 ﻿using BooksStore.Application.Features.BookCategory.Commands.CreateBookCategory;
+using BooksStore.Application.Features.BookCategory.Commands.UpdateBookCategory;
 using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
 using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryByName;
-using BooksStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SharedKernel.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BooksStore.WebApi.Controllers;
+
 [Route("api/[controller]")]
 [ApiController]
 public class BookCategoryController : ControllerBase
@@ -19,6 +19,7 @@ public class BookCategoryController : ControllerBase
     {
         _mediator = mediator;
     }
+
     // GET: api/<BookCategoryController>
     [HttpGet]
     public async Task<List<BookCategoryDto>> Get()
@@ -48,12 +49,20 @@ public class BookCategoryController : ControllerBase
 
     // PUT api/<BookCategoryController>/5
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult> Put(Guid id, [FromBody] UpdateBookCategoryCommand bookCategory)
     {
+        await _mediator.Send(bookCategory);
+        return NoContent();
     }
 
     // DELETE api/<BookCategoryController>/5
     [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesDefaultResponseType]
     public void Delete(int id)
     {
     }

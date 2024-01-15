@@ -1,4 +1,5 @@
-﻿using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
+﻿using BooksStore.Application.Features.BookCategory.Commands.UpdateBookCategory;
+using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
 using BooksStore.Persistence.DatabaseContext;
 using BooksStore.Persistence.Repositories;
 using MediatR;
@@ -29,6 +30,8 @@ public static class PersistenceServiceRegistration
             services.AddScoped(typeof(IMediator), typeof(Mediator));
             services.AddScoped(typeof(IRequestHandler<GetAllBookCategoryQuery, List<BookCategoryDto>>),
                 typeof(GetAllBookCategoryQueryHandler));
+            services.AddScoped(typeof(IRequestHandler<UpdateBookCategoryCommand, bool>),
+                typeof(UpdateBookCategoryCommandHandler));
         }
         else
         {
