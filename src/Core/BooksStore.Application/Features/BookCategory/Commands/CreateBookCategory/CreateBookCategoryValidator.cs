@@ -29,6 +29,6 @@ public class CreateBookCategoryValidator : AbstractValidator<CreateBookCategoryC
 
         var bookCategory = await handler.Handle(query, token);
 
-        return bookCategory != null;
+        return bookCategory == null;
     }
 }

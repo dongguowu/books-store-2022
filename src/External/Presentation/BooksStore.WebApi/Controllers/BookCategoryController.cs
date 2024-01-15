@@ -1,4 +1,6 @@
-﻿using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
+﻿using BooksStore.Application.Features.BookCategory.Commands.CreateBookCategory;
+using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
+using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryByName;
 using BooksStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -28,15 +30,20 @@ public class BookCategoryController : ControllerBase
 
     // GET api/<BookCategoryController>/5
     [HttpGet("{id}")]
-    public string Get(int id)
+    public async Task<List<BookCategoryDto>> GetByName(string id)
     {
-        return "value";
+        return (List<BookCategoryDto>)await _mediator.Send(new GetBookCategoryByNameQuery(id));
     }
 
     // POST api/<BookCategoryController>
+
     [HttpPost]
-    public void Post([FromBody] string value)
+    [ProducesResponseType(201)]
+    [ProducesResponseType(400)]
+    public async Task<ActionResult> Post(CreateBookCategoryCommand bookCategory)
     {
+        var response = await _mediator.Send(bookCategory);
+        return CreatedAtAction(nameof(Get), new { id = response });
     }
 
     // PUT api/<BookCategoryController>/5
