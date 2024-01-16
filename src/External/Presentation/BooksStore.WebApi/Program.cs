@@ -3,6 +3,7 @@ using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
 using BooksStore.Infra.Data.Context;
 using BooksStore.Infrastructure.Shared;
 using BooksStore.Persistence;
+using BooksStore.WebApi.Middleware;
 using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +33,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 {
+    app.UseMiddleware<ExceptionMiddleware>();
+
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
