@@ -9,7 +9,7 @@ namespace BooksStore.Persistence.Repositories;
 public class EfRepository<T> : RepositoryBase<T>, IReadRepository<T>, IRepository<T>
     where T : BaseEntity, IAggregateRoot
 {
-    public EfRepository(DbContext dbContext) : base(dbContext)
+    public EfRepository(BookDatabaseContext dbContext) : base(dbContext)
     {
     }
 }
