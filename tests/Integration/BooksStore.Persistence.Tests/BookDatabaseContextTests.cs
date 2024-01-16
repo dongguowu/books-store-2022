@@ -7,39 +7,38 @@ using SharedKernel.Interfaces;
 namespace BooksStore.Persistence.Tests;
 
 [TestFixture]
-public class Tests
+public class BookDatabaseContextTests
 {
+    private BookDatabaseContext? _context;
+
     [SetUp]
     public void Setup()
     {
-        var options = new DbContextOptionsBuilder<BookDatabaseContext>()
+        var dbContextOptions = new DbContextOptionsBuilder<BookDatabaseContext>()
             .UseInMemoryDatabase("TestDatabase-" + Guid.NewGuid()) // Unique database name for each test
             .Options;
 
-        _context = new BookDatabaseContext(options);
-        _rep = new BookRepository(_context);
+        _context = new BookDatabaseContext(dbContextOptions);
     }
 
     [TearDown]
     public void Cleanup()
     {
         _context?.Database.EnsureDeleted(); // Remove the database after each test
-        _rep = null;
         _context = null;
     }
 
-    private IRepository<Book>? _rep;
-    private BookDatabaseContext? _context;
 
     [TestCase]
-    public async Task AddsBookAndSetsId()
+    public async Task AddBookAndSetId()
     {
         var title = Guid.NewGuid().ToString();
         var price = 100.00m;
         var book = new Book(title, price, BookCategory.Default);
-        await _rep!.AddAsync(book);
+        var rep = new EfRepository<Book>(_context);
+        await rep!.AddAsync(book);
 
-        var result = (await _rep.ListAsync()).FirstOrDefault();
+        var result = (await rep.ListAsync()).FirstOrDefault();
 
         if (result == null)
         {
@@ -58,6 +57,7 @@ public class Tests
         var title = Guid.NewGuid().ToString();
         var price = 100.00m;
         var book = new Book(title, price, BookCategory.Default);
+        var _rep = new EfRepository<Book>(_context);
         await _rep!.AddAsync(book);
 
         // Delete
@@ -78,6 +78,7 @@ public class Tests
         var category = new BookCategory(Guid.NewGuid().ToString());
         var book = new Book(title, price, category);
 
+        var _rep = new EfRepository<Book>(_context);
 
         // Add
         await _rep!.AddAsync(book);

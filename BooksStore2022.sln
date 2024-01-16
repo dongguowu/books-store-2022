@@ -38,10 +38,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.Infra.Data", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.Core.Tests", "tests\Unit\BooksStore.Core.Tests\BooksStore.Core.Tests.csproj", "{A3F6E013-A507-49B9-8DF6-E9441F2DA6E3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.Persistence.Tests", "tests\Unit\BooksStore.Persistence.Tests\BooksStore.Persistence.Tests.csproj", "{3E43E55E-2603-4963-8FBC-DD2D5B553653}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.EfRepository.Tests", "tests\Unit\BooksStore.EfRepository.Tests\BooksStore.EfRepository.Tests.csproj", "{13FEBB33-482D-4F8A-ADE1-78AB20893F94}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.Persistence", "src\External\Infrastructure\BooksStore.Persistence\BooksStore.Persistence.csproj", "{CFC7E3E9-65E4-4412-B8FD-2CFCB6A2A22D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.WebApi", "src\External\Presentation\BooksStore.WebApi\BooksStore.WebApi.csproj", "{B53BF323-514D-48FE-A5C4-1F941CBD36E9}"
@@ -49,6 +45,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.Infra.MongoDB", "src\External\Infrastructure\BooksStore.Infra.MongoDB\BooksStore.Infra.MongoDB.csproj", "{E638075D-FC85-4F2A-A860-2C02BF621824}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksStore.Application.XunitTests", "tests\Unit\BooksStore.Application.XunitTests\BooksStore.Application.XunitTests.csproj", "{172222E1-2F54-46CC-A3FC-0C17A5DCEFC9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{03BF9291-E8BA-40DD-AE9D-65DAA5E12A84}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.EfRepository.Tests", "tests\Integration\BooksStore.EfRepository.Tests\BooksStore.EfRepository.Tests.csproj", "{16E19407-2E25-47D3-A59D-80FA640B4A2C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.Persistence.Tests", "tests\Integration\BooksStore.Persistence.Tests\BooksStore.Persistence.Tests.csproj", "{59A07AE4-752C-46A1-B86C-F2A870056354}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,14 +90,6 @@ Global
 		{A3F6E013-A507-49B9-8DF6-E9441F2DA6E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3F6E013-A507-49B9-8DF6-E9441F2DA6E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3F6E013-A507-49B9-8DF6-E9441F2DA6E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E43E55E-2603-4963-8FBC-DD2D5B553653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E43E55E-2603-4963-8FBC-DD2D5B553653}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E43E55E-2603-4963-8FBC-DD2D5B553653}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E43E55E-2603-4963-8FBC-DD2D5B553653}.Release|Any CPU.Build.0 = Release|Any CPU
-		{13FEBB33-482D-4F8A-ADE1-78AB20893F94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{13FEBB33-482D-4F8A-ADE1-78AB20893F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{13FEBB33-482D-4F8A-ADE1-78AB20893F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{13FEBB33-482D-4F8A-ADE1-78AB20893F94}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CFC7E3E9-65E4-4412-B8FD-2CFCB6A2A22D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CFC7E3E9-65E4-4412-B8FD-2CFCB6A2A22D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFC7E3E9-65E4-4412-B8FD-2CFCB6A2A22D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -112,6 +106,14 @@ Global
 		{172222E1-2F54-46CC-A3FC-0C17A5DCEFC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{172222E1-2F54-46CC-A3FC-0C17A5DCEFC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{172222E1-2F54-46CC-A3FC-0C17A5DCEFC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16E19407-2E25-47D3-A59D-80FA640B4A2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16E19407-2E25-47D3-A59D-80FA640B4A2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16E19407-2E25-47D3-A59D-80FA640B4A2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16E19407-2E25-47D3-A59D-80FA640B4A2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59A07AE4-752C-46A1-B86C-F2A870056354}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59A07AE4-752C-46A1-B86C-F2A870056354}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59A07AE4-752C-46A1-B86C-F2A870056354}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59A07AE4-752C-46A1-B86C-F2A870056354}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,12 +132,13 @@ Global
 		{64B74C54-CAB7-4FC3-83C7-AD912DFB2E8B} = {9F16D8F5-E374-4BDA-9948-23B03C95FB17}
 		{522C1701-CAF5-47F9-B936-7A69AB06C838} = {FE3ABEB1-EA27-4CBE-8554-34D93EDFD034}
 		{A3F6E013-A507-49B9-8DF6-E9441F2DA6E3} = {9F16D8F5-E374-4BDA-9948-23B03C95FB17}
-		{3E43E55E-2603-4963-8FBC-DD2D5B553653} = {9F16D8F5-E374-4BDA-9948-23B03C95FB17}
-		{13FEBB33-482D-4F8A-ADE1-78AB20893F94} = {9F16D8F5-E374-4BDA-9948-23B03C95FB17}
 		{CFC7E3E9-65E4-4412-B8FD-2CFCB6A2A22D} = {FE3ABEB1-EA27-4CBE-8554-34D93EDFD034}
 		{B53BF323-514D-48FE-A5C4-1F941CBD36E9} = {6A382376-E2DF-4D27-AD82-D0B231A0F074}
 		{E638075D-FC85-4F2A-A860-2C02BF621824} = {FE3ABEB1-EA27-4CBE-8554-34D93EDFD034}
 		{172222E1-2F54-46CC-A3FC-0C17A5DCEFC9} = {9F16D8F5-E374-4BDA-9948-23B03C95FB17}
+		{03BF9291-E8BA-40DD-AE9D-65DAA5E12A84} = {E1BD19D9-F466-4D5D-8949-6DCE67342A6C}
+		{16E19407-2E25-47D3-A59D-80FA640B4A2C} = {03BF9291-E8BA-40DD-AE9D-65DAA5E12A84}
+		{59A07AE4-752C-46A1-B86C-F2A870056354} = {03BF9291-E8BA-40DD-AE9D-65DAA5E12A84}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72C03CDF-61CA-477A-A985-004FE6CBFD3F}
