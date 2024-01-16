@@ -1,42 +1,30 @@
-﻿using BooksStore.Domain.Entities;
-using BooksStore.Persistence.DatabaseContext;
-using BooksStore.Persistence.Repositories;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using BooksStore.Domain.Entities;
+using NUnit.Framework;
 using SharedKernel.Interfaces;
 
-namespace BooksStore.Persistence.Tests;
+namespace BooksStore.EfRepository.Tests.Data;
 
 [TestFixture]
-public class Tests
+public class EfRepository : BaseEfRepTestFixture
 {
     [SetUp]
-    public void Setup()
+    public void Init()
     {
-        var options = new DbContextOptionsBuilder<BookDatabaseContext>()
-            .UseInMemoryDatabase("TestDatabase-" + Guid.NewGuid()) // Unique database name for each test
-            .Options;
-
-        _context = new BookDatabaseContext(options);
-        _rep = new BookRepository(_context);
-    }
-
-    [TearDown]
-    public void Cleanup()
-    {
-        _context?.Database.EnsureDeleted(); // Remove the database after each test
-        _rep = null;
-        _context = null;
+        RefreshDatabase();
+        _rep = GetRepository();
     }
 
     private IRepository<Book>? _rep;
-    private BookDatabaseContext? _context;
 
     [TestCase]
     public async Task AddsBookAndSetsId()
     {
         var title = Guid.NewGuid().ToString();
         var price = 100.00m;
-        var book = new Book(title, price, BookCategory.Default);
+        var book = new Book(title, price);
         await _rep!.AddAsync(book);
 
         var result = (await _rep.ListAsync()).FirstOrDefault();
@@ -57,7 +45,7 @@ public class Tests
         // Add
         var title = Guid.NewGuid().ToString();
         var price = 100.00m;
-        var book = new Book(title, price, BookCategory.Default);
+        var book = new Book(title, price);
         await _rep!.AddAsync(book);
 
         // Delete

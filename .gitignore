@@ -351,3 +351,4 @@ MigrationBackup/
 src/BooksStore.Web/booksStore.db-shm
 src/BooksStore.Web/booksStore.db-wal
 src/BooksStore.Web/booksStore.db
+Migrations/

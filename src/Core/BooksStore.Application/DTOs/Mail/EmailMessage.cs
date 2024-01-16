@@ -1,6 +1,6 @@
 ﻿namespace BooksStore.Application.DTOs.Mail;
 
-public record class MailRequest
+public record class EmailMessage
 {
     public string To { get; set; } = string.Empty;
     public string Subject { get; set; } = string.Empty;

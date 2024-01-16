@@ -1,16 +1,21 @@
-﻿using BooksStore.Persistence.DatabaseContext;
+﻿using BooksStore.Application.Features.BookCategory.Commands.UpdateBookCategory;
+using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
+using BooksStore.Persistence.DatabaseContext;
+using BooksStore.Persistence.Repositories;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SharedKernel.Interfaces;
 
 namespace BooksStore.Persistence;
 
 public static class PersistenceServiceRegistration
 {
-    public static IServiceCollection AddPersistenceServices(this IServiceCollection services,
+    public static IServiceCollection AddEfPersistenceServices(this IServiceCollection services,
         IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("DatabaseConnectionString");
+        var connectionString = configuration.GetConnectionString("EfDatabaseConnectionString");
 
         if (!string.IsNullOrWhiteSpace(connectionString))
         {
@@ -18,6 +23,15 @@ public static class PersistenceServiceRegistration
             {
                 options.UseSqlServer(connectionString);
             });
+
+
+            services.AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped(typeof(IMediator), typeof(Mediator));
+            services.AddScoped(typeof(IRequestHandler<GetAllBookCategoryQuery, List<BookCategoryDto>>),
+                typeof(GetAllBookCategoryQueryHandler));
+            services.AddScoped(typeof(IRequestHandler<UpdateBookCategoryCommand, bool>),
+                typeof(UpdateBookCategoryCommandHandler));
         }
         else
         {

@@ -2,7 +2,7 @@
 
 namespace BooksStore.Application.Interfaces.Shared;
 
-public interface IMailService
+public interface IEmailSender
 {
-    Task SendAsync(EmailMessage request);
+    Task<bool> SendEmail(EmailMessage email);
 }
