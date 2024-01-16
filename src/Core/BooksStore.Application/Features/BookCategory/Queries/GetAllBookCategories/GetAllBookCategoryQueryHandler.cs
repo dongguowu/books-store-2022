@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BooksStore.Application.Interfaces.Shared;
 using MediatR;
 using SharedKernel.Interfaces;
 
@@ -8,11 +9,13 @@ public class GetAllBookCategoryQueryHandler : IRequestHandler<GetAllBookCategory
 {
     private readonly IMapper _mapper;
     private readonly IReadRepository<Domain.Entities.BookCategory> _rep;
+    private readonly IAppLogger<GetAllBookCategoryQueryHandler> _logger;
 
-    public GetAllBookCategoryQueryHandler(IMapper mapper, IReadRepository<Domain.Entities.BookCategory> rep)
+    public GetAllBookCategoryQueryHandler(IReadRepository<Domain.Entities.BookCategory> rep, IMapper mapper, IAppLogger<GetAllBookCategoryQueryHandler> logger)
     {
         _mapper = mapper;
         _rep = rep;
+        _logger = logger;
     }
 
     public async Task<List<BookCategoryDto>> Handle(GetAllBookCategoryQuery request,
