@@ -18,8 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddCors(options =>
     {
-        options.AddPolicy("all", builder =>
-            builder
+        options.AddPolicy("all", corsPolicyBuilder =>
+            corsPolicyBuilder
                 .AllowAnyOrigin()
                 .AllowAnyHeader()
                 .AllowAnyMethod());
@@ -37,7 +37,8 @@ var app = builder.Build();
     if (app.Environment.IsDevelopment())
     {
         app.UseOpenApi();
-        app.UseSwaggerUi();
+        app.UseSwagger();
+        app.UseSwaggerUI();
     }
 
     app.UseHttpsRedirection();
