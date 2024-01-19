@@ -1,10 +1,8 @@
 ﻿using BooksStore.Application;
-using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
-using BooksStore.Infra.Data.Context;
 using BooksStore.Infrastructure.Shared;
 using BooksStore.Persistence;
 using BooksStore.WebApi.Middleware;
-using MediatR;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -20,8 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddCors(options =>
     {
-        options.AddPolicy("all", corsPolicyBuilder =>
-            corsPolicyBuilder
+        options.AddPolicy("all", builder =>
+            builder
                 .AllowAnyOrigin()
                 .AllowAnyHeader()
                 .AllowAnyMethod());
@@ -38,11 +36,12 @@ var app = builder.Build();
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
-        app.UseSwagger();
-        app.UseSwaggerUI();
+        app.UseOpenApi();
+        app.UseSwaggerUi();
     }
 
     app.UseHttpsRedirection();
+    app.UseCors("all");
     app.MapControllers();
     app.Run();
 }

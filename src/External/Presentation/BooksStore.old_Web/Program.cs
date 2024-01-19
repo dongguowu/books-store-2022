@@ -1,17 +1,21 @@
 ﻿using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using BooksStore.Core.IoC;
-using BooksStore.Infra.Data.Context;
-using BooksStore.Infra.EfDB;
+using BooksStore.Application;
+using BooksStore.Infrastructure.Shared;
+using BooksStore.Persistence;
 using BooksStore.Web.Configurations;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
 Assembly.GetExecutingAssembly();
+
+// Add services to the container.
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddEfPersistenceServices(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -23,20 +27,20 @@ builder.Services.RegisterAutoMapper();
 
 
 //
-var connectionString = builder.Configuration.GetConnectionString("SqliteConnection");
+//var connectionString = builder.Configuration.GetConnectionString("SqlServerConnection");
 
 //wire up or define dependency that belongs to infrastructure
 //DI database
-builder.Services
-    .AddDbContext<AppDbContext>(options =>
-        options.UseSqlite(connectionString, b => b.MigrationsAssembly("BooksStore.Web")));
+//builder.Services
+//    .AddDbContext<BookDatabaseContext>(options =>
+//        options.UseSqlite(connectionString, b => b.MigrationsAssembly("BooksStore.Web")));
 //DependencyContainer.RegisterServices(builder.Services);
 
 
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
-    containerBuilder.RegisterModule(new DefaultCoreModule());
-    containerBuilder.RegisterModule(new DefaultInfraModule());
+    //containerBuilder.RegisterModule(new DefaultCoreModule());
+    //containerBuilder.RegisterModule(new DefaultInfraModule());
 });
 
 

@@ -1,0 +1,104 @@
+﻿@page "/bookcategories/"
+@using BooksStore.BlazorUI.Contracts
+@using BooksStore.BlazorUI.Services.Base
+@using BooksStore.BlazorUI.ViewModels
+
+<h3>Book Category</h3>
+
+<div class="m-2 d-flex justify-content-end">
+    <button @onclick="CreateBookCategory" class="btn btn-success">Add Leave Type</button>
+</div>
+
+@if (string.IsNullOrEmpty(Message) == false)
+{
+    <div class="alert alert-danger">
+        @Message
+    </div>
+}
+
+<div clas></div>
+@if (BookCategoryVms == null)
+{
+    <p>Loading Data...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+         </tr>
+        </thead>
+        <tbody>
+        @foreach (var bookCategoryVm in BookCategoryVms)
+        {
+            <tr>
+                <td>@bookCategoryVm.Id </td>
+                <td>@bookCategoryVm.Name </td>
+                <td>
+                    <AuthorizeView Roles="Administrator">
+                        <button @onclick="@(() => EditBookCategory(bookCategoryVm.Id))" class="btn btn-warning">Edit</button>
+                        <button @onclick="@(() => DeleteBookCategory(bookCategoryVm.Id))" class="btn btn-danger">Delete</button>
+                    </AuthorizeView>
+                    <button @onclick="@(() => DetailsBookCategory(bookCategoryVm.Id))" class="btn btn-info">Details</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    [Inject]
+    public IBookCategoryService BookCategoryService { get; set; }
+
+    public List<BookCategoryDto> BookCategoryVms { get; private set; }
+    public string Message { get; set; } = string.Empty;
+
+    protected void CreateBookCategory()
+    {
+        NavigationManager.NavigateTo("/bookcategories/create/");
+    }
+
+
+    protected void EditBookCategory(Guid id)
+    {
+        NavigationManager.NavigateTo($"/bookcategories/edit/{id}");
+    }
+
+    protected void DetailsBookCategory(Guid id)
+    {
+        NavigationManager.NavigateTo($"/bookcategories/details/{id}");
+    }
+
+    protected async Task DeleteBookCategory(Guid id)
+    {
+        var response = await BookCategoryService.DeleteBookCategory(id);
+        if (response.Success)
+        {
+            StateHasChanged();
+        }
+        else
+        {
+            Message = response.Message;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        BookCategoryVms = await BookCategoryService.GetBookCategories();
+    }
+
+
+}
+
+}

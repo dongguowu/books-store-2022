@@ -13,3 +13,11 @@ add-migration InitialMigration
 update-database
 
 ```
+
+## NSwagStudio
+
+- namespaces
+- remove "use the base URL for the request"
+- select "Generate interfaces for client classes"
+- select system json instead of Newtonsoft
+- Output file path
