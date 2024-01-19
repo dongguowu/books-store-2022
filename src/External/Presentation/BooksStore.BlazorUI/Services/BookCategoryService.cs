@@ -14,10 +14,10 @@ public class BookCategoryService : BaseHttpService, IBookCategoryService
         _mapper = mapper;
     }
 
-    public async Task<List<BookCategoryDto>> GetBookCategories()
+    public async Task<List<BookCategoryVM>> GetBookCategories()
     {
         var results = await _client.BookCategoryAllAsync();
-        return results.ToList();
+        return _mapper.Map<List<BookCategoryVM>>(results);
 
     }
 

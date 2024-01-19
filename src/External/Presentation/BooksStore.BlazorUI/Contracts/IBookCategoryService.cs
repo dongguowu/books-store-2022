@@ -5,7 +5,7 @@ namespace BooksStore.BlazorUI.Contracts;
 
 public interface IBookCategoryService
 {
-    Task<List<BookCategoryDto>> GetBookCategories();
+    Task<List<BookCategoryVM>> GetBookCategories();
     Task<BookCategoryVM> GetBookCategory(Guid id);
 
     Task<Response<Guid>> CreateBookCategory(BookCategoryVM bookCategory);
