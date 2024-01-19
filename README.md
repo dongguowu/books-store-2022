@@ -21,3 +21,12 @@ update-database
 - select "Generate interfaces for client classes"
 - select system json instead of Newtonsoft
 - Output file path
+
+## SharedKernel
+
+### library
+
+- [Ardalis.Specification](https://github.com/ardalis/Specification)
+  includes a default generic Repository base class with support for EF6 and EF Core
+
+- [FluentValidation](https://github.com/FluentValidation/FluentValidation)

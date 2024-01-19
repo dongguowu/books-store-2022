@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
 using BooksStore.Application.Interfaces.Shared;
 using BooksStore.Application.MappingProfiles;
@@ -17,9 +12,9 @@ namespace BooksStore.Application.XunitTests.Features.BookCategories;
 
 public class GetBookCategoriesHandlerTests
 {
-    private readonly Mock<IReadRepository<BookCategory>> _mockReadRepo ;
-    private readonly IMapper _mapper;
     private readonly Mock<IAppLogger<GetAllBookCategoryQueryHandler>> _appLogger;
+    private readonly IMapper _mapper;
+    private readonly Mock<IReadRepository<BookCategory>> _mockReadRepo;
 
 
     public GetBookCategoriesHandlerTests()

@@ -7,11 +7,12 @@ namespace BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategor
 
 public class GetAllBookCategoryQueryHandler : IRequestHandler<GetAllBookCategoryQuery, List<BookCategoryDto>>
 {
+    private readonly IAppLogger<GetAllBookCategoryQueryHandler> _logger;
     private readonly IMapper _mapper;
     private readonly IReadRepository<Domain.Entities.BookCategory> _rep;
-    private readonly IAppLogger<GetAllBookCategoryQueryHandler> _logger;
 
-    public GetAllBookCategoryQueryHandler(IReadRepository<Domain.Entities.BookCategory> rep, IMapper mapper, IAppLogger<GetAllBookCategoryQueryHandler> logger)
+    public GetAllBookCategoryQueryHandler(IReadRepository<Domain.Entities.BookCategory> rep, IMapper mapper,
+        IAppLogger<GetAllBookCategoryQueryHandler> logger)
     {
         _mapper = mapper;
         _rep = rep;

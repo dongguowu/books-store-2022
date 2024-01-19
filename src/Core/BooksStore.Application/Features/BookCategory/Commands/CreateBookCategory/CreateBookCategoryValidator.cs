@@ -24,7 +24,7 @@ public class CreateBookCategoryValidator : AbstractValidator<CreateBookCategoryC
 
     private async Task<bool> BookCategoryNameUnique(CreateBookCategoryCommand command, CancellationToken token)
     {
-        return !(await BookCategoryNameMustExist(command.Name, token));
+        return !await BookCategoryNameMustExist(command.Name, token);
     }
 
     private async Task<bool> BookCategoryNameMustExist(string name, CancellationToken token)

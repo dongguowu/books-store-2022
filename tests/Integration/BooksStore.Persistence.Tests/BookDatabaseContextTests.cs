@@ -2,15 +2,12 @@
 using BooksStore.Persistence.DatabaseContext;
 using BooksStore.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
-using SharedKernel.Interfaces;
 
 namespace BooksStore.Persistence.Tests;
 
 [TestFixture]
 public class BookDatabaseContextTests
 {
-    private BookDatabaseContext? _context;
-
     [SetUp]
     public void Setup()
     {
@@ -27,6 +24,8 @@ public class BookDatabaseContextTests
         _context?.Database.EnsureDeleted(); // Remove the database after each test
         _context = null;
     }
+
+    private BookDatabaseContext? _context;
 
 
     [TestCase]

@@ -1,6 +1,5 @@
 ﻿using Ardalis.Specification.EntityFrameworkCore;
 using BooksStore.Persistence.DatabaseContext;
-using Microsoft.EntityFrameworkCore;
 using SharedKernel;
 using SharedKernel.Interfaces;
 

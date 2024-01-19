@@ -118,12 +118,11 @@ namespace BooksStore.BlazorUI.Services.Base
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.1.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class Client : IClient
     {
-        private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<System.Text.Json.JsonSerializerOptions> _settings = new System.Lazy<System.Text.Json.JsonSerializerOptions>(CreateSerializerSettings, true);
 
         public Client(System.Net.Http.HttpClient httpClient)
         {
-            _httpClient = httpClient;
+            HttpClient = httpClient;
         }
 
         private static System.Text.Json.JsonSerializerOptions CreateSerializerSettings()
@@ -153,7 +152,7 @@ namespace BooksStore.BlazorUI.Services.Base
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookCategoryDto>> BookCategoryAllAsync(System.Threading.CancellationToken cancellationToken)
         {
-            var client_ = _httpClient;
+            var client_ = HttpClient;
             var disposeClient_ = false;
             try
             {
@@ -231,7 +230,7 @@ namespace BooksStore.BlazorUI.Services.Base
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task BookCategoryPOSTAsync(CreateBookCategoryCommand body, System.Threading.CancellationToken cancellationToken)
         {
-            var client_ = _httpClient;
+            var client_ = HttpClient;
             var disposeClient_ = false;
             try
             {
@@ -320,7 +319,7 @@ namespace BooksStore.BlazorUI.Services.Base
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
-            var client_ = _httpClient;
+            var client_ = HttpClient;
             var disposeClient_ = false;
             try
             {
@@ -402,7 +401,7 @@ namespace BooksStore.BlazorUI.Services.Base
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
-            var client_ = _httpClient;
+            var client_ = HttpClient;
             var disposeClient_ = false;
             try
             {
@@ -496,7 +495,7 @@ namespace BooksStore.BlazorUI.Services.Base
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
-            var client_ = _httpClient;
+            var client_ = HttpClient;
             var disposeClient_ = false;
             try
             {
@@ -583,7 +582,7 @@ namespace BooksStore.BlazorUI.Services.Base
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Book>> BooksAllAsync(System.Threading.CancellationToken cancellationToken)
         {
-            var client_ = _httpClient;
+            var client_ = HttpClient;
             var disposeClient_ = false;
             try
             {
@@ -661,7 +660,7 @@ namespace BooksStore.BlazorUI.Services.Base
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Book> BooksPOSTAsync(Book body, System.Threading.CancellationToken cancellationToken)
         {
-            var client_ = _httpClient;
+            var client_ = HttpClient;
             var disposeClient_ = false;
             try
             {
@@ -746,7 +745,7 @@ namespace BooksStore.BlazorUI.Services.Base
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
-            var client_ = _httpClient;
+            var client_ = HttpClient;
             var disposeClient_ = false;
             try
             {
@@ -828,7 +827,7 @@ namespace BooksStore.BlazorUI.Services.Base
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
-            var client_ = _httpClient;
+            var client_ = HttpClient;
             var disposeClient_ = false;
             try
             {
@@ -908,7 +907,7 @@ namespace BooksStore.BlazorUI.Services.Base
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
-            var client_ = _httpClient;
+            var client_ = HttpClient;
             var disposeClient_ = false;
             try
             {

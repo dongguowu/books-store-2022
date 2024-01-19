@@ -1,5 +1,4 @@
-﻿using System.Text;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
 
 namespace SharedKernel.Exceptions;
 
@@ -12,17 +11,6 @@ public class BadRequestException : Exception
     {
         ValidationErrors = validationResult.ToDictionary();
     }
-
-    //public static string BuildErrorMessage(string message, ValidationResult validationResult)
-    //{
-    //    var sb = new StringBuilder($"{message}: ");
-    //    foreach (var error in validationResult.Errors)
-    //    {
-    //        sb.Append(error.ErrorMessage + "; ");
-    //    }
-
-    //    return sb.ToString();
-    //}
 
     public IDictionary<string, string[]>? ValidationErrors { get; set; }
 }
