@@ -63,7 +63,7 @@ public class BookCategoryController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
-    public void Delete(int id)
+    public void Delete(Guid id)
     {
     }
 }
