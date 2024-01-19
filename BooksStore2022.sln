@@ -52,7 +52,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.EfRepository.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.Persistence.Tests", "tests\Integration\BooksStore.Persistence.Tests\BooksStore.Persistence.Tests.csproj", "{59A07AE4-752C-46A1-B86C-F2A870056354}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksStore.BlazorUI", "src\External\Presentation\BooksStore.BlazorUI\BooksStore.BlazorUI.csproj", "{5A82DACC-C011-4FB4-A47B-9F8864EB78ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStore.BlazorUI", "src\External\Presentation\BooksStore.BlazorUI\BooksStore.BlazorUI.csproj", "{5A82DACC-C011-4FB4-A47B-9F8864EB78ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksStore.Domain.Tests", "tests\Unit\BooksStore.Domain.Tests\BooksStore.Domain.Tests.csproj", "{A47DFE45-8203-45E9-B23D-2E777404487A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -120,6 +122,10 @@ Global
 		{5A82DACC-C011-4FB4-A47B-9F8864EB78ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A82DACC-C011-4FB4-A47B-9F8864EB78ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A82DACC-C011-4FB4-A47B-9F8864EB78ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A47DFE45-8203-45E9-B23D-2E777404487A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A47DFE45-8203-45E9-B23D-2E777404487A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A47DFE45-8203-45E9-B23D-2E777404487A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A47DFE45-8203-45E9-B23D-2E777404487A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -146,6 +152,7 @@ Global
 		{16E19407-2E25-47D3-A59D-80FA640B4A2C} = {03BF9291-E8BA-40DD-AE9D-65DAA5E12A84}
 		{59A07AE4-752C-46A1-B86C-F2A870056354} = {03BF9291-E8BA-40DD-AE9D-65DAA5E12A84}
 		{5A82DACC-C011-4FB4-A47B-9F8864EB78ED} = {6A382376-E2DF-4D27-AD82-D0B231A0F074}
+		{A47DFE45-8203-45E9-B23D-2E777404487A} = {9F16D8F5-E374-4BDA-9948-23B03C95FB17}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72C03CDF-61CA-477A-A985-004FE6CBFD3F}

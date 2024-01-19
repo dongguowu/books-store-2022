@@ -6,11 +6,13 @@ namespace BooksStore.Application.XunitTests.Mocks;
 
 public class MockBookCategoryRepository
 {
+    public static string CategoryString = "Test Category";
+
     public static Mock<IReadRepository<BookCategory>> GetReadRepository()
     {
         var list = new List<BookCategory>
         {
-            new("category 01"), new("category 02"), new("category 03"), new("category 04")
+            new(CategoryString), new("category 01"), new("category 02"), new("category 03")
         };
 
         var mockRepo = new Mock<IReadRepository<BookCategory>>();

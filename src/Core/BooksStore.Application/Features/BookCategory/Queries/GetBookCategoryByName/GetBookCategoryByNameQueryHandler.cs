@@ -1,23 +1,29 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
+using MediatR;
 using SharedKernel.Interfaces;
 
 namespace BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryByName;
 
 public class
-    GetBookCategoryByNameQueryHandler : IRequestHandler<GetBookCategoryByNameQuery, Domain.Entities.BookCategory?>
+    GetBookCategoryByNameQueryHandler : IRequestHandler<GetBookCategoryByNameQuery, BookCategoryDetailDto?>
 {
     private readonly IReadRepository<Domain.Entities.BookCategory> _rep;
+    private readonly IMapper _mapper;
 
-    public GetBookCategoryByNameQueryHandler(IReadRepository<Domain.Entities.BookCategory> rep)
+    public GetBookCategoryByNameQueryHandler(IReadRepository<Domain.Entities.BookCategory> rep, IMapper mapper)
     {
         _rep = rep;
+        _mapper = mapper;
     }
 
-    public async Task<Domain.Entities.BookCategory?> Handle(GetBookCategoryByNameQuery request,
+    public async Task<BookCategoryDetailDto?> Handle(GetBookCategoryByNameQuery request,
         CancellationToken cancellationToken)
     {
         var spec = new BookCategoryByNameSpec(request.Name);
 
-        return await _rep.GetBySpecAsync(spec, cancellationToken);
+        var bookCategory = await _rep.GetBySpecAsync(spec, cancellationToken);
+
+        return _mapper.Map <BookCategoryDetailDto>(bookCategory);
     }
 }

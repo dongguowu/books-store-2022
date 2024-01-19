@@ -1,4 +1,5 @@
-﻿using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryByName;
+﻿using AutoMapper;
+using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryByName;
 using FluentValidation;
 using SharedKernel.Interfaces;
 
@@ -7,6 +8,7 @@ namespace BooksStore.Application.Features.BookCategory.Commands.CreateBookCatego
 public class CreateBookCategoryValidator : AbstractValidator<CreateBookCategoryCommand>
 {
     private readonly IReadRepository<Domain.Entities.BookCategory> _rep;
+    private readonly IMapper _mapper;
 
     public CreateBookCategoryValidator(IReadRepository<Domain.Entities.BookCategory> rep)
     {
@@ -30,7 +32,7 @@ public class CreateBookCategoryValidator : AbstractValidator<CreateBookCategoryC
     private async Task<bool> BookCategoryNameMustExist(string name, CancellationToken token)
     {
         var query = new GetBookCategoryByNameQuery(name);
-        var handler = new GetBookCategoryByNameQueryHandler(_rep);
+        var handler = new GetBookCategoryByNameQueryHandler(_rep, _mapper);
         var bookCategory = await handler.Handle(query, token);
 
         return bookCategory != null;
