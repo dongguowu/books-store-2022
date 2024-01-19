@@ -1,12 +1,11 @@
 ﻿@page "/bookcategories/"
 @using BooksStore.BlazorUI.Contracts
-@using BooksStore.BlazorUI.Services.Base
 @using BooksStore.BlazorUI.ViewModels
 
 <h3>Book Category</h3>
 
 <div class="m-2 d-flex justify-content-end">
-    <button @onclick="CreateBookCategory" class="btn btn-success">Add Leave Type</button>
+    <button @onclick="CreateBookCategory" class="btn btn-success">Add Book Category</button>
 </div>
 
 @if (string.IsNullOrEmpty(Message) == false)
@@ -41,10 +40,8 @@ else
                 <td>@bookCategoryVm.Id </td>
                 <td>@bookCategoryVm.Name </td>
                 <td>
-                    <AuthorizeView Roles="Administrator">
                         <button @onclick="@(() => EditBookCategory(bookCategoryVm.Id))" class="btn btn-warning">Edit</button>
                         <button @onclick="@(() => DeleteBookCategory(bookCategoryVm.Id))" class="btn btn-danger">Delete</button>
-                    </AuthorizeView>
                     <button @onclick="@(() => DetailsBookCategory(bookCategoryVm.Id))" class="btn btn-info">Details</button>
                 </td>
             </tr>
@@ -61,7 +58,7 @@ else
     [Inject]
     public IBookCategoryService BookCategoryService { get; set; }
 
-    public List<BookCategoryDto> BookCategoryVms { get; private set; }
+    public List<BookCategoryVM>? BookCategoryVms { get; private set; } = null;
     public string Message { get; set; } = string.Empty;
 
     protected void CreateBookCategory()
@@ -101,4 +98,3 @@ else
 
 }
 
-}
