@@ -19,7 +19,7 @@ public class GetBookCategoryByIdTests
 
     public GetBookCategoryByIdTests()
     {
-        _mockReadRepo = MockBookCategoryRepository.GetReadRepository();
+        _mockReadRepo = MockBookCategoryRepository.GetReadRepositoryWithDefaultList();
         var mapperConifg = new MapperConfiguration(c =>
         {
             c.AddProfile<BookCategoryProfile>();

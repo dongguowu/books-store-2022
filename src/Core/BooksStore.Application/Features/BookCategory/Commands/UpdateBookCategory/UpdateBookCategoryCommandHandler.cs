@@ -10,17 +10,17 @@ namespace BooksStore.Application.Features.BookCategory.Commands.UpdateBookCatego
 
 public class UpdateBookCategoryCommandHandler : IRequestHandler<UpdateBookCategoryCommand, bool>
 {
-    private readonly IMapper _mapper;
-    private readonly IRepository<Domain.Entities.BookCategory> _rep;
     private readonly IReadRepository<Domain.Entities.BookCategory> _readRep;
+    private readonly IRepository<Domain.Entities.BookCategory> _writeRep;
+    private readonly IMapper _mapper;
     private readonly IAppLogger<UpdateBookCategoryCommandHandler> _logger;
 
-    public UpdateBookCategoryCommandHandler(IMapper mapper, IRepository<Domain.Entities.BookCategory> rep, IAppLogger<UpdateBookCategoryCommandHandler> logger, IReadRepository<Domain.Entities.BookCategory> readRep)
+    public UpdateBookCategoryCommandHandler(IReadRepository<Domain.Entities.BookCategory> readRep, IRepository<Domain.Entities.BookCategory> writeRep, IMapper mapper, IAppLogger<UpdateBookCategoryCommandHandler> logger)
     {
-        _mapper = mapper;
-        _rep = rep;
-        _logger = logger;
         _readRep = readRep;
+        _writeRep = writeRep;
+        _mapper = mapper;
+        _logger = logger;
     }
 
     public async Task<bool> Handle(UpdateBookCategoryCommand request, CancellationToken cancellationToken)
@@ -34,12 +34,12 @@ public class UpdateBookCategoryCommandHandler : IRequestHandler<UpdateBookCatego
         }
 
         //0.2 does the book category exists
-        var bookCategoryToUpdate = await _rep.GetByIdAsync(request.Id, cancellationToken) ??
+        var bookCategoryToUpdate = await _writeRep.GetByIdAsync(request.Id, cancellationToken) ??
                                    throw new NotFoundException(nameof(BookCategory), request.Id);
 
         // 1 Update
         bookCategoryToUpdate.Name = request.Name;
-        await _rep.UpdateAsync(bookCategoryToUpdate, cancellationToken);
+        await _writeRep.UpdateAsync(bookCategoryToUpdate, cancellationToken);
 
         return true;
     }
