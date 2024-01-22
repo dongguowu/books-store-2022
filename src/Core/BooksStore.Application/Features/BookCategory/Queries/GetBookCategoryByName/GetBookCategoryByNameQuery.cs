@@ -1,4 +1,4 @@
-﻿using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
+﻿using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryById;
 using MediatR;
 
 namespace BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryByName;

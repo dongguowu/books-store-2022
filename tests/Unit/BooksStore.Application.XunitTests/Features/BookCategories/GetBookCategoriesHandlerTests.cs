@@ -12,7 +12,7 @@ namespace BooksStore.Application.XunitTests.Features.BookCategories;
 
 public class GetBookCategoriesHandlerTests
 {
-    private readonly Mock<IAppLogger<GetAllBookCategoryQueryHandler>> _appLogger;
+    private readonly Mock<IAppLogger<GetAllBookCategoriesQueryHandler>> _appLogger;
     private readonly IMapper _mapper;
     private readonly Mock<IReadRepository<BookCategory>> _mockReadRepo;
 
@@ -26,18 +26,18 @@ public class GetBookCategoriesHandlerTests
         });
 
         _mapper = mapperConifg.CreateMapper();
-        _appLogger = new Mock<IAppLogger<GetAllBookCategoryQueryHandler>>();
+        _appLogger = new Mock<IAppLogger<GetAllBookCategoriesQueryHandler>>();
     }
 
     [Fact]
     public async Task GetAllBookCategoriesListTest()
     {
-        var handler = new GetAllBookCategoryQueryHandler(_mockReadRepo.Object, _mapper, _appLogger.Object);
+        var handler = new GetAllBookCategoriesQueryHandler(_mockReadRepo.Object, _mapper, _appLogger.Object);
 
-        var result = await handler.Handle(new GetAllBookCategoryQuery(), CancellationToken.None);
+        var result = await handler.Handle(new GetAllBookCategoriesQuery(), CancellationToken.None);
 
         result.ShouldNotBeNull();
         result.ShouldBeOfType<List<BookCategoryDto>>();
-        result.Count.ShouldBe(4);
+        result.Count.ShouldBe(MockBookCategoryRepository._list.Count);
     }
 }

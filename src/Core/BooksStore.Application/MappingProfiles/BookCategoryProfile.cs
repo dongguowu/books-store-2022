@@ -2,6 +2,7 @@
 using BooksStore.Application.Features.BookCategory.Commands.CreateBookCategory;
 using BooksStore.Application.Features.BookCategory.Commands.UpdateBookCategory;
 using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
+using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryById;
 using BooksStore.Domain.Entities;
 
 namespace BooksStore.Application.MappingProfiles;

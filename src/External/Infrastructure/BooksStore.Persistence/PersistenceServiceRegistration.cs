@@ -28,8 +28,8 @@ public static class PersistenceServiceRegistration
             services.AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(IMediator), typeof(Mediator));
-            services.AddScoped(typeof(IRequestHandler<GetAllBookCategoryQuery, List<BookCategoryDto>>),
-                typeof(GetAllBookCategoryQueryHandler));
+            services.AddScoped(typeof(IRequestHandler<GetAllBookCategoriesQuery, List<BookCategoryDto>>),
+                typeof(GetAllBookCategoriesQueryHandler));
             services.AddScoped(typeof(IRequestHandler<UpdateBookCategoryCommand, bool>),
                 typeof(UpdateBookCategoryCommandHandler));
         }

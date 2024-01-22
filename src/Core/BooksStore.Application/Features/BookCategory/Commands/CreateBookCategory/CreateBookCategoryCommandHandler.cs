@@ -13,33 +13,28 @@ public class CreateBookCategoryCommandHandler : IRequestHandler<CreateBookCatego
     private readonly IRepository<Domain.Entities.BookCategory> _writeRep;
 
 
-    public CreateBookCategoryCommandHandler(IRepository<Domain.Entities.BookCategory> writeRep, IMapper mapper,
-        IReadRepository<Domain.Entities.BookCategory> readRep)
+    public CreateBookCategoryCommandHandler(IReadRepository<Domain.Entities.BookCategory> readRep, IRepository<Domain.Entities.BookCategory> writeRep, IMapper mapper)
     {
         _writeRep = writeRep;
-        _mapper = mapper;
         _readRep = readRep;
+        _mapper = mapper;
     }
 
     public async Task<BookCategoryDto> Handle(CreateBookCategoryCommand request, CancellationToken cancellationToken)
     {
         //0 validate incoming data
-        var validator = new CreateBookCategoryValidator(_readRep);
+        var validator = new CreateOrUpdateBookCategoryValidator(_readRep, _mapper);
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (validationResult.Errors.Any())
         {
             throw new BadRequestException("Invalid BookCategory", validationResult);
         }
 
-        //1 convert to domain entity object
-        var bookCategoryToCreate = _mapper.Map<Domain.Entities.BookCategory>(request);
-
         //2 add to database
-        var bookCategory = await _writeRep.AddAsync(bookCategoryToCreate, cancellationToken);
-        await _writeRep.SaveChangesAsync(cancellationToken);
+        var bookCategory = await _writeRep.AddAsync(_mapper.Map<Domain.Entities.BookCategory>(request), cancellationToken);
 
 
-        //3 return record id
+        //3 return record 
         return _mapper.Map<BookCategoryDto>(bookCategory);
     }
 }

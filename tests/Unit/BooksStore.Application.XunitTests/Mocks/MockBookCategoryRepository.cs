@@ -1,4 +1,6 @@
-﻿using BooksStore.Domain.Entities;
+﻿using Ardalis.Specification;
+using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryByName;
+using BooksStore.Domain.Entities;
 using Moq;
 using SharedKernel.Interfaces;
 
@@ -6,36 +8,35 @@ namespace BooksStore.Application.XunitTests.Mocks;
 
 public class MockBookCategoryRepository
 {
-    public static string CategoryString = "Test Category";
+    public static readonly List<BookCategory> _list = new()
+    {
+        new BookCategory("category 01"), new BookCategory("category 02"), new BookCategory("category 03")
+    };
 
     public static Mock<IReadRepository<BookCategory>> GetReadRepository()
     {
-        var list = new List<BookCategory>
-        {
-            new(CategoryString), new("category 01"), new("category 02"), new("category 03")
-        };
-
         var mockRepo = new Mock<IReadRepository<BookCategory>>();
 
         mockRepo
             .Setup(r => r.ListAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(list);
+            .ReturnsAsync(_list);
+
+
+
 
         return mockRepo;
     }
 
     public static Mock<IRepository<BookCategory>> GetWriteRepository()
     {
-        var list = new List<BookCategory>();
-
         var mockRepo = new Mock<IRepository<BookCategory>>();
 
         mockRepo
             .Setup(r => r.AddAsync(It.IsAny<BookCategory>(), It.IsAny<CancellationToken>()))
-            .Returns((BookCategory bookCategory) =>
+            .Returns((BookCategory bookCategory, CancellationToken cancellation) =>
             {
-                list.Add(bookCategory);
-                return Task.CompletedTask;
+                _list.Add(bookCategory);
+                return Task.FromResult(bookCategory); 
             });
 
         return mockRepo;

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
+using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryById;
 using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryByName;
 using BooksStore.Application.Interfaces.Shared;
 using BooksStore.Application.MappingProfiles;
@@ -11,14 +11,14 @@ using Shouldly;
 
 namespace BooksStore.Application.XunitTests.Features.BookCategories;
 
-public class GetBookCategoryByNameTests
+public class GetBookCategoryByNameHanlderTests
 {
     private readonly IMapper _mapper;
     private readonly Mock<IReadRepository<BookCategory>> _mockReadRepo;
 
 
 
-    public GetBookCategoryByNameTests()
+    public GetBookCategoryByNameHanlderTests()
     {
         _mockReadRepo = MockBookCategoryRepository.GetReadRepository();
         var mapperConifg = new MapperConfiguration(c =>
@@ -37,10 +37,12 @@ public class GetBookCategoryByNameTests
             .ReturnsAsync(bookcategory);
         var handler = new GetBookCategoryByNameQueryHandler(_mockReadRepo.Object, _mapper);
 
-        var result = await handler.Handle(new GetBookCategoryByNameQuery(MockBookCategoryRepository.CategoryString), CancellationToken.None);
+        var result = await handler.Handle(new GetBookCategoryByNameQuery("any validate name"), CancellationToken.None);
 
         result.ShouldNotBeNull();
         result.ShouldBeOfType<BookCategoryDetailDto>();
-        result.Name.Contains("Default");
+        result.Id.ShouldBeOfType<Guid>();
+        result.Id.ShouldBe(Guid.Empty);
+        result.Name.ShouldContain("Default");
     }
 }

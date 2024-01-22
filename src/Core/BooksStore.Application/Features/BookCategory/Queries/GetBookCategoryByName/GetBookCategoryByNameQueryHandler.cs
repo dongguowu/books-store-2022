@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
+using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryById;
 using MediatR;
 using SharedKernel.Interfaces;
 
@@ -24,6 +24,11 @@ public class
 
         var bookCategory = await _rep.GetBySpecAsync(spec, cancellationToken);
 
-        return _mapper.Map <BookCategoryDetailDto>(bookCategory);
+        if (bookCategory == null)
+        {
+            return null;
+        }
+
+        return _mapper.Map<BookCategoryDetailDto>(bookCategory) ;
     }
 }

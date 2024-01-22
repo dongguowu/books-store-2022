@@ -5,14 +5,15 @@ using SharedKernel.Interfaces;
 
 namespace BooksStore.Application.Features.BookCategory.Commands.CreateBookCategory;
 
-public class CreateBookCategoryValidator : AbstractValidator<CreateBookCategoryCommand>
+public class CreateOrUpdateBookCategoryValidator : AbstractValidator<CreateBookCategoryCommand>
 {
     private readonly IReadRepository<Domain.Entities.BookCategory> _rep;
     private readonly IMapper _mapper;
 
-    public CreateBookCategoryValidator(IReadRepository<Domain.Entities.BookCategory> rep)
+    public CreateOrUpdateBookCategoryValidator(IReadRepository<Domain.Entities.BookCategory> rep, IMapper mapper)
     {
         _rep = rep;
+        _mapper = mapper;
 
         RuleFor(p => p.Name)
             .NotEmpty().WithMessage("{PropertyName} is required")
