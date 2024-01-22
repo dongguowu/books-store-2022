@@ -18,7 +18,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\BooksStore.Application\BooksStore.Application.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\BooksStore.Infrastructure.Shared\BooksStore.Infrastructure.Shared.csproj" />
+    <ProjectReference
+      Include="..\..\Infrastructure\BooksStore.Infrastructure.Shared\BooksStore.Infrastructure.Shared.csproj" />
     <ProjectReference Include="..\..\Infrastructure\BooksStore.Persistence\BooksStore.Persistence.csproj" />
   </ItemGroup>
 

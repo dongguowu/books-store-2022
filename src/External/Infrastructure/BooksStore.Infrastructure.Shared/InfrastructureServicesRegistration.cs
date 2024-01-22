@@ -1,10 +1,8 @@
 ﻿using BooksStore.Application.DTOs.Settings;
 using BooksStore.Application.Interfaces.Shared;
-using BooksStore.Infra.Data.Repository;
 using BooksStore.Infrastructure.Shared.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SharedKernel.Interfaces;
 
 namespace BooksStore.Infrastructure.Shared;
 

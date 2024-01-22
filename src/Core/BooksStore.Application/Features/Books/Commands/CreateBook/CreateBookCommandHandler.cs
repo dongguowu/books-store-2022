@@ -2,16 +2,17 @@
 using BooksStore.Domain.Abstractions;
 using BooksStore.Domain.Entities;
 using Microsoft.Extensions.Logging;
+using SharedKernel.Interfaces;
 
 namespace BooksStore.Application.Features.Books.Commands.CreateBook;
 
 public sealed class CreateBookCommandHandler : ICommandHandler<CreateBookCommand, Guid>
 {
-    private readonly IBookRepository _bookRepository;
+    private readonly IRepository<Book> _bookRepository;
     private readonly ILogger<CreateBookCommandHandler> _logger;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CreateBookCommandHandler(IBookRepository bookRepository, IUnitOfWork unitOfWork,
+    public CreateBookCommandHandler(IRepository<Book> bookRepository, IUnitOfWork unitOfWork,
         ILogger<CreateBookCommandHandler> logger)
     {
         _bookRepository = bookRepository;
@@ -25,7 +26,7 @@ public sealed class CreateBookCommandHandler : ICommandHandler<CreateBookCommand
 
         var book = new Book(request.Title);
 
-        _bookRepository.Insert(book);
+        await _bookRepository.AddAsync(book, cancellationToken);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

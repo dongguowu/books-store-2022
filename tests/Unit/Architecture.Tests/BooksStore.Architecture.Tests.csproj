@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -25,11 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Core\BooksStore.Application\BooksStore.Application.csproj" />
-    <ProjectReference Include="..\..\..\src\Core\BooksStore.Domain\BooksStore.Domain.csproj" />
     <ProjectReference Include="..\..\..\src\External\Infrastructure\BooksStore.Infrastructure.Shared\BooksStore.Infrastructure.Shared.csproj" />
-    <ProjectReference Include="..\..\..\src\External\Infrastructure\BooksStore.Persistence\BooksStore.Persistence.csproj" />
     <ProjectReference Include="..\..\..\src\External\Presentation\BooksStore.Debug.Console\BooksStore.Debug.Console.csproj" />
+    <ProjectReference Include="..\..\..\src\External\Presentation\BooksStore.WebApi\BooksStore.WebApi.csproj" />
   </ItemGroup>
 
 </Project>

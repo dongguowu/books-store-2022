@@ -31,7 +31,7 @@ else
             <th>
                 Name
             </th>
-         </tr>
+        </tr>
         </thead>
         <tbody>
         @foreach (var bookCategoryVm in BookCategoryVms)
@@ -40,8 +40,8 @@ else
                 <td>@bookCategoryVm.Id </td>
                 <td>@bookCategoryVm.Name </td>
                 <td>
-                        <button @onclick="@(() => EditBookCategory(bookCategoryVm.Id))" class="btn btn-warning">Edit</button>
-                        <button @onclick="@(() => DeleteBookCategory(bookCategoryVm.Id))" class="btn btn-danger">Delete</button>
+                    <button @onclick="@(() => EditBookCategory(bookCategoryVm.Id))" class="btn btn-warning">Edit</button>
+                    <button @onclick="@(() => DeleteBookCategory(bookCategoryVm.Id))" class="btn btn-danger">Delete</button>
                     <button @onclick="@(() => DetailsBookCategory(bookCategoryVm.Id))" class="btn btn-info">Details</button>
                 </td>
             </tr>
@@ -58,7 +58,7 @@ else
     [Inject]
     public IBookCategoryService BookCategoryService { get; set; }
 
-    public List<BookCategoryVM>? BookCategoryVms { get; private set; } = null;
+    public List<BookCategoryVM>? BookCategoryVms { get; private set; }
     public string Message { get; set; } = string.Empty;
 
     protected void CreateBookCategory()
@@ -97,4 +97,3 @@ else
 
 
 }
-

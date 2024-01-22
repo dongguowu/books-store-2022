@@ -2,16 +2,14 @@
 using BooksStore.Infrastructure.Shared;
 using BooksStore.Persistence;
 using BooksStore.WebApi.Middleware;
-using Microsoft.AspNetCore.Builder;
+using BooksStore.WebApi.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 {
     //builder.Services.AddMongo("mongodb://root:rrrr@localhost:27017", "BooksStore").AddMongoRepository<Book>("books");
 
     // Add services to the container.
-    builder.Services.AddApplicationServices();
-    builder.Services.AddInfrastructureServices(builder.Configuration);
-    builder.Services.AddEfPersistenceServices(builder.Configuration);
+    builder.Services.AddContainer(builder);
 
 
     builder.Services.AddControllers();

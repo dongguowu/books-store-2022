@@ -36,10 +36,10 @@ public class BookConstructor
     }
 
     [TestCase]
-    public void InitializesCategoryToEmptyString()
+    public void InitializesCategory_Not_EmptyString()
     {
         Assert.That(_testBook?.DomainEvents, Is.Not.Null);
-        Assert.That(_testBook?.Category.Name, Is.EqualTo(string.Empty));
+        Assert.That(_testBook?.Category.Name, Is.Not.EqualTo(string.Empty));
     }
 
     [TestCase]

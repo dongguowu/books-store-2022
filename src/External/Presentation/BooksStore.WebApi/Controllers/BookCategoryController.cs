@@ -24,7 +24,7 @@ public class BookCategoryController : ControllerBase
     [HttpGet]
     public async Task<List<BookCategoryDto>> Get()
     {
-        var results = await _mediator.Send(new GetAllBookCategoryQuery());
+        var results = await _mediator.Send(new GetAllBookCategoriesQuery());
 
         return results;
     }
