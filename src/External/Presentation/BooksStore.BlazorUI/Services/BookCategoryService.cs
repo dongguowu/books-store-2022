@@ -16,7 +16,7 @@ public class BookCategoryService : BaseHttpService, IBookCategoryService
 
     public async Task<List<BookCategoryVM>> GetBookCategories()
     {
-        var results = await _client.BookCategoryAllAsync();
+        var results = await _client.BookCategoriesAllAsync();
         return _mapper.Map<List<BookCategoryVM>>(results);
     }
 
@@ -30,7 +30,7 @@ public class BookCategoryService : BaseHttpService, IBookCategoryService
         try
         {
             var command = _mapper.Map<CreateBookCategoryCommand>(bookCategory);
-            await _client.BookCategoryPOSTAsync(command, CancellationToken.None);
+            await _client.BookCategoriesPOSTAsync(command, CancellationToken.None);
             return new Response<Guid> { Success = true };
         }
         catch (ApiException ex)
@@ -43,7 +43,7 @@ public class BookCategoryService : BaseHttpService, IBookCategoryService
     {
         try
         {
-            await _client.BookCategoryDELETEAsync(id);
+            await _client.BookCategoriesDELETEAsync(id);
             return new Response<Guid> { Success = true };
         }
         catch (ApiException e)
