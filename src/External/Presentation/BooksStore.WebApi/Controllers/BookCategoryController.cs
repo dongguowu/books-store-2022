@@ -1,6 +1,7 @@
 ﻿using BooksStore.Application.Features.BookCategory.Commands.CreateBookCategory;
 using BooksStore.Application.Features.BookCategory.Commands.UpdateBookCategory;
 using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
+using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryById;
 using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryByName;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -31,13 +32,12 @@ public class BookCategoryController : ControllerBase
 
     // GET api/<BookCategoryController>/5
     [HttpGet("{id}")]
-    public async Task<List<BookCategoryDto>> GetByName(string id)
+    public async Task<BookCategoryDetailDto> GetById(Guid id)
     {
-        return (List<BookCategoryDto>)await _mediator.Send(new GetBookCategoryByNameQuery(id));
+        return (BookCategoryDetailDto)(await _mediator.Send(new GetBookCategoryByIdQuery(id)) ?? new object());
     }
 
     // POST api/<BookCategoryController>
-
     [HttpPost]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
