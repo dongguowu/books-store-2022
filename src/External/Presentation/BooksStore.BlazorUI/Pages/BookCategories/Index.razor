@@ -1,4 +1,5 @@
 ﻿@page "/bookcategories/"
+
 @using BooksStore.BlazorUI.Contracts
 @using BooksStore.BlazorUI.ViewModels
 
@@ -56,7 +57,7 @@ else
 
     [Inject] public IBookCategoryService BookCategoryService { get; set; }
 
-    public List<BookCategoryVM>? BookCategoryVms { get; private set; }
+    public List<BookCategoryVm>? BookCategoryVms { get; private set; }
     public string Message { get; set; } = string.Empty;
 
     protected void CreateBookCategory()

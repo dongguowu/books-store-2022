@@ -8,8 +8,9 @@ public class MappingConfig : Profile
 {
     public MappingConfig()
     {
-        CreateMap<BookCategoryDto, BookCategoryVM>().ReverseMap();
-        CreateMap<CreateBookCategoryCommand, BookCategoryVM>().ReverseMap();
-        CreateMap<UpdateBookCategoryCommand, BookCategoryVM>().ReverseMap();
+        CreateMap<BookCategoryDto, BookCategoryVm>().ReverseMap();
+        CreateMap<BookCategoryDetailDto, BookCategoryVm>().ReverseMap();
+        CreateMap<CreateBookCategoryCommand, BookCategoryVm>().ReverseMap();
+        CreateMap<UpdateBookCategoryCommand, BookCategoryVm>().ReverseMap();
     }
 }

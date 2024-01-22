@@ -1,0 +1,24 @@
+﻿@page "/bookcategories/details/{idstring}/" 
+
+@using BooksStore.BlazorUI.Contracts
+@using BooksStore.BlazorUI.ViewModels
+
+<h3>Details</h3>
+<h4>@idstring</h4>
+
+<FormComponent BookCategory="bookCategory" Disabled="true" />
+
+@code {
+        [Inject]
+        IBookCategoryService _client { get; set; }
+
+        [Parameter] 
+        public string idstring { get; set; }
+
+        BookCategoryVm bookCategory = new BookCategoryVm();
+
+        protected async override Task OnParametersSetAsync()
+        {
+            bookCategory = await _client.GetBookCategory(Guid.Parse(idstring));
+        }
+}

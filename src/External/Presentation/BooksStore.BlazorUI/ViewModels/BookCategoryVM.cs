@@ -2,7 +2,7 @@
 
 namespace BooksStore.BlazorUI.ViewModels;
 
-public class BookCategoryVM
+public class BookCategoryVm
 {
     public Guid Id { get; set; }
 

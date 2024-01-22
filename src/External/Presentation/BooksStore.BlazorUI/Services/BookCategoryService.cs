@@ -14,18 +14,19 @@ public class BookCategoryService : BaseHttpService, IBookCategoryService
         _mapper = mapper;
     }
 
-    public async Task<List<BookCategoryVM>> GetBookCategories()
+    public async Task<List<BookCategoryVm>> GetBookCategories()
     {
         var results = await _client.BookCategoriesAllAsync();
-        return _mapper.Map<List<BookCategoryVM>>(results);
+        return _mapper.Map<List<BookCategoryVm>>(results);
     }
 
-    public Task<BookCategoryVM> GetBookCategory(Guid id)
+    public async Task<BookCategoryVm> GetBookCategory(Guid id)
     {
-        throw new NotImplementedException();
+        var result = await _client.BookCategoriesGETAsync(id);
+        return _mapper.Map<BookCategoryVm>(result);
     }
 
-    public async Task<Response<Guid>> CreateBookCategory(BookCategoryVM bookCategory)
+    public async Task<Response<Guid>> CreateBookCategory(BookCategoryVm bookCategory)
     {
         try
         {
