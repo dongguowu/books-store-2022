@@ -10,9 +10,10 @@ public class BookCategory : BaseEntity, IAggregateRoot
         Id = id;
         Name = name;
     }
+
     public BookCategory(string name) : this(Guid.NewGuid(), name) { }
 
     public string Name { get; set; }
 
-    public static BookCategory Default { get; } = new BookCategory(Guid.Empty, "Default Category");
+    public static BookCategory Default { get; } = new(Guid.Empty, "Default Category");
 }

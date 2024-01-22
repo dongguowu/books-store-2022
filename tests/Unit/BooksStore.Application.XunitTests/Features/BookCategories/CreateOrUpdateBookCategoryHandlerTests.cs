@@ -14,13 +14,12 @@ using Shouldly;
 
 namespace BooksStore.Application.XunitTests.Features.BookCategories;
 
-
 public class CreateOrUpdateBookCategoryHandlerTests
 {
     private readonly IMapper _mapper;
+    private readonly Mock<IAppLogger<UpdateBookCategoryCommandHandler>> _mockAppLogger;
     private readonly Mock<IReadRepository<BookCategory>> _mockReadRep;
     private readonly Mock<IRepository<BookCategory>> _mockWriteRep;
-    private readonly Mock<IAppLogger<UpdateBookCategoryCommandHandler>> _mockAppLogger;
 
     public CreateOrUpdateBookCategoryHandlerTests()
     {
@@ -43,7 +42,7 @@ public class CreateOrUpdateBookCategoryHandlerTests
         // Setup the GetBySpecAsync method 
         var cancellationToken = It.IsAny<CancellationToken>();
         _mockReadRep
-            .Setup(r => r.GetBySpecAsync<BookCategoryByNameSpec>(
+            .Setup(r => r.GetBySpecAsync(
                 It.IsAny<BookCategoryByNameSpec>(),
                 cancellationToken
             ))
@@ -51,12 +50,12 @@ public class CreateOrUpdateBookCategoryHandlerTests
 
         // Create new Book Category
         var handler = new CreateBookCategoryCommandHandler(_mockReadRep.Object, _mockWriteRep.Object, _mapper);
-        var categoryToCreate = new BookCategoryDto(){Name = "Test Category"};
+        var categoryToCreate = new BookCategoryDto { Name = "Test Category" };
         await handler.Handle(_mapper.Map<CreateBookCategoryCommand>(categoryToCreate), CancellationToken.None);
 
         // Setup the GetBySpecAsync method 
         _mockReadRep
-            .Setup(r => r.GetBySpecAsync<BookCategoryByNameSpec>(
+            .Setup(r => r.GetBySpecAsync(
                 It.IsAny<BookCategoryByNameSpec>(),
                 cancellationToken
             ))
@@ -72,7 +71,7 @@ public class CreateOrUpdateBookCategoryHandlerTests
         // Setup the GetBySpecAsync method 
         var cancellationToken = It.IsAny<CancellationToken>();
         _mockReadRep
-            .Setup(r => r.GetBySpecAsync<BookCategoryByNameSpec>(
+            .Setup(r => r.GetBySpecAsync(
                 It.IsAny<BookCategoryByNameSpec>(),
                 cancellationToken
             ))
@@ -90,11 +89,10 @@ public class CreateOrUpdateBookCategoryHandlerTests
     [Fact]
     public async Task Handle_ValidCategory_UpdateCategoriesRepo()
     {
-
         // Setup the GetBySpecAsync method 
         var cancellationToken = It.IsAny<CancellationToken>();
         _mockReadRep
-            .Setup(r => r.GetBySpecAsync<BookCategoryByNameSpec>(
+            .Setup(r => r.GetBySpecAsync(
                 It.IsAny<BookCategoryByNameSpec>(),
                 cancellationToken
             ))
@@ -107,11 +105,12 @@ public class CreateOrUpdateBookCategoryHandlerTests
             .Setup(r => r.UpdateAsync(It.IsAny<BookCategory>(), cancellationToken)).Returns(Task.CompletedTask);
 
         // Create new Book Category
-        var handler = new UpdateBookCategoryCommandHandler(_mockReadRep.Object, _mockWriteRep.Object, _mapper, _mockAppLogger.Object);
-        var result = await handler.Handle(new UpdateBookCategoryCommand(Guid.NewGuid(), "Test Category"), CancellationToken.None);
+        var handler = new UpdateBookCategoryCommandHandler(_mockReadRep.Object, _mockWriteRep.Object, _mapper,
+            _mockAppLogger.Object);
+        var result = await handler.Handle(new UpdateBookCategoryCommand(Guid.NewGuid(), "Test Category"),
+            CancellationToken.None);
 
         result.ShouldBe(true);
-
     }
 
     [Fact]
@@ -120,18 +119,20 @@ public class CreateOrUpdateBookCategoryHandlerTests
         var cancellationToken = It.IsAny<CancellationToken>();
         // Setup method 
         _mockReadRep
-            .Setup(r => r.GetBySpecAsync<BookCategoryByNameSpec>(
+            .Setup(r => r.GetBySpecAsync(
                 It.IsAny<BookCategoryByNameSpec>(),
                 cancellationToken
             ))
             .ReturnsAsync(BookCategory.Default);
 
         // Create new Book Category
-        var handler = new UpdateBookCategoryCommandHandler(_mockReadRep.Object, _mockWriteRep.Object, _mapper, _mockAppLogger.Object);
+        var handler = new UpdateBookCategoryCommandHandler(_mockReadRep.Object, _mockWriteRep.Object, _mapper,
+            _mockAppLogger.Object);
 
         // Act and Assert
         await Assert.ThrowsAsync<BadRequestException>(
-            async () => await handler.Handle(new UpdateBookCategoryCommand(Guid.NewGuid(), "Test Category"), CancellationToken.None)
+            async () => await handler.Handle(new UpdateBookCategoryCommand(Guid.NewGuid(), "Test Category"),
+                CancellationToken.None)
         );
     }
 }

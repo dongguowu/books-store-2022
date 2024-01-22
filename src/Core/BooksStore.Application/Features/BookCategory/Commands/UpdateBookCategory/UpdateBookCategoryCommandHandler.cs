@@ -2,7 +2,6 @@
 using BooksStore.Application.Features.BookCategory.Commands.CreateBookCategory;
 using BooksStore.Application.Interfaces.Shared;
 using MediatR;
-using Microsoft.Extensions.Logging;
 using SharedKernel.Exceptions;
 using SharedKernel.Interfaces;
 
@@ -10,12 +9,14 @@ namespace BooksStore.Application.Features.BookCategory.Commands.UpdateBookCatego
 
 public class UpdateBookCategoryCommandHandler : IRequestHandler<UpdateBookCategoryCommand, bool>
 {
+    private readonly IAppLogger<UpdateBookCategoryCommandHandler> _logger;
+    private readonly IMapper _mapper;
     private readonly IReadRepository<Domain.Entities.BookCategory> _readRep;
     private readonly IRepository<Domain.Entities.BookCategory> _writeRep;
-    private readonly IMapper _mapper;
-    private readonly IAppLogger<UpdateBookCategoryCommandHandler> _logger;
 
-    public UpdateBookCategoryCommandHandler(IReadRepository<Domain.Entities.BookCategory> readRep, IRepository<Domain.Entities.BookCategory> writeRep, IMapper mapper, IAppLogger<UpdateBookCategoryCommandHandler> logger)
+    public UpdateBookCategoryCommandHandler(IReadRepository<Domain.Entities.BookCategory> readRep,
+        IRepository<Domain.Entities.BookCategory> writeRep, IMapper mapper,
+        IAppLogger<UpdateBookCategoryCommandHandler> logger)
     {
         _readRep = readRep;
         _writeRep = writeRep;
@@ -27,7 +28,8 @@ public class UpdateBookCategoryCommandHandler : IRequestHandler<UpdateBookCatego
     {
         //0.1 validate incoming data
         var validator = new CreateOrUpdateBookCategoryValidator(_readRep, _mapper);
-        var validationResult =await validator.ValidateAsync(new CreateBookCategoryCommand(request.Name), cancellationToken);
+        var validationResult =
+            await validator.ValidateAsync(new CreateBookCategoryCommand(request.Name), cancellationToken);
         if (validationResult.Errors.Any())
         {
             throw new BadRequestException("Invalid BookCategory", validationResult);

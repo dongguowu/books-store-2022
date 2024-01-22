@@ -8,8 +8,8 @@ namespace BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryBy
 public class
     GetBookCategoryByNameQueryHandler : IRequestHandler<GetBookCategoryByNameQuery, BookCategoryDetailDto?>
 {
-    private readonly IReadRepository<Domain.Entities.BookCategory> _rep;
     private readonly IMapper _mapper;
+    private readonly IReadRepository<Domain.Entities.BookCategory> _rep;
 
     public GetBookCategoryByNameQueryHandler(IReadRepository<Domain.Entities.BookCategory> rep, IMapper mapper)
     {
@@ -29,6 +29,6 @@ public class
             return null;
         }
 
-        return _mapper.Map<BookCategoryDetailDto>(bookCategory) ;
+        return _mapper.Map<BookCategoryDetailDto>(bookCategory);
     }
 }

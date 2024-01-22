@@ -7,8 +7,8 @@ namespace BooksStore.Application.Features.BookCategory.Commands.CreateBookCatego
 
 public class CreateOrUpdateBookCategoryValidator : AbstractValidator<CreateBookCategoryCommand>
 {
-    private readonly IReadRepository<Domain.Entities.BookCategory> _rep;
     private readonly IMapper _mapper;
+    private readonly IReadRepository<Domain.Entities.BookCategory> _rep;
 
     public CreateOrUpdateBookCategoryValidator(IReadRepository<Domain.Entities.BookCategory> rep, IMapper mapper)
     {

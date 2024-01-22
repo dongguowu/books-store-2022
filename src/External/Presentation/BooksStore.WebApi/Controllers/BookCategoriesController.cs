@@ -2,7 +2,6 @@
 using BooksStore.Application.Features.BookCategory.Commands.UpdateBookCategory;
 using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
 using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryById;
-using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryByName;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,11 +11,11 @@ namespace BooksStore.WebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class BookCategoryController : ControllerBase
+public class BookCategoriesController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public BookCategoryController(IMediator mediator)
+    public BookCategoriesController(IMediator mediator)
     {
         _mediator = mediator;
     }

@@ -1,7 +1,4 @@
-﻿
-using NUnit.Framework;
-using System;
-using BooksStore.Domain.Entities;
+﻿using BooksStore.Domain.Entities;
 
 namespace BooksStore.Domain.Tests;
 
@@ -12,8 +9,8 @@ public class BookCategoryTests
     public void Constructor_WithIdAndName_SetsPropertiesCorrectly()
     {
         // Arrange
-        Guid id = Guid.NewGuid();
-        string name = "Test Category";
+        var id = Guid.NewGuid();
+        var name = "Test Category";
 
         // Act
         var bookCategory = new BookCategory(id, name);
@@ -29,7 +26,7 @@ public class BookCategoryTests
     public void Constructor_WithoutId_SetsPropertiesCorrectly()
     {
         // Arrange
-        string name = "Test Category";
+        var name = "Test Category";
 
         // Act
         var bookCategory = new BookCategory(name);

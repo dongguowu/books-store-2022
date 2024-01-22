@@ -16,7 +16,6 @@ public class GetAllBookCategoriesHandlerTests
     private readonly IMapper _mapper;
     private readonly Mock<IReadRepository<BookCategory>> _mockReadRepo;
 
-
     public GetAllBookCategoriesHandlerTests()
     {
         _mockReadRepo = MockBookCategoryRepository.GetReadRepositoryWithDefaultList();

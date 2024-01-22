@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryById;
-using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryByName;
 using BooksStore.Application.MappingProfiles;
 using BooksStore.Application.XunitTests.Mocks;
 using BooksStore.Domain.Entities;
@@ -14,7 +13,6 @@ public class GetBookCategoryByIdTests
 {
     private readonly IMapper _mapper;
     private readonly Mock<IReadRepository<BookCategory>> _mockReadRepo;
-
 
 
     public GetBookCategoryByIdTests()

@@ -52,11 +52,9 @@ else
 
 @code {
 
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    [Inject] public NavigationManager NavigationManager { get; set; }
 
-    [Inject]
-    public IBookCategoryService BookCategoryService { get; set; }
+    [Inject] public IBookCategoryService BookCategoryService { get; set; }
 
     public List<BookCategoryVM>? BookCategoryVms { get; private set; }
     public string Message { get; set; } = string.Empty;

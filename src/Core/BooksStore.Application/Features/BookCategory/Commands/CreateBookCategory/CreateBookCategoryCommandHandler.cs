@@ -13,7 +13,8 @@ public class CreateBookCategoryCommandHandler : IRequestHandler<CreateBookCatego
     private readonly IRepository<Domain.Entities.BookCategory> _writeRep;
 
 
-    public CreateBookCategoryCommandHandler(IReadRepository<Domain.Entities.BookCategory> readRep, IRepository<Domain.Entities.BookCategory> writeRep, IMapper mapper)
+    public CreateBookCategoryCommandHandler(IReadRepository<Domain.Entities.BookCategory> readRep,
+        IRepository<Domain.Entities.BookCategory> writeRep, IMapper mapper)
     {
         _writeRep = writeRep;
         _readRep = readRep;
@@ -31,7 +32,8 @@ public class CreateBookCategoryCommandHandler : IRequestHandler<CreateBookCatego
         }
 
         //2 add to database
-        var bookCategory = await _writeRep.AddAsync(_mapper.Map<Domain.Entities.BookCategory>(request), cancellationToken);
+        var bookCategory =
+            await _writeRep.AddAsync(_mapper.Map<Domain.Entities.BookCategory>(request), cancellationToken);
 
 
         //3 return record 

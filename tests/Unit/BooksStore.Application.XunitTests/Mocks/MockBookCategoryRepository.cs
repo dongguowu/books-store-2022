@@ -1,6 +1,4 @@
-﻿using Ardalis.Specification;
-using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryByName;
-using BooksStore.Domain.Entities;
+﻿using BooksStore.Domain.Entities;
 using Moq;
 using SharedKernel.Interfaces;
 
@@ -33,7 +31,7 @@ public class MockBookCategoryRepository
             .Returns((BookCategory bookCategory, CancellationToken cancellation) =>
             {
                 _list.Add(bookCategory);
-                return Task.FromResult(bookCategory); 
+                return Task.FromResult(bookCategory);
             });
 
         return mockRepo;
