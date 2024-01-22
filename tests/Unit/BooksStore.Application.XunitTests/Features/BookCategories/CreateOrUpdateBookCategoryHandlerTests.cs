@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BooksStore.Application.Features.BookCategory.Commands.CreateBookCategory;
 using BooksStore.Application.Features.BookCategory.Commands.UpdateBookCategory;
+using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
 using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryByName;
 using BooksStore.Application.Interfaces.Shared;
 using BooksStore.Application.MappingProfiles;
@@ -50,7 +51,8 @@ public class CreateOrUpdateBookCategoryHandlerTests
 
         // Create new Book Category
         var handler = new CreateBookCategoryCommandHandler(_mockReadRep.Object, _mockWriteRep.Object, _mapper);
-        await handler.Handle(new CreateBookCategoryCommand("Test Category"), CancellationToken.None);
+        var categoryToCreate = new BookCategoryDto(){Name = "Test Category"};
+        await handler.Handle(_mapper.Map<CreateBookCategoryCommand>(categoryToCreate), CancellationToken.None);
 
         // Setup the GetBySpecAsync method 
         _mockReadRep
@@ -110,5 +112,26 @@ public class CreateOrUpdateBookCategoryHandlerTests
 
         result.ShouldBe(true);
 
+    }
+
+    [Fact]
+    public async Task Handle_InvalidCategory_UpdateCategoriesRepo_Throw_BadRequestException()
+    {
+        var cancellationToken = It.IsAny<CancellationToken>();
+        // Setup method 
+        _mockReadRep
+            .Setup(r => r.GetBySpecAsync<BookCategoryByNameSpec>(
+                It.IsAny<BookCategoryByNameSpec>(),
+                cancellationToken
+            ))
+            .ReturnsAsync(BookCategory.Default);
+
+        // Create new Book Category
+        var handler = new UpdateBookCategoryCommandHandler(_mockReadRep.Object, _mockWriteRep.Object, _mapper, _mockAppLogger.Object);
+
+        // Act and Assert
+        await Assert.ThrowsAsync<BadRequestException>(
+            async () => await handler.Handle(new UpdateBookCategoryCommand(Guid.NewGuid(), "Test Category"), CancellationToken.None)
+        );
     }
 }

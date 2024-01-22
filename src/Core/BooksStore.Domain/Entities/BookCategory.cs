@@ -11,7 +11,6 @@ public class BookCategory : BaseEntity, IAggregateRoot
         Name = name;
     }
     public BookCategory(string name) : this(Guid.NewGuid(), name) { }
-    private BookCategory() : this(Guid.NewGuid(), string.Empty) { }
 
     public string Name { get; set; }
 
