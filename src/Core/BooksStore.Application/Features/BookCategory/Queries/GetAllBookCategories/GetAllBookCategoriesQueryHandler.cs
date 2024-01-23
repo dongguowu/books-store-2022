@@ -7,15 +7,15 @@ namespace BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategor
 
 public class GetAllBookCategoriesQueryHandler : IRequestHandler<GetAllBookCategoriesQuery, List<BookCategoryDto>>
 {
-    private readonly IAppLogger<GetAllBookCategoriesQueryHandler> _logger;
-    private readonly IMapper _mapper;
     private readonly IReadRepository<Domain.Entities.BookCategory> _rep;
+    private readonly IMapper _mapper;
+    private readonly IAppLogger<GetAllBookCategoriesQueryHandler> _logger;
 
     public GetAllBookCategoriesQueryHandler(IReadRepository<Domain.Entities.BookCategory> rep, IMapper mapper,
         IAppLogger<GetAllBookCategoriesQueryHandler> logger)
     {
-        _mapper = mapper;
         _rep = rep;
+        _mapper = mapper;
         _logger = logger;
     }
 
@@ -23,7 +23,8 @@ public class GetAllBookCategoriesQueryHandler : IRequestHandler<GetAllBookCatego
         CancellationToken cancellationToken)
     {
         // Query the database
-        var bookCategories = await _rep.ListAsync(cancellationToken);
+        var specification = new BookCategoriesContainNameSpec(request?.QueryString);
+        var bookCategories = await _rep.ListAsync(specification, cancellationToken);
 
         // convert data objects to DTO objects
         var data = _mapper.Map<List<BookCategoryDto>>(bookCategories);

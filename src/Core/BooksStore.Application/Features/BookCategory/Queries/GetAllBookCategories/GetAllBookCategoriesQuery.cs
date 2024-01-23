@@ -2,4 +2,4 @@
 
 namespace BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
 
-public sealed record GetAllBookCategoriesQuery : IRequest<List<BookCategoryDto>>;
+public sealed record GetAllBookCategoriesQuery(string? QueryString = null) : IRequest<List<BookCategoryDto>>;

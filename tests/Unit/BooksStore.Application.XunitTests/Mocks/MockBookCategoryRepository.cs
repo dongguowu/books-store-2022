@@ -1,4 +1,5 @@
-﻿using BooksStore.Domain.Entities;
+﻿using BooksStore.Application.Features.BookCategory.Queries.GetAllBookCategories;
+using BooksStore.Domain.Entities;
 using Moq;
 using SharedKernel.Interfaces;
 
@@ -19,6 +20,9 @@ public class MockBookCategoryRepository
             .Setup(r => r.ListAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(_list);
 
+        mockRep
+            .Setup(r => r.ListAsync(It.IsAny<BookCategoriesContainNameSpec>(),It.IsAny<CancellationToken>()))
+            .ReturnsAsync(_list);
         return mockRep;
     }
 
