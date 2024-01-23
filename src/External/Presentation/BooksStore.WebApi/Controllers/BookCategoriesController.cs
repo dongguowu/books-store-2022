@@ -22,9 +22,9 @@ public class BookCategoriesController : ControllerBase
 
     // GET: api/<BookCategoryController>
     [HttpGet]
-    public async Task<List<BookCategoryDto>> Get()
+    public async Task<List<BookCategoryDto>> Get(string? queryString = null)
     {
-        var results = await _mediator.Send(new GetAllBookCategoriesQuery());
+        var results = await _mediator.Send(new GetAllBookCategoriesQuery(queryString));
 
         return results;
     }
