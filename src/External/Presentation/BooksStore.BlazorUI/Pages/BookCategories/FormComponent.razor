@@ -1,31 +1,56 @@
-﻿@using BooksStore.BlazorUI.Services.Base
-@using BooksStore.BlazorUI.ViewModels
-
+﻿@using BooksStore.BlazorUI.ViewModels
 <EditForm Model="@BookCategory" OnValidSubmit="@OnValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>Id:</label>
+            <div>
+                <InputText @bind-Value="@BookCategory.Id" class="form-control"/>
+                <ValidationMessage For="@(() => BookCategory.Id)"/>
+            </div>
+        </div>
+    </fieldset>
     <fieldset disabled="@Disabled">
         <div class="form-group">
             <label>Name:</label>
             <div>
-                <InputText @bind-Value="@BookCategory.Name" class="form-control" />
-                <ValidationMessage For="@(() => BookCategory.Name)" />
+                <InputText @bind-Value="@BookCategory.Name" class="form-control"/>
+                <ValidationMessage For="@(() => BookCategory.Name)"/>
             </div>
         </div>
     </fieldset>
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>Created:</label>
+            <div>
+                <InputText @bind-Value="@BookCategory.DateCreated" class="form-control"/>
+                <ValidationMessage For="@(() => BookCategory.DateCreated)"/>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>Modified:</label>
+            <div>
+                <InputText @bind-Value="@BookCategory.DateModified" class="form-control"/>
+                <ValidationMessage For="@(() => BookCategory.DateModified)"/>
+            </div>
+        </div>
+    </fieldset>
+
     @if (!Disabled)
     {
         <button type="submit" class="btn btn-success btn-block">
             @ButtonText
         </button>
     }
-    <BackToList Target="bookcategories" />
+    <BackToList Target="bookcategories"/>
 </EditForm>
 
 @code {
     [Parameter] public bool Disabled { get; set; } = false;
-    [Parameter] public BookCategoryVm BookCategory { get; set; }
+    [Parameter] public BookCategoryDetailVm BookCategory { get; set; }
     [Parameter] public string ButtonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 }

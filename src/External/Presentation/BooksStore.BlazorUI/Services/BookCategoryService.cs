@@ -20,10 +20,10 @@ public class BookCategoryService : BaseHttpService, IBookCategoryService
         return _mapper.Map<List<BookCategoryVm>>(results);
     }
 
-    public async Task<BookCategoryVm> GetBookCategory(Guid id)
+    public async Task<BookCategoryDetailVm> GetBookCategory(Guid id)
     {
         var result = await _client.BookCategoriesGETAsync(id);
-        return _mapper.Map<BookCategoryVm>(result);
+        return _mapper.Map<BookCategoryDetailVm>(result);
     }
 
     public async Task<Response<Guid>> CreateBookCategory(BookCategoryVm bookCategory)

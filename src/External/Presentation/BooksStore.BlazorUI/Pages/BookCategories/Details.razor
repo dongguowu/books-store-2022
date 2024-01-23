@@ -4,7 +4,6 @@
 @using BooksStore.BlazorUI.ViewModels
 
 <h3>Details</h3>
-<h4>@idstring</h4>
 
 <FormComponent BookCategory="bookCategory" Disabled="true" />
 
@@ -15,7 +14,7 @@
         [Parameter] 
         public string idstring { get; set; }
 
-        BookCategoryVm bookCategory = new BookCategoryVm();
+        BookCategoryDetailVm bookCategory = new BookCategoryDetailVm();
 
         protected async override Task OnParametersSetAsync()
         {
