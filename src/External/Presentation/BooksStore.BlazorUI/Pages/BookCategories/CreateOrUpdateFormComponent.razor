@@ -1,0 +1,36 @@
+﻿@using BooksStore.BlazorUI.ViewModels
+
+<EditForm Model="@BookCategory" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+        <fieldset disabled="@Disabled">
+            <div class="form-group">
+                <label>Id: @BookCategory.Id</label>
+            </div>
+        </fieldset>
+   
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>Name:</label>
+            <div>
+                <InputText @bind-Value="@BookCategory.Name" class="form-control"/>
+                <ValidationMessage For="@(() => BookCategory.Name)"/>
+            </div>
+        </div>
+    </fieldset>
+
+    @if (!Disabled)
+    {
+        <button type="submit" class="btn btn-success btn-block">
+            @ButtonText
+        </button>
+    }
+    <BackToList Target="bookcategories"/>
+</EditForm>
+
+@code {
+    [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public BookCategoryVm BookCategory { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

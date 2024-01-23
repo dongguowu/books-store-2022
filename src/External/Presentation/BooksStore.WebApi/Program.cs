@@ -1,7 +1,4 @@
-﻿using BooksStore.Application;
-using BooksStore.Infrastructure.Shared;
-using BooksStore.Persistence;
-using BooksStore.WebApi.Middleware;
+﻿using BooksStore.WebApi.Middleware;
 using BooksStore.WebApi.Settings;
 
 var builder = WebApplication.CreateBuilder(args);

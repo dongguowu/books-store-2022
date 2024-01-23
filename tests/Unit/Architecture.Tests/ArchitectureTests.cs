@@ -3,7 +3,6 @@ using BooksStore.Application.Features.Books.Commands.CreateBook;
 using BooksStore.Domain.Entities;
 using BooksStore.Infrastructure.Shared.Services;
 using BooksStore.Persistence.DatabaseContext;
-using BooksStore.WebApi.Controllers;
 using BooksStore.WebApi.Settings;
 using NetArchTest.Rules;
 using SharedKernel;
@@ -22,8 +21,13 @@ public class ArchitectureTests
     {
         "BooksStore.Infrastructure.Shared", "BooksStore.Persistence"
     };
-    private readonly string[] PresentationNamespaces = { "BooksStore.WebApi", "BooksStore.BlazorUI", "BooksStore.Debug.Console" };
-    private string[] ExternalNamespaces;
+
+    private readonly string[] PresentationNamespaces =
+    {
+        "BooksStore.WebApi", "BooksStore.BlazorUI", "BooksStore.Debug.Console"
+    };
+
+    private readonly string[] ExternalNamespaces;
 
     public ArchitectureTests()
     {
@@ -119,7 +123,8 @@ public class ArchitectureTests
         //var otherProjects = new[] { PresentationNamespaces, WebNamespace };
         var otherProjects = PresentationNamespaces;
         // Act
-        var testResult = Types.InAssembly(persistenceAssembly ).ShouldNot().HaveDependencyOnAll(otherProjects).GetResult();
+        var testResult = Types.InAssembly(persistenceAssembly).ShouldNot().HaveDependencyOnAll(otherProjects)
+            .GetResult();
 
         // Assert
         Assert.That(testResult.IsSuccessful, Is.True);
@@ -129,7 +134,8 @@ public class ArchitectureTests
         //var otherProjects = new[] { PresentationNamespaces, WebNamespace };
         otherProjects = PresentationNamespaces;
         // Act
-        testResult = Types.InAssembly(infrastructureAssembly ).ShouldNot().HaveDependencyOnAll(otherProjects).GetResult();
+        testResult = Types.InAssembly(infrastructureAssembly).ShouldNot().HaveDependencyOnAll(otherProjects)
+            .GetResult();
 
         // Assert
         Assert.That(testResult.IsSuccessful, Is.True);

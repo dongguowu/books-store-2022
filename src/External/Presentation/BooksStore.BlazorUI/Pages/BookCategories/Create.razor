@@ -1,0 +1,35 @@
+﻿@page "/bookcategories/create/"
+
+@using BooksStore.BlazorUI.Contracts
+@using BooksStore.BlazorUI.ViewModels
+
+<h3>Create Leave Type</h3>
+
+@if (string.IsNullOrEmpty(Message) == false)
+{
+    <div class="alert alert-danger">
+        @Message
+    </div>
+}
+
+<CreateOrUpdateFormComponent ButtonText="Create" BookCategory="bookCategory" OnValidSubmit="@CreateLeaveType" />
+
+@code {
+    [Inject]
+    NavigationManager _navManager { get; set; }
+    [Inject]
+    IBookCategoryService _client { get; set; }
+    public string Message { get; private set; }
+
+    BookCategoryVm bookCategory = new BookCategoryVm();
+
+    async Task CreateLeaveType()
+    {
+        var response = await _client.CreateBookCategory(bookCategory);
+        if(response.Success)
+        {
+            _navManager.NavigateTo("/bookcategories/");
+        }
+        Message = response.Message;
+    }
+}

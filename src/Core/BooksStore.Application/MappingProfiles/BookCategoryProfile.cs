@@ -13,6 +13,8 @@ public class BookCategoryProfile : Profile
     {
         CreateMap<BookCategory, BookCategoryDto>().ReverseMap();
         CreateMap<BookCategory, BookCategoryDetailDto>();
+        CreateMap<BookCategoryDto, CreateBookCategoryCommand>();
+        CreateMap<BookCategoryDto, UpdateBookCategoryCommand>();
         CreateMap<CreateBookCategoryCommand, BookCategory>();
         CreateMap<UpdateBookCategoryCommand, BookCategory>();
     }

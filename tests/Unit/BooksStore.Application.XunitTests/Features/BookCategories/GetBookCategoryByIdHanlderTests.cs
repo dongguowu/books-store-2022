@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryById;
-using BooksStore.Application.Features.BookCategory.Queries.GetBookCategoryByName;
 using BooksStore.Application.MappingProfiles;
 using BooksStore.Application.XunitTests.Mocks;
 using BooksStore.Domain.Entities;
@@ -16,10 +15,9 @@ public class GetBookCategoryByIdTests
     private readonly Mock<IReadRepository<BookCategory>> _mockReadRepo;
 
 
-
     public GetBookCategoryByIdTests()
     {
-        _mockReadRepo = MockBookCategoryRepository.GetReadRepository();
+        _mockReadRepo = MockBookCategoryRepository.GetReadRepositoryWithDefaultList();
         var mapperConifg = new MapperConfiguration(c =>
         {
             c.AddProfile<BookCategoryProfile>();
@@ -31,9 +29,9 @@ public class GetBookCategoryByIdTests
     [Fact]
     public async Task GetBookCategoryTest()
     {
-        var bookcategory = BookCategory.Default;
+        var bookCategory = BookCategory.Default;
         _mockReadRepo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(bookcategory);
+            .ReturnsAsync(bookCategory);
         var handler = new GetBookCategoryByIdQueryHandler(_mockReadRepo.Object, _mapper);
 
         var result = await handler.Handle(new GetBookCategoryByIdQuery(It.IsAny<Guid>()), CancellationToken.None);
@@ -42,6 +40,8 @@ public class GetBookCategoryByIdTests
         result.ShouldBeOfType<BookCategoryDetailDto>();
         result.Id.ShouldBeOfType<Guid>();
         result.Id.ShouldBe(Guid.Empty);
-        result.Name.Contains("Default");
+        result.Name.ShouldBe(bookCategory.Name);
+        result.DateCreated.ShouldBe(null);
+        result.DateModified.ShouldBe(null);
     }
 }

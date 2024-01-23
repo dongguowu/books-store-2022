@@ -10,16 +10,15 @@ using Shouldly;
 
 namespace BooksStore.Application.XunitTests.Features.BookCategories;
 
-public class GetBookCategoriesHandlerTests
+public class GetAllBookCategoriesHandlerTests
 {
     private readonly Mock<IAppLogger<GetAllBookCategoriesQueryHandler>> _appLogger;
     private readonly IMapper _mapper;
     private readonly Mock<IReadRepository<BookCategory>> _mockReadRepo;
 
-
-    public GetBookCategoriesHandlerTests()
+    public GetAllBookCategoriesHandlerTests()
     {
-        _mockReadRepo = MockBookCategoryRepository.GetReadRepository();
+        _mockReadRepo = MockBookCategoryRepository.GetReadRepositoryWithDefaultList();
         var mapperConifg = new MapperConfiguration(c =>
         {
             c.AddProfile<BookCategoryProfile>();
@@ -34,10 +33,21 @@ public class GetBookCategoriesHandlerTests
     {
         var handler = new GetAllBookCategoriesQueryHandler(_mockReadRepo.Object, _mapper, _appLogger.Object);
 
-        var result = await handler.Handle(new GetAllBookCategoriesQuery(), CancellationToken.None);
+        var results = await handler.Handle(new GetAllBookCategoriesQuery(), CancellationToken.None);
 
+        results.ShouldNotBeNull();
+        results.ShouldBeOfType<List<BookCategoryDto>>();
+        results.Count.ShouldBe(MockBookCategoryRepository._list.Count);
+
+
+        var result = results.FirstOrDefault();
         result.ShouldNotBeNull();
-        result.ShouldBeOfType<List<BookCategoryDto>>();
-        result.Count.ShouldBe(MockBookCategoryRepository._list.Count);
+        result.Id.ShouldBeOfType<Guid>();
+        result.Id.ShouldNotBe(Guid.Empty);
+
+
+        result.Name.ShouldNotBeNull();
+        result.Name.ShouldBeOfType<string>();
+        result.Name.ShouldNotBe(string.Empty);
     }
 }

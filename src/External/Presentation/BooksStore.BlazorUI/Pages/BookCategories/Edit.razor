@@ -1,0 +1,43 @@
+﻿@page "/bookcategories/edit/{idstring}/"
+
+@using BooksStore.BlazorUI.Contracts
+@using BooksStore.BlazorUI.ViewModels
+
+<h3>Edit Book Category</h3>
+
+@if (string.IsNullOrEmpty(Message) == false)
+{
+    <div class="alert alert-danger">
+        @Message
+    </div>
+}
+
+<CreateOrUpdateFormComponent ButtonText="Update" BookCategory="bookCategory" OnValidSubmit="@EditBookCategory"/>
+
+@code {
+    [Inject] IBookCategoryService _client { get; set; }
+
+    [Inject] NavigationManager _navManager { get; set; }
+
+    [Parameter] public string idstring { get; set; }
+    public string Message { get; private set; }
+
+    BookCategoryVm bookCategory = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        bookCategory = await _client.GetBookCategoryWithoutDetail(Guid.Parse(idstring));
+    }
+
+    async Task EditBookCategory()
+    {
+        var response = await _client.UpdateBookCategory(bookCategory);
+        if (response.Success)
+        {
+            _navManager.NavigateTo("/bookcategories/");
+        }
+
+        Message = response.Message;
+    }
+
+}

@@ -8,8 +8,12 @@ public class MappingConfig : Profile
 {
     public MappingConfig()
     {
-        CreateMap<BookCategoryDto, BookCategoryVM>().ReverseMap();
-        CreateMap<CreateBookCategoryCommand, BookCategoryVM>().ReverseMap();
-        CreateMap<UpdateBookCategoryCommand, BookCategoryVM>().ReverseMap();
+        CreateMap<DateTimeOffset, string>().ConvertUsing(dtOffset => dtOffset.ToString("yyyy-MM-dd / HH:mm:ss"));
+        CreateMap<Guid, string>().ConvertUsing(guid => guid.ToString());
+        CreateMap<BookCategoryDto, BookCategoryVm>().ReverseMap();
+        CreateMap<BookCategoryDetailDto, BookCategoryDetailVm>().ReverseMap();
+        CreateMap<BookCategoryDetailDto, BookCategoryVm>().ReverseMap();
+        CreateMap<CreateBookCategoryCommand, BookCategoryVm>().ReverseMap();
+        CreateMap<UpdateBookCategoryCommand, BookCategoryVm>().ReverseMap();
     }
 }
