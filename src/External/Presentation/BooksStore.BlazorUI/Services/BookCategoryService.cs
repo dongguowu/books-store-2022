@@ -26,12 +26,33 @@ public class BookCategoryService : BaseHttpService, IBookCategoryService
         return _mapper.Map<BookCategoryDetailVm>(result);
     }
 
+    public async Task<BookCategoryVm> GetBookCategoryWithoutDetail(Guid id)
+    {
+        var result = await _client.BookCategoriesGETAsync(id);
+        return _mapper.Map<BookCategoryVm>(result);
+    }
+
     public async Task<Response<Guid>> CreateBookCategory(BookCategoryVm bookCategory)
     {
         try
         {
             var command = _mapper.Map<CreateBookCategoryCommand>(bookCategory);
             await _client.BookCategoriesPOSTAsync(command, CancellationToken.None);
+            return new Response<Guid> { Success = true };
+        }
+        catch (ApiException ex)
+        {
+            return ConvertApiExceptions<Guid>(ex);
+        }
+    }
+
+    public async Task<Response<Guid>> UpdateBookCategory(BookCategoryVm bookCategory)
+    {
+        try
+        {
+            var command = _mapper.Map<UpdateBookCategoryCommand>(bookCategory);
+            var id = Guid.Parse(bookCategory.Id);
+            await _client.BookCategoriesPUTAsync(id, command, CancellationToken.None);
             return new Response<Guid> { Success = true };
         }
         catch (ApiException ex)

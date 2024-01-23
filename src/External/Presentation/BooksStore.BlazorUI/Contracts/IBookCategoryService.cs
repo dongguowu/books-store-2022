@@ -7,7 +7,9 @@ public interface IBookCategoryService
 {
     Task<List<BookCategoryVm>> GetBookCategories();
     Task<BookCategoryDetailVm> GetBookCategory(Guid id);
+    Task<BookCategoryVm> GetBookCategoryWithoutDetail(Guid id);
 
     Task<Response<Guid>> CreateBookCategory(BookCategoryVm bookCategory);
+    Task<Response<Guid>> UpdateBookCategory(BookCategoryVm bookCategory);
     Task<Response<Guid>> DeleteBookCategory(Guid id);
 }

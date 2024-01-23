@@ -41,9 +41,9 @@ else
                 <td>@bookCategoryVm.Id </td>
                 <td>@bookCategoryVm.Name </td>
                 <td>
-                    <button @onclick="@(() => EditBookCategory(bookCategoryVm.Id))" class="btn btn-warning">Edit</button>
-                    <button @onclick="@(() => DeleteBookCategory(bookCategoryVm.Id))" class="btn btn-danger">Delete</button>
-                    <button @onclick="@(() => DetailsBookCategory(bookCategoryVm.Id))" class="btn btn-info">Details</button>
+                    <button @onclick="@(() => EditBookCategory(Guid.Parse(bookCategoryVm.Id)))" class="btn btn-warning">Edit</button>
+                    <button @onclick="@(() => DeleteBookCategory(Guid.Parse(bookCategoryVm.Id)))" class="btn btn-danger">Delete</button>
+                    <button @onclick="@(() => DetailsBookCategory(Guid.Parse(bookCategoryVm.Id)))" class="btn btn-info">Details</button>
                 </td>
             </tr>
         }

@@ -12,6 +12,7 @@ public class MappingConfig : Profile
         CreateMap<Guid, string>().ConvertUsing(guid => guid.ToString());
         CreateMap<BookCategoryDto, BookCategoryVm>().ReverseMap();
         CreateMap<BookCategoryDetailDto, BookCategoryDetailVm>().ReverseMap();
+        CreateMap<BookCategoryDetailDto, BookCategoryVm>().ReverseMap();
         CreateMap<CreateBookCategoryCommand, BookCategoryVm>().ReverseMap();
         CreateMap<UpdateBookCategoryCommand, BookCategoryVm>().ReverseMap();
     }

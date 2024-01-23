@@ -4,7 +4,7 @@ namespace BooksStore.BlazorUI.ViewModels;
 
 public class BookCategoryVm
 {
-    public Guid Id { get; set; }
+    public string Id { get; set; }
 
     [Required] public string Name { get; set; }
 }
