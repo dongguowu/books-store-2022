@@ -34,7 +34,7 @@
         var response = await _client.UpdateBookCategory(bookCategory);
         if (response.Success)
         {
-            _navManager.NavigateTo("/leavetypes/");
+            _navManager.NavigateTo("/bookcategories/");
         }
 
         Message = response.Message;

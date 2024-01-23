@@ -1,16 +1,14 @@
 ﻿@using BooksStore.BlazorUI.ViewModels
+
 <EditForm Model="@BookCategory" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator/>
     <ValidationSummary/>
-    <fieldset disabled="@Disabled">
-        <div class="form-group">
-            <label>Id:</label>
-            <div>
-                <InputText @bind-Value="@BookCategory.Id" class="form-control"/>
-                <ValidationMessage For="@(() => BookCategory.Id)"/>
+        <fieldset disabled="@Disabled">
+            <div class="form-group">
+                <label>Id: @BookCategory.Id</label>
             </div>
-        </div>
-    </fieldset>
+        </fieldset>
+   
     <fieldset disabled="@Disabled">
         <div class="form-group">
             <label>Name:</label>
