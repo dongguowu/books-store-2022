@@ -14,9 +14,9 @@ public class BookCategoryService : BaseHttpService, IBookCategoryService
         _mapper = mapper;
     }
 
-    public async Task<List<BookCategoryVm>> GetBookCategories()
+    public async Task<List<BookCategoryVm>> GetBookCategories(string? query = null)
     {
-        var results = await _client.BookCategoriesAllAsync();
+        var results = await _client.BookCategoriesAllAsync(query);
         return _mapper.Map<List<BookCategoryVm>>(results);
     }
 

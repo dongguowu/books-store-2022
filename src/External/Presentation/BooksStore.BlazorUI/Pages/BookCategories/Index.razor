@@ -5,6 +5,14 @@
 
 <h3>Book Category</h3>
 
+<div class="text-center bg-blue-100">
+    <input class="border-4 w-1/3 rounded m-6 p-6 h-8
+               border-blue-300" @bind-value="QueryString"
+           @bind-value:event="oninput" 
+           @onchange="SearchBookCategoriesAsync"
+           placeholder="Search by name" />
+</div>
+
 <div class="m-2 d-flex justify-content-end">
     <button @onclick="CreateBookCategory" class="btn btn-success">Add Book Category</button>
 </div>
@@ -42,7 +50,6 @@ else
                 <td>@bookCategoryVm.Name </td>
                 <td>
                     <button @onclick="@(() => EditBookCategory(Guid.Parse(bookCategoryVm.Id)))" class="btn btn-warning">Edit</button>
-                    <button @onclick="@(() => DeleteBookCategory(Guid.Parse(bookCategoryVm.Id)))" class="btn btn-danger">Delete</button>
                     <button @onclick="@(() => DetailsBookCategory(Guid.Parse(bookCategoryVm.Id)))" class="btn btn-info">Details</button>
                 </td>
             </tr>
@@ -59,6 +66,7 @@ else
 
     public List<BookCategoryVm>? BookCategoryVms { get; private set; }
     public string Message { get; set; } = string.Empty;
+    public string QueryString = string.Empty;
 
     protected void CreateBookCategory()
     {
@@ -76,22 +84,14 @@ else
         NavigationManager.NavigateTo($"/bookcategories/details/{id}");
     }
 
-    protected async Task DeleteBookCategory(Guid id)
-    {
-        var response = await BookCategoryService.DeleteBookCategory(id);
-        if (response.Success)
-        {
-            StateHasChanged();
-        }
-        else
-        {
-            Message = response.Message;
-        }
-    }
-
     protected override async Task OnInitializedAsync()
     {
-        BookCategoryVms = await BookCategoryService.GetBookCategories();
+        BookCategoryVms = await BookCategoryService.GetBookCategories(QueryString);
+    }
+
+    protected async Task SearchBookCategoriesAsync()
+    {
+        BookCategoryVms = await BookCategoryService.GetBookCategories(QueryString);
     }
 
 

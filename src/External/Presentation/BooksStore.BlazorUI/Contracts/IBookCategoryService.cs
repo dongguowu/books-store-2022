@@ -5,7 +5,7 @@ namespace BooksStore.BlazorUI.Contracts;
 
 public interface IBookCategoryService
 {
-    Task<List<BookCategoryVm>> GetBookCategories();
+    Task<List<BookCategoryVm>> GetBookCategories(string? queryString);
     Task<BookCategoryDetailVm> GetBookCategory(Guid id);
     Task<BookCategoryVm> GetBookCategoryWithoutDetail(Guid id);
 

@@ -25,12 +25,12 @@ namespace BooksStore.BlazorUI.Services.Base
     {
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookCategoryDto>> BookCategoriesAllAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookCategoryDto>> BookCategoriesAllAsync(string queryString);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookCategoryDto>> BookCategoriesAllAsync(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookCategoryDto>> BookCategoriesAllAsync(string queryString, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -143,15 +143,15 @@ namespace BooksStore.BlazorUI.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookCategoryDto>> BookCategoriesAllAsync()
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookCategoryDto>> BookCategoriesAllAsync(string queryString)
         {
-            return BookCategoriesAllAsync(System.Threading.CancellationToken.None);
+            return BookCategoriesAllAsync(queryString, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookCategoryDto>> BookCategoriesAllAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BookCategoryDto>> BookCategoriesAllAsync(string queryString, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -166,6 +166,12 @@ namespace BooksStore.BlazorUI.Services.Base
                 
                     // Operation Path: "api/BookCategories"
                     urlBuilder_.Append("api/BookCategories");
+            urlBuilder_.Append('?');
+            if (queryString != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("queryString")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(queryString, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+            }
+            urlBuilder_.Length--;
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
