@@ -1,5 +1,4 @@
 ﻿@page "/bookcategories/edit/{idstring}/"
-
 @using BooksStore.BlazorUI.Contracts
 @using BooksStore.BlazorUI.ViewModels
 
@@ -20,6 +19,7 @@
     [Inject] NavigationManager _navManager { get; set; }
 
     [Parameter] public string idstring { get; set; }
+
     public string Message { get; private set; }
 
     BookCategoryVm bookCategory = new();

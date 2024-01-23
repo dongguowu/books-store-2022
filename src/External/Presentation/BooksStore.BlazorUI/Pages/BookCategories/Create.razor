@@ -12,7 +12,7 @@
     </div>
 }
 
-<CreateOrUpdateFormComponent ButtonText="Create" BookCategory="bookCategory" OnValidSubmit="@CreateLeaveType" />
+<CreateOrUpdateFormComponent ButtonText="Create" BookCategory="bookCategory" OnValidSubmit="@CreateBookCategory" />
 
 @code {
     [Inject]
@@ -23,7 +23,7 @@
 
     BookCategoryVm bookCategory = new BookCategoryVm();
 
-    async Task CreateLeaveType()
+    async Task CreateBookCategory()
     {
         var response = await _client.CreateBookCategory(bookCategory);
         if(response.Success)
