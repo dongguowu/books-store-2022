@@ -32,7 +32,10 @@ public class UpdateBookCategoryCommandHandler : IRequestHandler<UpdateBookCatego
             await validator.ValidateAsync(new CreateBookCategoryCommand(request.Name), cancellationToken);
         if (validationResult.Errors.Any())
         {
-            throw new BadRequestException("Invalid BookCategory", validationResult);
+            var message = "Invalid BookCategory";
+            _logger.LogWarning("....My Logger Information.....");
+            _logger.LogWarning(message);
+            throw new BadRequestException(message, validationResult);
         }
 
         //0.2 does the book category exists
