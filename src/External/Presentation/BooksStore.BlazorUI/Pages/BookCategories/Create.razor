@@ -19,6 +19,9 @@
     NavigationManager _navManager { get; set; }
     [Inject]
     IBookCategoryService _client { get; set; }
+    [Inject]
+    IToastService toastService { get; set; }
+
     public string Message { get; private set; }
 
     BookCategoryVm bookCategory = new BookCategoryVm();
@@ -28,6 +31,9 @@
         var response = await _client.CreateBookCategory(bookCategory);
         if(response.Success)
         {
+            toastService.ShowSuccess("Book Category Created.");
+            toastService.ShowSuccess("Leave Type created Successfully");
+            toastService.ShowToast(ToastLevel.Info, "Test");
             _navManager.NavigateTo("/bookcategories/");
         }
         Message = response.Message;

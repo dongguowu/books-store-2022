@@ -1,4 +1,6 @@
 ﻿using System.Reflection;
+using Blazored.LocalStorage;
+using Blazored.Toast;
 using BooksStore.BlazorUI;
 using BooksStore.BlazorUI.Contracts;
 using BooksStore.BlazorUI.Services;
@@ -18,6 +20,9 @@ builder.Services.AddHttpClient<IClient, Client>(client =>
     client.BaseAddress = new Uri("https://localhost:7123");
 });
 
+
+builder.Services.AddBlazoredToast();
+builder.Services.AddBlazoredLocalStorage();
 
 builder.Services.AddScoped<IBookCategoryService, BookCategoryService>();
 
